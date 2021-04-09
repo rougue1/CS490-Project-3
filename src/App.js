@@ -7,9 +7,7 @@ function App() {
 
   return (
     <div className="App">
-      { loginStatus === 'loggedIn'
-        ? <Login loginStatus="loginStatus" setLoginStatus="setLoginStatus" />
-        : null}
+      <login />
     </div>
   );
 }
