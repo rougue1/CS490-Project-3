@@ -1,13 +1,17 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Login } from './components/login';
+import { GLogin } from './components/login';
 
 function App() {
-  const [loginStatus, setLoginStatus] = useState('loggedIn');
+  const [loginStatus, setLoginStatus] = useState(false);
 
   return (
     <div className="App">
-      <Login />
+      <GLogin setLoginStatus={setLoginStatus} />
+
+      {loginStatus === true
+        ? <div> You are logged in </div>
+        : <div> You are not logged in </div>}
     </div>
   );
 }
