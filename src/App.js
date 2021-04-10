@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import './App.css';
 import React, { useState } from 'react';
 import { GLogout } from './components/logout';
