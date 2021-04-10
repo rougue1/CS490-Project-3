@@ -5,7 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 // refresh token
 // import { refreshTokenSetup } from '../utils/refreshToken';
 
-const clientId = '1011493052864-t6p5q2p2mcfaif046nhcaa7qf8ap2hab.apps.googleusercontent.com';
+const clientId = '538730922823-2fe42abari68eb7qf7fgt6rmbk4r04hi.apps.googleusercontent.com';
 
 export function GLogin({ setLoginStatus }) {
   const onSuccess = (googleUser) => {
@@ -16,7 +16,7 @@ export function GLogin({ setLoginStatus }) {
     console.log({ userInfo });
     setLoginStatus(true);
   };
-
+  // eslint-disable-next-line
   const onFailure = (googleUser) => {
     console.log('Failed to login');
   };
