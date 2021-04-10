@@ -25,4 +25,5 @@ module.exports = {
         "react-hooks/exhaustive-deps": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   },
+  ignorePatterns: ["src/components/*"],
 };
