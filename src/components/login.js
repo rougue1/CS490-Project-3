@@ -2,19 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 
-// refresh token
-// import { refreshTokenSetup } from '../utils/refreshToken';
-
-const clientId = '1011493052864-t6p5q2p2mcfaif046nhcaa7qf8ap2hab.apps.googleusercontent.com';
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 export function GLogin({ setLoginStatus }) {
-  const onSuccess = (googleUser) => {
-    const idToken = googleUser.getAuthResponse().id_token;
-    console.log({ idToken });
-    console.log(googleUser.profileObj);
-    const userInfo = { Name: googleUser.profileObj.name, Email: googleUser.profileObj.email };
-    console.log({ userInfo });
-    setLoginStatus(true);
+  const onSuccess = async (googleUser) => {
+    const userInfo = {
+      GoogleId: googleUser.profileObj.googleId,
+      FirstName: googleUser.profileObj.givenName,
+      LastName: googleUser.profileObj.familyName,
+      FullName: googleUser.profileObj.name,
+      Email: googleUser.profileObj.email,
+    };
+
+    const res = await fetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        userInfo,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+
+    if (data === 200) {
+      setLoginStatus(true);
+    }
   };
 
   const onFailure = (googleUser) => {

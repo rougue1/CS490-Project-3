@@ -1,10 +1,8 @@
 ''' Our server file'''
 # disabling some of the errors
 # pylint: disable= E1101, C0413, R0903, W0603, W1508
-
-
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request, jsonify
 
 app = Flask(__name__, static_folder='./build/static')
 
@@ -15,6 +13,14 @@ def index(filename):
     '''starting point'''
     return send_from_directory('./build', filename)
 
+@app.route('/login', methods=['POST'])
+def login():
+    '''login function obtains user info'''
+    user_info = request.json
+    if user_info:
+        print(user_info)
+        return jsonify(200)
+    return jsonify(400)
 
 app.run(
     host=os.getenv('IP', '0.0.0.0'),
