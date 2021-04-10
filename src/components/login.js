@@ -1,40 +1,37 @@
-/*eslint-disable */
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { GoogleLogin } from 'react-google-login';
 
-export function Login({ loginStatus, setLoginStatus }) {
-  const inputRef = useRef(null);
+// refresh token
+// import { refreshTokenSetup } from '../utils/refreshToken';
 
-  function logIn() {
-    setLoginStatus('loggedIn');
-  }
+const clientId = '1011493052864-t6p5q2p2mcfaif046nhcaa7qf8ap2hab.apps.googleusercontent.com';
+
+export function GLogin({ setLoginStatus }) {
+  const onSuccess = (googleUser) => {
+    const idToken = googleUser.getAuthResponse().id_token;
+    console.log({ idToken });
+    console.log(googleUser.profileObj);
+    const userInfo = { Name: googleUser.profileObj.name, Email: googleUser.profileObj.email };
+    console.log({ userInfo });
+    setLoginStatus(true);
+  };
+
+  const onFailure = (googleUser) => {
+    console.log('Failed to login');
+  };
 
   return (
-    <div className="loginBox">
-      <div>
-        <input
-          className="input"
-          ref={inputRef}
-          type="text"
-          placeholder="User name...."
-        />
-        <button className="button" type="submit" onClick={logIn}>
-          Submit
-        </button>
-      </div>
-    </div>
-
+    <GoogleLogin clientId={clientId} onSuccess={onSuccess} onFailure={onFailure} />
   );
 }
 
-Login.propTypes = {
-  loginStatus: PropTypes.string,
-  setLoginStatus: PropTypes.objectOf(PropTypes.object),
+GLogin.propTypes = {
+  setLoginStatus: PropTypes.bool,
 };
 
-Login.defaultProps = {
-  loginStatus: PropTypes.string,
-  setLoginStatus: PropTypes.objectOf(PropTypes.object),
+GLogin.defaultProps = {
+  setLoginStatus: PropTypes.bool,
 };
 
-export default Login;
+export default GLogin;
