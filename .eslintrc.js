@@ -23,6 +23,7 @@ module.exports = {
   rules: {
         "react/no-array-index-key": "off",
         "react-hooks/exhaustive-deps": "off",
+        "no-unused-vars": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   },
 };
