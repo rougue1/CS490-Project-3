@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
+import { GLogout } from './components/logout';
 import { GLogin } from './components/login';
 
 function App() {
@@ -7,11 +8,9 @@ function App() {
 
   return (
     <div className="App">
-      <GLogin setLoginStatus={setLoginStatus} />
-
       {loginStatus === true
-        ? <div> You are logged in </div>
-        : <div> You are not logged in </div>}
+        ? <GLogout setLoginStatus={setLoginStatus} />
+        : <GLogin setLoginStatus={setLoginStatus} />}
     </div>
   );
 }

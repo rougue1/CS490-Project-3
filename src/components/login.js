@@ -11,11 +11,18 @@ export function GLogin({ setLoginStatus }) {
   const onSuccess = (googleUser) => {
     const idToken = googleUser.getAuthResponse().id_token;
     console.log({ idToken });
+    console.log(googleUser.profileObj);
+    const userInfo = { Name: googleUser.profileObj.name, Email: googleUser.profileObj.email };
+    console.log({ userInfo });
     setLoginStatus(true);
   };
 
+  const onFailure = (googleUser) => {
+    console.log('Failed to login');
+  };
+
   return (
-    <GoogleLogin clientId={clientId} onSuccess={onSuccess} />
+    <GoogleLogin clientId={clientId} onSuccess={onSuccess} onFailure={onFailure} />
   );
 }
 
