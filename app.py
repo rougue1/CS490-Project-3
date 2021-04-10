@@ -5,6 +5,7 @@
 import os
 import operator  # for reordering the scores table
 from flask import Flask, send_from_directory, json
+from flask import request, jsonify
 from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -30,6 +31,15 @@ DB.create_all()
 def index(filename):
     '''starting point'''
     return send_from_directory('./build', filename)
+    
+@APP.route('/login', methods=['POST'])
+def login():
+    '''login function obtains user info'''
+    user_info = request.json
+    if user_info:
+        print(user_info)
+        return jsonify(200)
+    return jsonify(400)
 
 if __name__ == "__main__":
     APP.run(
