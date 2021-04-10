@@ -26,4 +26,5 @@ module.exports = {
         "no-unused-vars": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   },
+  ignorePatterns: ["src/components/*"],
 };

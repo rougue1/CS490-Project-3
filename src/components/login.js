@@ -1,3 +1,4 @@
+// eslint-disable
 import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
@@ -30,7 +31,7 @@ export function GLogin({ setLoginStatus }) {
       setLoginStatus(true);
     }
   };
-
+  // eslint-disable-next-line
   const onFailure = (googleUser) => {
     console.log('Failed to login');
   };
