@@ -7,8 +7,8 @@
 # update - optional
 
 from datetime import date as dt
-from app import DB
 import models
+from app import DB
 
 DB.create_all()
 session = DB.session()

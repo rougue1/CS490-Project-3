@@ -1,5 +1,6 @@
+from sqlalchemy import ForeignKey, Column, Integer, Float, String, Date
+from sqlalchemy.orm import relationship
 from app import DB
-from sqlalchemy import Column, Integer, Float, String, Date
 
 
 class Users(DB.Model):
@@ -12,6 +13,8 @@ class Users(DB.Model):
     email = Column(String, unique=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
+    children = relationship("Transactions", backref="user_info",
+                            cascade="all, delete", passive_deletes=True)
 
     def __init__(self, user_id, email, first_name, last_name):
         self.user_id = user_id
@@ -31,19 +34,28 @@ class Transaction(DB.Model):
     __tablename__ = "transactions"
 
     # user_id of the user entering transaction
-    user_id = Column(Integer, nullable=False, unique=False, primary_key=True)
+    user_id = Column(Integer, ForeignKey(
+        "user_info.user_id", ondelete="CASCADE"))
+
     # type of transaction
     transaction_type = Column(String, nullable=False)
+
     # the cost of the transaction
     amount = Column(Float, unique=False, nullable=False)
+
     # date of transaction; in form: YYYY-MM-DD
     date = Column(Date, unique=False)
+
     # location/origin of the transaction
     location = Column(String, nullable=False)
+
     # a short description of the transaction
     description = Column(String, nullable=False)
+
     # id of the transaction, supposed to be autoincrement according to user's list of transactions
-    transaction_id = Column(Integer, nullable=False)
+    transaction_id = Column(Integer, nullable=False, primary_key=True)
+
+    # parent = relationship("Users", back_populates="transactions")
 
     def __init__(self, user_id, type, amount, date, location, description,
                  transaction_id):
