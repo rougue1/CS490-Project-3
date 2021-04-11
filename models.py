@@ -9,12 +9,12 @@ class Users(DB.Model):
     '''
     __tablename__ = "user_info"
 
-    user_id = Column(Integer, unique=True, nullable=False, primary_key=True)
+    user_id = Column(String, unique=True, nullable=False, primary_key=True)
     email = Column(String, unique=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
-    children = relationship("Transactions", backref="user_info",
-                            cascade="all, delete", passive_deletes=True)
+    transactions = relationship("Transaction", backref="user_info",
+                                cascade="all, delete-orphan")
 
     def __init__(self, user_id, email, first_name, last_name):
         self.user_id = user_id
@@ -30,11 +30,13 @@ class Users(DB.Model):
 
 
 class Transaction(DB.Model):
-
+    '''
+    Transactions table for users to add their transactions.
+    '''
     __tablename__ = "transactions"
 
     # user_id of the user entering transaction
-    user_id = Column(Integer, ForeignKey(
+    user_id = Column(String, ForeignKey(
         "user_info.user_id", ondelete="CASCADE"))
 
     # type of transaction
@@ -55,12 +57,12 @@ class Transaction(DB.Model):
     # id of the transaction, supposed to be autoincrement according to user's list of transactions
     transaction_id = Column(Integer, nullable=False, primary_key=True)
 
-    # parent = relationship("Users", back_populates="transactions")
+    parent = relationship("Users", backref="user_info")
 
-    def __init__(self, user_id, type, amount, date, location, description,
+    def __init__(self, user_id, transaction_type, amount, date, location, description,
                  transaction_id):
         self.user_id = user_id
-        self.type = type
+        self.transaction_type = transaction_type
         self.amount = amount
         self.date = date
         self.location = location
@@ -71,4 +73,4 @@ class Transaction(DB.Model):
         return '<UserID %r>' % self.user_id
 
     def __str__(self):
-        return f"User {self.user_id} had {self.type} from {self.location} for amount {self.amount} on {self.date}"
+        return f"User {self.user_id} had {self.transaction_type} from {self.location} for amount {self.amount} on {self.date}"
