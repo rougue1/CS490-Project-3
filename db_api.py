@@ -66,4 +66,5 @@ class DBQuery:
         transactions.sort(key=lambda x: x.date)
         for transaction in transactions:
             print(transaction)
+        return transactions
         # return transactions
