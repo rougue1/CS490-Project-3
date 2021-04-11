@@ -12,9 +12,11 @@ function App() {
 
   return (
     <div className="App">
-      {loginStatus === true
-        ? <GLogout setLoginStatus={setLoginStatus} />
-        : <GLogin setLoginStatus={setLoginStatus} />}
+      <div className="wrap">
+        {loginStatus === true
+          ? <GLogout setLoginStatus={setLoginStatus} />
+          : <GLogin setLoginStatus={setLoginStatus} />}
+      </div>
     </div>
   );
 }
