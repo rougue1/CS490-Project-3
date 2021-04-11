@@ -37,6 +37,9 @@ class DBQuery:
             session.commit()
 
     def remove(self):
+        ''' 
+        to remove the user 
+        '''
         user = session.query(models.Users).filter_by(user_id=self.user_id)
         user.delete()
         session.commit()
