@@ -10,7 +10,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
-from db_api import DBQuery
+from db_api import *
 import datetime
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
@@ -44,8 +44,16 @@ def login():
     user_info = request.json
     if user_info:
         print(user_info)
+        user_obj = DBQuery(user_info['user_info']['GoogleId'],
+        user_info['user_info']['Email'],
+        user_info['user_info']['FirstName'],
+        user_info['user_info']['LastName'])
+        
+        
         return jsonify(200)
     return jsonify(400)
+    
+    
     
 if __name__ == "__main__":
     APP.run(

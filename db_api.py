@@ -49,7 +49,7 @@ class DBQuery:
         # transaction = session.query(models.Transaction).filter(
         #     models.Transaction.user_id == self.user_id,
         #     models.Transaction.transaction_id == transaction_id).first()
-        # if transaction is None:
+
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, description)
         session.add(to_add)
@@ -67,7 +67,8 @@ class DBQuery:
     def getTransactions(self):
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        # transactions.sort(key=lambda x: x.date)
+        transactions.sort(key=lambda x: x.date)
         for transaction in transactions:
-            print(transaction, type(transaction))
-        # return transactions
+            print(transaction)
+        return transactions
+
