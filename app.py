@@ -26,12 +26,14 @@ import models
 
 DB.create_all()
 
+
 @APP.route('/', defaults={"filename": "index.html"})
 @APP.route('/<path:filename>')
 def index(filename):
     '''starting point'''
     return send_from_directory('./build', filename)
-    
+
+
 @APP.route('/login', methods=['POST'])
 def login():
     '''login function obtains user info'''
@@ -40,6 +42,7 @@ def login():
         print(user_info)
         return jsonify(200)
     return jsonify(400)
+
 
 if __name__ == "__main__":
     APP.run(
