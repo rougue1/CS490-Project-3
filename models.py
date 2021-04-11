@@ -57,21 +57,21 @@ class Transaction(DB.Model):
     description = Column(String, nullable=False)
 
     # id of the transaction, supposed to be autoincrement according to user's list of transactions
-    transaction_id = Column(Integer, nullable=False, primary_key=True)
+    transaction_id = Column(Integer, nullable=False, primary_key=True, autoincrement=True)
 
     user_info = relationship("Users",
                              primaryjoin=user_id == Users.user_id,
                              back_populates="transactions")
 
     def __init__(self, user_id, transaction_type, amount, date, location,
-                 description, transaction_id):
+                 description):
         self.user_id = user_id
         self.transaction_type = transaction_type
         self.amount = amount
         self.date = date
         self.location = location
         self.description = description
-        self.transaction_id = transaction_id
+        # self.transaction_id = transaction_id
 
     def __repr__(self):
         return '<UserID %r>' % self.user_id
