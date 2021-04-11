@@ -30,7 +30,9 @@ DB.create_all()
 @APP.route('/', defaults={"filename": "index.html"})
 @APP.route('/<path:filename>')
 def index(filename):
-    '''starting point'''
+    '''
+    starting point
+    '''
     return send_from_directory('./build', filename)
 
 

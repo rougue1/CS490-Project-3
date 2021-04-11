@@ -1,9 +1,8 @@
-# delete
-# add user
-# add expense
-# get users
-# get expenses for a user - sort by date (most recent)
-# delete by transactionID
+# delete - DONE
+# add user - DONE
+# add expense - DONE
+# get expenses for a user - sort by date (most recent) - DONE
+# delete by transactionID - DONE
 # update - optional
 
 from datetime import date as dt
@@ -49,7 +48,7 @@ class DBQuery:
             models.Transaction.transaction_id == transaction_id).first()
         if transaction is None:
             to_add = models.Transaction(self.user_id, transaction_type, amount,
-                                        dt.today(), location, description,
+                                        date, location, description,
                                         transaction_id)
             session.add(to_add)
             session.commit()
@@ -66,4 +65,7 @@ class DBQuery:
     def getTransactions(self):
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        return transactions
+        # transactions.sort(key=lambda x: x.date)
+        for transaction in transactions:
+            print(transaction, type(transaction))
+        # return transactions
