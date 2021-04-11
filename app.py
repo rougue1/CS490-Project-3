@@ -28,6 +28,7 @@ import models
 
 DB.create_all()
 
+USER=''
 
 @APP.route('/', defaults={"filename": "index.html"})
 @APP.route('/<path:filename>')
@@ -44,16 +45,30 @@ def login():
     user_info = request.json
     if user_info:
         print(user_info)
-        user_obj = DBQuery(user_info['user_info']['GoogleId'],
-        user_info['user_info']['Email'],
-        user_info['user_info']['FirstName'],
-        user_info['user_info']['LastName'])
-        
-        
+        USER = DBQuery(
+            user_info['userInfo']['GoogleId'],
+            user_info['userInfo']['Email'],
+            user_info['userInfo']['FirstName'],
+            user_info['userInfo']['LastName'])
+            
         return jsonify(200)
     return jsonify(400)
     
-    
+@APP.route('/add', methods=['POST'])
+def add_transaction():
+    '''
+    add_transaction function will add transaction info to db
+    '''
+    user_info = request.json
+    if user_info:
+        print(transaction_info)
+        # USER.add_transaction()
+            
+        return jsonify(200)
+    return jsonify(400)
+
+
+
     
 if __name__ == "__main__":
     APP.run(

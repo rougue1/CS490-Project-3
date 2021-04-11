@@ -71,4 +71,3 @@ class DBQuery:
         for transaction in transactions:
             print(transaction)
         return transactions
-
