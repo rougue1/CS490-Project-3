@@ -64,7 +64,9 @@ class DBQuery:
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
         transactions.sort(key=lambda x: x.date)
+        transactions_dict = {}
         for transaction in transactions:
-            print(transaction)
-        return transactions
+            transactions_dict[transaction.transaction_id] = [
+                transaction.transaction_type, transaction.amount, transaction.date, transaction.location, transaction.description]
+        return transactions_dict
         # return transactions
