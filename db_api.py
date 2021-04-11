@@ -31,7 +31,7 @@ class DBQuery:
     def add(self):
         user = session.query(
             models.Users).filter_by(user_id=self.user_id).first()
-        if not user:
+        if user is None:
             to_add = models.Users(self.user_id, self.email, self.first_name,
                                   self.last_name)
             session.add(to_add)
@@ -47,7 +47,7 @@ class DBQuery:
         transaction = session.query(models.Transaction).filter(
             models.Transaction.user_id == self.user_id,
             models.Transaction.transaction_id == transaction_id).first()
-        if not transaction:
+        if transaction is None:
             to_add = models.Transaction(self.user_id, transaction_type, amount,
                                         dt.today(), location, description,
                                         transaction_id)
@@ -59,9 +59,9 @@ class DBQuery:
         to_remove = session.query(models.Transaction).filter(
             models.Transaction.transaction_id == transaction_id,
             models.Transaction.user_id == self.user_id).first()
-
-        to_remove.delete()
-        session.commit()
+        if to_remove is not None:
+            to_remove.delete()
+            session.commit()
 
     def getTransactions(self):
         transactions = session.query(
