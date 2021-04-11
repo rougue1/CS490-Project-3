@@ -57,7 +57,7 @@ class DBQuery:
         # match user id and transaction id to remove
         to_remove = session.query(models.Transaction).filter(
             models.Transaction.transaction_id == transaction_id,
-            models.Transaction.user_id == self.user_id).first()
+            models.Transaction.user_id == self.user_id)
         if to_remove is not None:
             to_remove.delete()
             session.commit()
