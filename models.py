@@ -13,8 +13,8 @@ class Users(DB.Model):
     email = Column(String, unique=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
-    transactions = relationship("Transaction",
-                                backref="user_info",
+
+    transactions = relationship("Transaction", backref="user",
                                 cascade="all, delete-orphan")
 
     def __init__(self, user_id, email, first_name, last_name):
@@ -58,7 +58,8 @@ class Transaction(DB.Model):
     # id of the transaction, supposed to be autoincrement according to user's list of transactions
     transaction_id = Column(Integer, nullable=False, primary_key=True)
 
-    parent = relationship("Users", backref="user_info")
+    user_info = relationship(
+        "Users", primaryjoin=user_id == Users.user_id, back_populates="transactions")
 
     def __init__(self, user_id, transaction_type, amount, date, location,
                  description, transaction_id):

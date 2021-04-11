@@ -55,6 +55,7 @@ class DBQuery:
         session.add(to_add)
         session.commit()
 
+
     def removeTransaction(self, transaction_id):
         #match user id and transaction id to remove
         to_remove = session.query(models.Transaction).\
@@ -63,3 +64,10 @@ class DBQuery:
 
         to_remove.delete()
         session.commit()
+
+    def getTransactions(self):
+        transactions = session.query(models.Users).filter_by(
+            user_id=self.user_id).first().transactions
+        for transaction in transactions:
+            print(transaction)
+
