@@ -10,6 +10,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
+from db_api import *
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 
@@ -25,7 +26,8 @@ DB = SQLAlchemy(APP)
 import models
 
 DB.create_all()
-
+ 
+USER = ""
 
 @APP.route('/', defaults={"filename": "index.html"})
 @APP.route('/<path:filename>')
@@ -39,12 +41,23 @@ def index(filename):
 @APP.route('/login', methods=['POST'])
 def login():
     '''login function obtains user info'''
+    global USER
     user_info = request.json
     if user_info:
-        print(user_info)
+        USER = DBQuery(
+        user_info['userInfo']['GoogleId'],
+        user_info['userInfo']['Email'],
+        user_info['userInfo']['FirstName'],
+        user_info['userInfo']['LastName'])
         return jsonify(200)
     return jsonify(400)
-
+    
+@APP.route('/home')
+def home():
+    global USER
+    transactions = USER.getTransactions()
+    #print(jsonify(transactions).data)
+    return jsonify(transactions)
 
 if __name__ == "__main__":
     APP.run(
