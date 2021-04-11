@@ -29,11 +29,11 @@ class DBQuery:
         self.add()
 
     def add(self):
-        user = session.query(models.Users).filter_by(
-            user_id=self.user_id).first()
+        user = session.query(
+            models.Users).filter_by(user_id=self.user_id).first()
         if not user:
-            to_add = models.Users(self.user_id, self.email,
-                                  self.first_name, self.last_name)
+            to_add = models.Users(self.user_id, self.email, self.first_name,
+                                  self.last_name)
             session.add(to_add)
             session.commit()
 
@@ -49,13 +49,17 @@ class DBQuery:
         # for expense in expenses:
         #     print(expense.user_id)
 
-        to_add = models.Transaction(self.user_id, transaction_type, amount, dt.today(),
-                                    location, description, transaction_id)
+        to_add = models.Transaction(self.user_id, transaction_type, amount,
+                                    dt.today(), location, description,
+                                    transaction_id)
         session.add(to_add)
         session.commit()
 
     def removeTransaction(self, transaction_id):
-        # to_remove = session.query(models.Transaction).filter().first()
-        if not to_remove:
-            to_remove.delete()
-            session.commit()
+        #match user id and transaction id to remove
+        to_remove = session.query(models.Transaction).\
+            filter(models.Transaction.transaction_id == transaction_id,
+            models.Transaction.user_id == self.user_id)
+
+        to_remove.delete()
+        session.commit()

@@ -13,7 +13,8 @@ class Users(DB.Model):
     email = Column(String, unique=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
-    transactions = relationship("Transaction", backref="user_info",
+    transactions = relationship("Transaction",
+                                backref="user_info",
                                 cascade="all, delete-orphan")
 
     def __init__(self, user_id, email, first_name, last_name):
@@ -36,8 +37,8 @@ class Transaction(DB.Model):
     __tablename__ = "transactions"
 
     # user_id of the user entering transaction
-    user_id = Column(String, ForeignKey(
-        "user_info.user_id", ondelete="CASCADE"))
+    user_id = Column(String, ForeignKey("user_info.user_id",
+                                        ondelete="CASCADE"))
 
     # type of transaction
     transaction_type = Column(String, nullable=False)
@@ -45,7 +46,7 @@ class Transaction(DB.Model):
     # the cost of the transaction
     amount = Column(Float, unique=False, nullable=False)
 
-    # date of transaction; in form: YYYY-MM-DD
+    # date of transaction (datetime.date object); in form: YYYY-MM-DD
     date = Column(Date, unique=False)
 
     # location/origin of the transaction
@@ -59,8 +60,8 @@ class Transaction(DB.Model):
 
     parent = relationship("Users", backref="user_info")
 
-    def __init__(self, user_id, transaction_type, amount, date, location, description,
-                 transaction_id):
+    def __init__(self, user_id, transaction_type, amount, date, location,
+                 description, transaction_id):
         self.user_id = user_id
         self.transaction_type = transaction_type
         self.amount = amount
