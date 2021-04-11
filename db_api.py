@@ -14,26 +14,48 @@ DB.create_all()
 session = DB.session()
 
 
-def addUser(user_id, email, first_name, last_name):
-    to_add = models.Users(user_id, email, first_name, last_name)
-    session.add(to_add)
-    session.commit()
+class DBQuery:
+    user_id = ""
+    email = ""
+    first_name = ""
+    last_name = ""
 
+    # You HAVE to call the constructor before accessing any other functions
+    def __init__(self, user_id, email, first_name, last_name):
+        self.user_id = user_id
+        self.email = email
+        self.first_name = first_name
+        self.last_name = last_name
+        self.add()
 
-def addTransaction(user_id, transaction_type, amount, date, location,
-                   description, transaction_id):
-    # expenses = models.Expenses.query.all()
+    def add(self):
+        user = session.query(models.Users).filter_by(
+            user_id=self.user_id).first()
+        if not user:
+            to_add = models.Users(self.user_id, self.email,
+                                  self.first_name, self.last_name)
+            session.add(to_add)
+            session.commit()
 
-    # for expense in expenses:
-    #     print(expense.user_id)
+    def remove(self):
+        user = session.query(models.Users).filter_by(user_id=self.user_id)
+        user.delete()
+        session.commit()
 
-    to_add = models.Transaction(user_id, transaction_type, amount, dt.today(),
-                                location, description, transaction_id)
-    session.add(to_add)
-    session.commit()
+    def addTransaction(self, transaction_type, amount, date, location,
+                       description, transaction_id):
+        # expenses = models.Expenses.query.all()
 
+        # for expense in expenses:
+        #     print(expense.user_id)
 
-# expenses = session.query(models.Expenses).all()
+        to_add = models.Transaction(self.user_id, transaction_type, amount, dt.today(),
+                                    location, description, transaction_id)
+        session.add(to_add)
+        session.commit()
 
-# for expense in expenses:
-#     print(expense)
+    def removeTransaction(self, transaction_id):
+        # to_remove = session.query(models.Transaction).filter().first()
+        if not to_remove:
+            to_remove.delete()
+            session.commit()
