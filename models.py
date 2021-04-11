@@ -2,7 +2,7 @@ from app import DB
 
 class Users(DB.Model):
     
-    __tablename__ = "userInfo"
+    __tablename__ = "user_info"
     
     user_id = DB.Column(DB.Integer, unique=True, nullable=False, primary_key=True)
     email = DB.Column(DB.String(255), unique=True, nullable=False)
