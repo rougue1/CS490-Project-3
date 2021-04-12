@@ -5,8 +5,9 @@ export function Home()
 {
     useEffect(() => {
         fetch("/home").then(
-            res => console.log(res)
+            res => console.log(res.json().data)
         )
     }, []);
+    
     return <div></div>
 }

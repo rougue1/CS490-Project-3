@@ -57,7 +57,7 @@ def home():
     global USER
     transactions = USER.getTransactions()
     #print(jsonify(transactions).data)
-    return jsonify(transactions)
+    return jsonify(300)
 
 if __name__ == "__main__":
     APP.run(
