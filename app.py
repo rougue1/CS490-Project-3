@@ -56,22 +56,28 @@ def login():
         return jsonify(200)
     return jsonify(400)
     
-@APP.route('/add', methods=['POST'])
-def add_transaction():
-    '''
-    add_transaction function will add transaction info to db
-    '''
+@APP.route('/home', methods=['Get'])
+def home():
+    '''home function obtains user info'''
+    global USER
     user_info = request.json
-    if user_info:
-        print(transaction_info)
-        # USER.add_transaction()
-            
-        return jsonify(200)
+    print("in the function for home")
+    print(request.method)
+    print(user_info)
+    # USER.addTransaction("Expense",123.00,
+    #     datetime.datetime.strptime("05/31/2019", "%m/%d/%Y").date(),
+    #     "Nike",
+    #     "Sneakers")
+    if request.method == 'GET':
+        print("recieved request")
+        print(user_info)
+        print(USER.getTransactions())
+        return USER.getTransactions()
     return jsonify(400)
 
 
 
-    
+
 if __name__ == "__main__":
     APP.run(
         host=os.getenv('IP', '0.0.0.0'),

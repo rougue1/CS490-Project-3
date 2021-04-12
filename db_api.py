@@ -1,3 +1,4 @@
+
 # delete - DONE
 # add user - DONE
 # add expense - DONE
@@ -37,9 +38,6 @@ class DBQuery:
             session.commit()
 
     def remove(self):
-        ''' 
-        to remove the user 
-        '''
         user = session.query(models.Users).filter_by(user_id=self.user_id)
         user.delete()
         session.commit()
@@ -49,7 +47,6 @@ class DBQuery:
         # transaction = session.query(models.Transaction).filter(
         #     models.Transaction.user_id == self.user_id,
         #     models.Transaction.transaction_id == transaction_id).first()
-
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, description)
         session.add(to_add)
@@ -59,7 +56,7 @@ class DBQuery:
         # match user id and transaction id to remove
         to_remove = session.query(models.Transaction).filter(
             models.Transaction.transaction_id == transaction_id,
-            models.Transaction.user_id == self.user_id)
+            models.Transaction.user_id == self.user_id).first()
         if to_remove is not None:
             to_remove.delete()
             session.commit()
@@ -78,4 +75,3 @@ class DBQuery:
                 "description": transaction.description
             }
         return transactions_dict
-

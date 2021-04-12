@@ -5,8 +5,13 @@ export function Home()
 {
     useEffect(() => {
         fetch("/home").then(
-            res => console.log(res)
-        )
+            res => res.json()
+        ).then(data => {
+            console.log(data)
+        }).catch(err => {
+            console.log("something went wrong...");
+        })
     }, []);
+    
     return <div></div>
 }
