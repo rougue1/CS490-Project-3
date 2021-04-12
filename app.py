@@ -13,6 +13,7 @@ from dotenv import load_dotenv, find_dotenv
 from db_api import *
 import datetime
 
+
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 
 APP = Flask(__name__, static_folder='./build/static')
@@ -42,6 +43,7 @@ def index(filename):
 @APP.route('/login', methods=['POST'])
 def login():
     '''login function obtains user info'''
+    global USER
     user_info = request.json
     if user_info:
         print(user_info)
