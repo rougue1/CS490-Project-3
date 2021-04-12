@@ -56,8 +56,7 @@ def login():
 def home():
     global USER
     transactions = USER.getTransactions()
-    #print(jsonify(transactions).data)
-    return jsonify(300)
+    return (jsonify(transactions))
 
 if __name__ == "__main__":
     APP.run(
