@@ -3,15 +3,36 @@ import PropTypes from 'prop-types';
 
 export function Home()
 {
+    const [ data, setData ] = useState([]);
+    
     useEffect(() => {
         fetch("/home").then(
             res => res.json()
         ).then(data => {
-            console.log(data)
-        }).catch(err => {
-            console.log("something went wrong...");
+            setData(data);
         })
     }, []);
     
-    return <div></div>
+    console.log(data.length);
+    
+    return (
+        <div className="transaction">
+            {data.length === 0 ? (
+                <b>No transactions to show</b>
+            ):(
+            <table>
+                {data.map((item, index) => {
+                    return (
+                      <tr>
+                        <th>{item.amount}</th>
+                        <th>{item.location}</th>
+                        <th>{item.date}</th>
+                      </tr>
+                    );
+                })}
+            </table>
+            )}
+        </div>
+    );
+>>>>>>> 83d855bb3f45bc89361cfb08c1d2dac6b8bd40b9
 }
