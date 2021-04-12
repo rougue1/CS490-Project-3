@@ -60,23 +60,9 @@ def login():
 def home():
     '''home function obtains user info'''
     global USER
-    user_info = request.json
-    print("in the function for home")
-    print(request.method)
-    print(user_info)
-    # USER.addTransaction("Expense",123.00,
-    #     datetime.datetime.strptime("05/31/2019", "%m/%d/%Y").date(),
-    #     "Nike",
-    #     "Sneakers")
-    if request.method == 'GET':
-        print("recieved request")
-        print(user_info)
-        print(USER.getTransactions())
-        return USER.getTransactions()
-    return jsonify(400)
-
-
-
+    transactions = USER.getTransactions()
+    print(transactions)
+    return (jsonify(transactions))
 
 if __name__ == "__main__":
     APP.run(

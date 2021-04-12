@@ -4,7 +4,7 @@ import './App.css';
 import React, { useState } from 'react';
 import { GLogout } from './components/logout';
 import { GLogin } from './components/login';
-import { Home } from './components/home'
+import { Home } from './components/home';
 require("dotenv").config();
 
 function App() {
