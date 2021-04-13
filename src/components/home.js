@@ -1,8 +1,12 @@
 import React ,{ useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import '../App.css';
 import { View } from './view.js';
+=======
+import ListBuilder from '@bit/lekanmedia.shared-ui.list-builder';
+>>>>>>> fc64396c21f62e7f282f6a90b8aec912ab138dbe
 
 export function Home()
 {

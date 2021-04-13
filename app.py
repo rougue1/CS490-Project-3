@@ -61,6 +61,7 @@ def home():
     '''home function obtains user info'''
     global USER
     transactions = USER.getTransactions()
+    print(transactions)
     return (jsonify(transactions))
 
 if __name__ == "__main__":
