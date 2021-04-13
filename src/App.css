@@ -30,4 +30,14 @@ body {
 }
 .transaction tr:hover {
   background-color: gray;
+  cursor: pointer;
+}
+
+.balanceBoard {
+  display: grid;
+}
+
+.totalBalance {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }

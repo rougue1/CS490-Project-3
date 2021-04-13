@@ -89,7 +89,6 @@ class DBQuery:
         total_expense = 0
 
         for transaction in transactions:
-            print(transaction.transaction_type)
             if transaction.transaction_type == 'Income':
                 total_balance += transaction.amount
                 total_income += transaction.amount

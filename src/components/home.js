@@ -45,18 +45,18 @@ export function Home() {
   return (
     <div>
         <div>
-            Welcome, {userData.User}
+            <h1>Welcome, {userData.User}</h1>
         </div>
         <div className="Home">
             <div className="balanceBoard">
                 <div className="totalBalance">
-                    Total balance: {userData.Balance}
+                    Total balance: <h3>{userData.Balance}</h3>
                 </div>
                 <div className="totalIncome">
-                    Total income: {userData.Income}
+                    Total income: <h4>{userData.Income}</h4>
                 </div>
                 <div className="totalExpense">
-                    Total expense: {userData.Expense}
+                    Total expense: <h4>{userData.Expense}</h4>
                 </div>
             </div>
             <div className="transaction">
@@ -66,11 +66,9 @@ export function Home() {
               <>
                 <table>
                   <thead>
-                    <tr>
                       <th>Amount</th>
                       <th>Location</th>
                       <th>Date</th>
-                    </tr>
                   </thead>
                   <tbody>
                     {data.map((item, index) => (
