@@ -21,3 +21,13 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.transaction{
+  background-color: lightgray;
+}
+.transaction td{
+  padding: 0.5rem 2rem;
+}
+.transaction tr:hover{
+  background-color:gray;
+}
