@@ -3,7 +3,7 @@
 }
 
 body {
-    margin: 0px;
+  margin: 0px;
 }
 
 .loginBox {
@@ -16,18 +16,18 @@ body {
 }
 
 .wrap {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.transaction{
+.transaction {
   background-color: lightgray;
 }
-.transaction td{
+.transaction td {
   padding: 0.5rem 2rem;
 }
-.transaction tr:hover{
-  background-color:gray;
+.transaction tr:hover {
+  background-color: gray;
 }

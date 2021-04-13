@@ -40,8 +40,9 @@ export function GLogin({ setLoginStatus }) {
     <div className="loginBox">
       <h1>Welcome to expense tracker</h1>
       <h5>Please login to continue</h5>
-      <br></br><br></br>
-      <GoogleLogin 
+      <br />
+      <br />
+      <GoogleLogin
         clientId={clientId}
         buttonText="Login with Google"
         onSuccess={onSuccess}

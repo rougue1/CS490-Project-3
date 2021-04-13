@@ -13,7 +13,6 @@ from dotenv import load_dotenv, find_dotenv
 from db_api import *
 import datetime
 
-
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 
 APP = Flask(__name__, static_folder='./build/static')
@@ -29,7 +28,8 @@ import models
 
 DB.create_all()
 
-USER=''
+USER = ''
+
 
 @APP.route('/', defaults={"filename": "index.html"})
 @APP.route('/<path:filename>')
@@ -47,15 +47,40 @@ def login():
     user_info = request.json
     if user_info:
         print(user_info)
-        USER = DBQuery(
-            user_info['userInfo']['GoogleId'],
-            user_info['userInfo']['Email'],
-            user_info['userInfo']['FirstName'],
-            user_info['userInfo']['LastName'])
-            
+        USER = DBQuery(user_info['userInfo']['GoogleId'],
+                       user_info['userInfo']['Email'],
+                       user_info['userInfo']['FirstName'],
+                       user_info['userInfo']['LastName'])
+
         return jsonify(200)
     return jsonify(400)
     
+    
+@APP.route('/add', methods=['POST'])
+def add():
+    '''
+    add income or expense
+    '''
+    global USER
+    user_info = request.json
+    if user_info:
+        print(user_info)
+        base = user_info['formDataObj']
+        ##need month day year from year month day
+        # datetime.datetime.strptime("2015-01-30", "%Y-%m-%d").strftime("%d-%m-%Y")
+        correct_date = datetime.datetime.strptime(base['date'], "%Y-%m-%d").strftime("%m-%d-%Y")
+        correct_date = correct_date.replace("-","/")
+        
+        USER.addTransaction(
+            base['type'],
+            base['amount'],
+            correct_date,
+            base['location'],
+            base['description'],
+            )
+        return jsonify(200)
+    return jsonify(400)
+
 @APP.route('/home', methods=['Get'])
 def home():
     '''home function obtains user info'''
@@ -63,6 +88,7 @@ def home():
     transactions = USER.getTransactions()
     print(transactions)
     return (jsonify(transactions))
+
 
 if __name__ == "__main__":
     APP.run(
