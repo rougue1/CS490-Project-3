@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { GLogout } from './components/logout';
 import { GLogin } from './components/login';
 import { Home } from './components/home'
+import 'bootstrap/dist/css/bootstrap.min.css';
 require("dotenv").config();
 
 function App() {
