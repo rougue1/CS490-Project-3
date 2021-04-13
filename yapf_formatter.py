@@ -13,4 +13,5 @@ for r, d, f in os.walk(PATH):
         if re.match(r".*.py$", file):
             FILES.append(os.path.join(r, file))
 for filename in FILES:
+    print(f"Formatting: {filename}")
     FormatFile(filename, in_place=True)
