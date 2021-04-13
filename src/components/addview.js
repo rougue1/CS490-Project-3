@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 export function AddView({updateData, show, onHide }) {
   
+  
    const onFormSubmit = async (e) => {
           e.preventDefault()
           const formData = new FormData(e.target),
