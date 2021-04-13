@@ -71,6 +71,7 @@ export function Home() {
         <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
           <AddView updateData={getData} show={row} onHide={closeAdd} />
         </div>
+        
       </>
       )}
     </div>
