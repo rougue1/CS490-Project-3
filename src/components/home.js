@@ -35,15 +35,12 @@ export function Home() {
         });
     }
   useEffect(() => {
-    // fetch('/home')
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setData(data);
-    //   });
     getData();
-    getUserInfo();
-    
   }, []);
+  
+  useEffect(() => {
+      getUserInfo();
+  }, [data]);
 
   return (
     <div>
@@ -52,9 +49,15 @@ export function Home() {
         </div>
         <div className="Home">
             <div className="balanceBoard">
-                Total balance: {userData.Balance}
-                Total income: {userData.Income}
-                Total expense: {userData.Expense}
+                <div className="totalBalance">
+                    Total balance: {userData.Balance}
+                </div>
+                <div className="totalIncome">
+                    Total income: {userData.Income}
+                </div>
+                <div className="totalExpense">
+                    Total expense: {userData.Expense}
+                </div>
             </div>
             <div className="transaction">
               {data.length === 0 ? (
