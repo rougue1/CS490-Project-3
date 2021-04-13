@@ -8,6 +8,7 @@ import { AddView } from './addview.js';
 
 export function Home() {
   const [data, setData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [show, setShow] = useState(false);
   const [row, setRow] = useState(false);
   const [itemData,setItem] = useState(null);
@@ -26,6 +27,13 @@ export function Home() {
       });
   }
 
+    function getUserInfo() {
+        fetch('/userInfo')
+        .then((res) => res.json())
+        .then((val) => {
+        setUserData(val);
+        });
+    }
   useEffect(() => {
     // fetch('/home')
     //   .then((res) => res.json())
@@ -33,47 +41,60 @@ export function Home() {
     //     setData(data);
     //   });
     getData();
+    getUserInfo();
     
   }, []);
 
   return (
-    <div className="transaction">
-      {data.length === 0 ? (
-        <b>No transactions to show</b>
-      ) : (
-      <>
-        <table>
-          <thead>
-            <tr>
-              <th>Amount</th>
-              <th>Location</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr onClick={() => { setShow(true); setItem(item)}}>
-                <td>{item.amount}</td>
-                <td>{item.location}</td>
-                <td>{item.date}</td>
-              </tr>
-            ))}
-            {show ? (
-                <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-                  <View list={itemData} show={show} onHide={handleClose} />
-                </div>
-            ): null}
-          </tbody>
-        </table>
-        <Button variant="success" onClick={() => showAdd()}>
-          Add
-        </Button>
-        <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-          <AddView updateData={getData} show={row} onHide={closeAdd} />
+    <div>
+        <div>
+            Welcome, {userData.User}
         </div>
-        
-      </>
-      )}
+        <div className="Home">
+            <div className="balanceBoard">
+                Total balance: {userData.Balance}
+                Total income: {userData.Income}
+                Total expense: {userData.Expense}
+            </div>
+            <div className="transaction">
+              {data.length === 0 ? (
+                <b>No transactions to show</b>
+              ) : (
+              <>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Amount</th>
+                      <th>Location</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.map((item, index) => (
+                      <tr onClick={() => { setShow(true); setItem(item)}}>
+                        <td>{item.amount}</td>
+                        <td>{item.location}</td>
+                        <td>{item.date}</td>
+                      </tr>
+                    ))}
+                    {show ? (
+                        <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
+                          <View list={itemData} show={show} onHide={handleClose} />
+                        </div>
+                    ): null}
+                  </tbody>
+                </table>
+                <Button variant="success" onClick={() => showAdd()}>
+                  Add
+                </Button>
+                <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
+                  <AddView updateData={getData} show={row} onHide={closeAdd} />
+                </div>
+                
+              </>
+              )}
+            </div>
+        </div>
     </div>
   );
 }

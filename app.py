@@ -83,12 +83,18 @@ def add():
 
 @APP.route('/home', methods=['Get'])
 def home():
-    '''home function obtains user info'''
+    '''home function obtains user's transactions info'''
     global USER
     transactions = USER.getTransactions()
-    print(transactions)
     return (jsonify(transactions))
-
+    
+    
+@APP.route('/userInfo', methods=['Get'])
+def userInfo():
+    '''userData function obtains user info'''
+    global USER
+    userInfo = USER.getUserInfo()
+    return (jsonify(userInfo))
 
 if __name__ == "__main__":
     APP.run(
