@@ -78,3 +78,26 @@ class DBQuery:
                 "description": transaction.description
             })
         return transactions_list
+        
+    def getUserInfo(self):
+        transactions = session.query(
+            models.Users).filter_by(user_id=self.user_id).first().transactions
+
+        full_name = self.first_name + ' ' + self.last_name
+        total_balance = 0
+        total_income = 0
+        total_expense = 0
+
+        for transaction in transactions:
+            print(transaction.transaction_type)
+            if transaction.transaction_type == 'Income':
+                total_balance += transaction.amount
+                total_income += transaction.amount
+            else:
+                total_balance -= transaction.amount
+                total_expense += transaction.amount
+
+        return {"User": full_name,
+                "Balance": round(total_balance, 2),
+                "Income": round(total_income, 2),
+                "Expense": round(total_expense, 2)}
