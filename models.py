@@ -9,7 +9,7 @@ class Users(DB.Model):
     '''
     __tablename__ = "user_info"
 
-    user_id = Column(Integer, unique=True, nullable=False, primary_key=True)
+    user_id = Column(String, unique=True, nullable=False, primary_key=True)
     email = Column(String, unique=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
@@ -38,7 +38,7 @@ class Transaction(DB.Model):
     __tablename__ = "transactions"
 
     # user_id of the user entering transaction
-    user_id = Column(Integer, ForeignKey("user_info.user_id",
+    user_id = Column(String, ForeignKey("user_info.user_id",
                                          ondelete="CASCADE"))
 
     # type of transaction
@@ -77,4 +77,6 @@ class Transaction(DB.Model):
         return '<TransactionID %r>' % self.transaction_id
 
     def __str__(self):
+
         return f"ID -> {self.transaction_id}: User {self.user_id} had {self.transaction_type} from {self.location} for amount {self.amount} on {self.date}"
+

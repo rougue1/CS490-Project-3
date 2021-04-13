@@ -1,3 +1,4 @@
+
 # delete - DONE
 # add user - DONE
 # add expense - DONE
@@ -64,7 +65,15 @@ class DBQuery:
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
         transactions.sort(key=lambda x: x.date)
+        transactions_list = []
         for transaction in transactions:
-            print(transaction)
-        return transactions
-        # return transactions
+            transactions_list.append({
+                "id": transaction.transaction_id,
+                "type": transaction.transaction_type,
+                "amount": transaction.amount,
+                "date": transaction.date,
+                "location": transaction.location,
+                "description": transaction.description
+            })
+        return transactions_list
+
