@@ -54,6 +54,7 @@ export function Home()
                     </tr>
                 );
                 })}
+                
               
               </tbody>
             </table>
