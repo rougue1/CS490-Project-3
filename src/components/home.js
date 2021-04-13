@@ -1,14 +1,17 @@
 import React ,{ useState, useEffect } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Modal from 'react-modal';
 import '../App.css';
+import { View } from './view.js';
 
-
-Modal.setAppElement("#root")
 export function Home()
 {
     const [ data, setData ] = useState([]);
-    const [modal,setModal] = useState(false);
+    const [show, setShow] = useState(false);
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     
     useEffect(() => {
         fetch("/home").then(
@@ -37,15 +40,9 @@ export function Home()
                 {data.map((item, index) => {
                  console.log(item)
                  return(
-                    <tr onClick={() => setModal(true)}>
-                        <div style={{display: "none"}} onClick={e => e.stopPropagation()}>
-                            <Modal size="sm" isOpen={modal} onRequestClose={() => setModal(false)}>
-                                <h3>Amount: {item.amount} </h3>
-                                <h3>Date: {item.date}</h3>
-                                <h3>Location: {item.location} </h3>
-                                <h3>Description: {item.description} </h3>
-                                <button onClick={() => setModal(false)}>Close</button>
-                            </Modal>
+                    <tr onClick={() => setShow(true)}>
+                        <div style={{display:"none"}} onClick={e => e.stopPropagation()}>
+                            <View  list={item} show={show} onHide={handleClose} />
                         </div>
                       <td>{item.amount}</td>
                       <td>{item.location}</td>
