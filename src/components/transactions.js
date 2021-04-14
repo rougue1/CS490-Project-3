@@ -33,15 +33,17 @@ export function Transaction({data, getData})
           <b>No transactions to show</b>
           ) : (
           <>
-          <table>
+          <table className="transactionsTable">
             <thead>
+                <th></th>
                 <th>Amount</th>
                 <th>Location</th>
                 <th>Date</th>
             </thead>
             <tbody>
               {data.map((item, index) => (
-                <tr onClick={() => { setShow(true); setItem(item)}}>
+                <tr onClick={() => { setShow(true); setItem(item)}} key={index}>
+                  <td><div className="colorTag"></div></td>
                   <td>{item.amount}</td>
                   <td>{item.location}</td>
                   <td>{item.date}</td>

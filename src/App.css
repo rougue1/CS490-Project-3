@@ -6,6 +6,11 @@ body {
   margin: 0px;
 }
 
+tr {
+  box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+  transition: all .2s ease-in-out;
+}
+
 .loginBox {
   background: rgba(255, 255, 255, 0.1);
   height: 275px;
@@ -22,14 +27,18 @@ body {
   justify-content: center;
 }
 
+.transactionsTable {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
 .transaction {
-  background-color: lightgray;
 }
 .transaction td {
   padding: 0.5rem 2rem;
 }
 .transaction tr:hover {
-  background-color: gray;
+  transform: scale(1.05);
   cursor: pointer;
 }
 
