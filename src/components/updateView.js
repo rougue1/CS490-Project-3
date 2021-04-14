@@ -8,10 +8,10 @@ export function UpdateView({updateData, show, onHide }) {
   
   
    const onUpdate = async (e) => {
-          e.preventDefault()
+          e.preventDefault();
           const formData = new FormData(e.target),
-                formDataObj = Object.fromEntries(formData.entries())
-          console.log(formDataObj)
+                formDataObj = Object.fromEntries(formData.entries());
+          console.log(formDataObj);
           
           //send to backend
           const res = await fetch('/update', {

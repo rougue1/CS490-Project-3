@@ -28,46 +28,50 @@ export function Transaction({data, getData})
     const [itemData,setItem] = useState(null);
 
     return (
+      <div>
         <div className="transaction">
-              {data.length === 0 ? (
-                <b>No transactions to show</b>
-              ) : (
-              <>
-                <table>
-                  <thead>
-                      <th>Amount</th>
-                      <th>Location</th>
-                      <th>Date</th>
-                  </thead>
-                  <tbody>
-                    {data.map((item, index) => (
-                      <tr onClick={() => { setShow(true); setItem(item)}}>
-                        <td>{item.amount}</td>
-                        <td>{item.location}</td>
-                        <td>{item.date}</td>
-                      </tr>
-                    ))}
-                    {show ? (
-                        <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-                          <View list={itemData} show={show} onHide={handleClose} toogleUpdate={handleUpdate}/>
-                        </div>
-                    ): null}
-                  </tbody>
-                </table>
-                {showUpdate ?(
-                <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-                <UpdateView updateData={getData} show={showUpdate} onHide={closeUpdate} /> 
-                </div>): null}
-                <Button variant="success" onClick={() => showAdd()}>
-                  Add
-                </Button>
-                <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-                  <AddView updateData={getData} show={row} onHide={closeAdd} />
-                </div>
-               
-              </>
-              )}
-            </div>  
+        {data.length === 0 ? (
+          <b>No transactions to show</b>
+          ) : (
+          <>
+          <table>
+            <thead>
+                <th>Amount</th>
+                <th>Location</th>
+                <th>Date</th>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr onClick={() => { setShow(true); setItem(item)}}>
+                  <td>{item.amount}</td>
+                  <td>{item.location}</td>
+                  <td>{item.date}</td>
+                </tr>
+              ))}
+              {show ? (
+                  <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
+                    <View list={itemData} show={show} onHide={handleClose} toogleUpdate={handleUpdate} updateData={getData}/>
+                  </div>
+              ): null}
+            </tbody>
+          </table>
+          </>
+        )}
+        </div>
+        <Button variant="success" onClick={() => showAdd()}>
+              Add
+        </Button>
+        {showUpdate ?
+          (
+          <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
+          <UpdateView updateData={getData} show={showUpdate} onHide={closeUpdate} /> 
+          </div>)
+          : 
+          null}
+        <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
+          <AddView updateData={getData} show={row} onHide={closeAdd} />
+        </div>
+      </div>
     );
 }
 
