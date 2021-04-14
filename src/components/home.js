@@ -27,7 +27,13 @@ export function Home() {
     }
 
   useEffect(() => {
+    // fetch('/home')
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setData(data);
+    //   });
     getData();
+    
   }, []);
   
   useEffect(() => {
@@ -53,6 +59,7 @@ export function Home() {
             </div>
             <Transaction data={data} getData={getData}/>
         </div>
+        
     </div>
   );
 }
