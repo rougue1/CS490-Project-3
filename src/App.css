@@ -50,9 +50,15 @@ body {
 
 .balanceBoard {
   display: grid;
+  grid-row-gap: 5px;
 }
 
 .totalBalance {
   grid-column-start: 1;
   grid-column-end: 3;
+  border-bottom: solid lightgrey;
+}
+
+.totalIncome {
+  border-right: solid lightgray;
 }
