@@ -46,7 +46,6 @@ def login():
     global USER
     user_info = request.json
     if user_info:
-        print(user_info)
         USER = DBQuery(user_info['userInfo']['GoogleId'],
                        user_info['userInfo']['Email'],
                        user_info['userInfo']['FirstName'],
