@@ -11,6 +11,17 @@ tr {
   transition: all .2s ease-in-out;
 }
 
+.transaction td {
+  padding: 0.5rem 2rem;
+}
+
+.colorTag {
+  background: red;
+  width: 15px;
+  height: 15px;
+  padding: 0.5rem 0rem !important;
+}
+
 .loginBox {
   background: rgba(255, 255, 255, 0.1);
   height: 275px;
@@ -34,9 +45,7 @@ tr {
 
 .transaction {
 }
-.transaction td {
-  padding: 0.5rem 2rem;
-}
+
 .transaction tr:hover {
   transform: scale(1.05);
   cursor: pointer;

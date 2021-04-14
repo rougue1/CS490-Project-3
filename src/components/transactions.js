@@ -43,8 +43,8 @@ export function Transaction({data, getData})
             <tbody>
               {data.map((item, index) => (
                 <tr onClick={() => { setShow(true); setItem(item)}} key={index}>
-                  <td><div className="colorTag"></div></td>
-                  <td>{item.amount}</td>
+                  <td className="colorTag"></td>
+                  <td>$ {item.amount}</td>
                   <td>{item.location}</td>
                   <td>{item.date}</td>
                 </tr>
