@@ -12,11 +12,7 @@ export function GLogout({ setLoginStatus }) {
 
   return (
     <div>
-      <GoogleLogout
-        clientId={clientId}
-        buttonText="Logout"
-        onLogoutSuccess={onSuccess}
-      />
+      <GoogleLogout clientId={clientId} buttonText="Logout" onLogoutSuccess={onSuccess} />
     </div>
   );
 }

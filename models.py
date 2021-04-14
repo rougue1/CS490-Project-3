@@ -39,7 +39,7 @@ class Transaction(DB.Model):
 
     # user_id of the user entering transaction
     user_id = Column(String, ForeignKey("user_info.user_id",
-                                         ondelete="CASCADE"))
+                                        ondelete="CASCADE"))
 
     # type of transaction
     transaction_type = Column(String, nullable=False)
@@ -57,8 +57,10 @@ class Transaction(DB.Model):
     description = Column(String, nullable=False)
 
     # id of the transaction, supposed to be autoincrement according to user's list of transactions
-    transaction_id = Column(Integer, nullable=False,
-                            primary_key=True, autoincrement=True)
+    transaction_id = Column(Integer,
+                            nullable=False,
+                            primary_key=True,
+                            autoincrement=True)
 
     user_info = relationship("Users",
                              primaryjoin=user_id == Users.user_id,
@@ -79,4 +81,3 @@ class Transaction(DB.Model):
     def __str__(self):
 
         return f"ID -> {self.transaction_id}: User {self.user_id} had {self.transaction_type} from {self.location} for amount {self.amount} on {self.date}"
-

@@ -4,9 +4,9 @@ import './App.css';
 import React, { useState } from 'react';
 import { GLogout } from './components/logout';
 import { GLogin } from './components/login';
-import { Home } from './components/home'
+import { Home } from './components/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
-require("dotenv").config();
+require('dotenv').config();
 
 function App() {
   console.log(process.env.HI);
@@ -15,13 +15,14 @@ function App() {
   return (
     <div className="App">
       <div className="wrap">
-        {loginStatus === true
-          ?
+        {loginStatus === true ? (
           <div>
             <Home />
             <GLogout setLoginStatus={setLoginStatus} />
           </div>
-          : <GLogin setLoginStatus={setLoginStatus} />}
+        ) : (
+          <GLogin setLoginStatus={setLoginStatus} />
+        )}
       </div>
     </div>
   );

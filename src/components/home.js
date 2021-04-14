@@ -1,61 +1,60 @@
-import React ,{ useState, useEffect } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+/* eslint-disable*/
+import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+// import PropTypes from 'prop-types';
 import '../App.css';
-import { View } from './view.js';
+import { Transaction } from './transactions.js'
 
-export function Home()
-{
-    const [ data, setData ] = useState([]);
-    const [show, setShow] = useState(false);
-    
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
-    
-    useEffect(() => {
-        fetch("/home").then(
-            res => res.json()
-        ).then(data => {
-            setData(data);
-        })
-    }, []);
-    
-    console.log(data.length);
-    
-    return (
-        <div className="transaction">
-            {data.length === 0 ? (
-                <b>No transactions to show</b>
-            ):(
-            <table>
-              <thead>
-                <tr>
-                  <th>Amount</th>
-                  <th>Location</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => {
-                 console.log(item)
-                 return(
-                    <tr onClick={() => setShow(true)}>
-                        <div style={{display:"none"}} onClick={e => e.stopPropagation()}>
-                            <View  list={item} show={show} onHide={handleClose} />
-                        </div>
-                      <td>{item.amount}</td>
-                      <td>{item.location}</td>
-                      <td>{item.date}</td>
-                    </tr>
-                );
-                })}
-                
-              
-              </tbody>
-            </table>
-            
-            )}
+export function Home() {
+  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState({});
+
+  function getData(){
+      fetch('/home')
+      .then((res) => res.json())
+      .then((val) => {
+        setData(val);
+      });
+  }
+
+    function getUserInfo() {
+        fetch('/userInfo')
+        .then((res) => res.json())
+        .then((val) => {
+        setUserData(val);
+        });
+    }
+
+  useEffect(() => {
+    getData();
+  }, []);
+  
+  useEffect(() => {
+      getUserInfo();
+  }, [data]);
+
+  return (
+    <div>
+        <div>
+            <h1>Welcome, {userData.User}</h1>
         </div>
-    );
+        <div className="Home">
+            <div className="balanceBoard">
+                <div className="totalBalance">
+                    Total balance: <h3>{userData.Balance}</h3>
+                </div>
+                <div className="totalIncome">
+                    Total income: <h4>{userData.Income}</h4>
+                </div>
+                <div className="totalExpense">
+                    Total expense: <h4>{userData.Expense}</h4>
+                </div>
+            </div>
+            <Transaction data={data} getData={getData}/>
+        </div>
+    </div>
+  );
 }
+
+export default Home;
