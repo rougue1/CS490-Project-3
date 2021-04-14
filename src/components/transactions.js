@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { View } from './view.js';
