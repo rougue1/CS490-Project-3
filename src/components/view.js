@@ -2,10 +2,10 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-export function View({ list, show, onHide }) {
+export function View({ list, show, onHide, toogleUpdate }) {
   // alert(list.amount)
   // function deleteRow(){
-    
+   
   // }
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
@@ -31,7 +31,7 @@ export function View({ list, show, onHide }) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={onHide}>
+        <Button variant="primary" onClick={toogleUpdate}>
           Update
         </Button>
         <Button variant="danger" onClick={onHide}>
@@ -45,11 +45,13 @@ export function View({ list, show, onHide }) {
 View.propTypes = {
   show: PropTypes.bool,
   onHide: PropTypes.bool,
+  toogleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
 View.defaultProps = {
   show: PropTypes.bool,
   onHide: PropTypes.bool,
+  toogleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
 
