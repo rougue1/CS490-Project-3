@@ -63,7 +63,6 @@ def add():
     global USER
     user_info = request.json
     if user_info:
-        print(user_info)
         base = user_info['formDataObj']
         ##need month day year from year month day
         # datetime.datetime.strptime("2015-01-30", "%Y-%m-%d").strftime("%d-%m-%Y")
