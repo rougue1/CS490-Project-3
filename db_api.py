@@ -66,7 +66,12 @@ class DBQuery:
         transactions.sort(key=lambda x: x.date)
         transactions_dict = {}
         for transaction in transactions:
-            transactions_dict[transaction.transaction_id] = [
-                transaction.transaction_type, transaction.amount, transaction.date, transaction.location, transaction.description]
+            transactions_dict[transaction.transaction_id] = {
+                "type": transaction.transaction_type,
+                "amount": transaction.amount,
+                "date": transaction.date,
+                "location": transaction.location,
+                "description": transaction.description
+            }
         return transactions_dict
         # return transactions
