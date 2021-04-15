@@ -1,3 +1,58 @@
 .App {
   text-align: center;
 }
+
+body {
+  margin: 0px;
+}
+
+.transaction tr {
+  box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+  transition: all .2s ease-in-out;
+  border-radius: 5px;
+}
+
+.transaction td {
+  padding: 0.5rem 2rem;
+}
+
+.colorTag {
+  width: 15px;
+  padding: 0.5rem 0rem !important;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.loginBox {
+  background: rgba(255, 255, 255, 0.1);
+  height: 275px;
+  width: 690px;
+  padding-top: 50px;
+  box-shadow: 1px 1px 12px rgb(0 0 0 / 10%);
+  font-family: sans-serif;
+}
+
+.wrap {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transactionsTable {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.transaction tr:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.balanceBoard {
+  display: grid;
+}
+
+.totalBalance {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

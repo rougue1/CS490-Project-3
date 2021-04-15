@@ -25,7 +25,6 @@ export function GLogin({ setLoginStatus }) {
       },
     });
     const data = await res.json();
-    console.log(data);
 
     if (data === 200) {
       setLoginStatus(true);
@@ -37,7 +36,18 @@ export function GLogin({ setLoginStatus }) {
   };
 
   return (
-    <GoogleLogin clientId={clientId} onSuccess={onSuccess} onFailure={onFailure} />
+    <div className="loginBox">
+      <h1>Welcome to expense tracker</h1>
+      <h5>Please login to continue</h5>
+      <br />
+      <br />
+      <GoogleLogin
+        clientId={clientId}
+        buttonText="Login with Google"
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+      />
+    </div>
   );
 }
 

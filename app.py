@@ -1,4 +1,6 @@
-''' Our server file'''
+'''
+Our server file
+'''
 # disabling some of the errors
 # pylint: disable= E1101, C0413, R0903, W0603, W1508
 
@@ -10,6 +12,8 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
+from db_api import DBQuery
+import datetime
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 
@@ -22,26 +26,88 @@ APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 DB = SQLAlchemy(APP)
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
-import models
 
 DB.create_all()
+
+USER = ''
 
 
 @APP.route('/', defaults={"filename": "index.html"})
 @APP.route('/<path:filename>')
 def index(filename):
     '''
-    starting point
+    Starting point
     '''
     return send_from_directory('./build', filename)
 
 
 @APP.route('/login', methods=['POST'])
 def login():
-    '''login function obtains user info'''
+    '''
+    Login function obtains user info
+    '''
+    global USER
     user_info = request.json
     if user_info:
-        print(user_info)
+        USER = DBQuery(user_info['userInfo']['GoogleId'],
+                       user_info['userInfo']['Email'],
+                       user_info['userInfo']['FirstName'],
+                       user_info['userInfo']['LastName'])
+
+        return jsonify(200)
+    return jsonify(400)
+
+
+@APP.route('/add', methods=['POST'])
+def add():
+    '''
+    Add income or expense
+    '''
+    global USER
+    user_info = request.json
+    if user_info:
+        base = user_info['formDataObj']
+        USER.addTransaction(
+            base['type'],
+            base['amount'],
+            base['date'],
+            base['location'],
+            base['description'],
+        )
+        return jsonify(200)
+    return jsonify(400)
+
+
+@APP.route('/home', methods=['Get'])
+def home():
+    '''
+    Get transactions for a user
+    '''
+    global USER
+    transactions = USER.getTransactions()
+    return jsonify(transactions)
+
+
+@APP.route('/userInfo', methods=['Get'])
+def userInfo():
+    '''
+    Get a users full info
+    '''
+    global USER
+    user_info = USER.get()
+    return jsonify(user_info)
+
+
+@APP.route('/delete', methods=['Post'])
+def deleteInfo():
+    '''
+    Delete a transaction
+    '''
+    global USER
+    data = request.json
+    if data:
+        transaction_id = data["id_data"]
+        USER.removeTransaction(transaction_id)
         return jsonify(200)
     return jsonify(400)
 
