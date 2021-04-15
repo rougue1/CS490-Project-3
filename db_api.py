@@ -39,6 +39,10 @@ class DBQuery:
     # You HAVE to call the constructor before accessing any other functions
 
     def __init__(self, user_id, email, first_name, last_name):
+        '''
+        params:
+            all are strings
+        '''
         self.user_id = user_id
         self.email = email
         self.first_name = first_name
@@ -127,9 +131,9 @@ class DBQuery:
             if '-' in date:
                 date = date.replace('-', '/')
                 date = datetime.datetime.strptime(
-                    date, "%Y/%m/%d").strftime("%m/%d/%Y").date()
+                    date, "%Y/%m/%d").strftime("%m/%d/%Y")
             else:
-                date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+                date = datetime.datetime.strptime(date, "%m/%d/%Y")
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, description)
         session.add(to_add)
