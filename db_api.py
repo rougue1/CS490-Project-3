@@ -19,6 +19,7 @@ class DBQuery:
     email = ""
     first_name = ""
     last_name = ""
+    
 
     # You HAVE to call the constructor before accessing any other functions
     def __init__(self, user_id, email, first_name, last_name):
@@ -60,7 +61,7 @@ class DBQuery:
             models.Transaction.transaction_id == transaction_id,
             models.Transaction.user_id == self.user_id).first()
         if to_remove is not None:
-            to_remove.delete()
+            session.delete(to_remove)
             session.commit()
 
     def getTransactions(self):

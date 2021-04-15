@@ -95,6 +95,17 @@ def userInfo():
     userInfo = USER.getUserInfo()
     return (jsonify(userInfo))
 
+@APP.route('/delete', methods=['Post'])
+def deleteInfo():
+    '''userData function obtains user info'''
+    global USER
+    data = request.json
+    if data:
+        transaction_id = data["id_data"]
+        USER.removeTransaction(transaction_id)
+        return (jsonify(200))
+    return (jsonify(400))
+
 if __name__ == "__main__":
     APP.run(
         host=os.getenv('IP', '0.0.0.0'),
