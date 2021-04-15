@@ -169,14 +169,15 @@ class DBQuery:
             args.extend(transaction_info[len(args):])
             to_edit.transaction_type, to_edit.amount, to_edit.date, to_edit.location, to_edit.description = args
 
-            # using dict.get(key, default) so that if the key DNE, it gets default value
-            to_edit.transaction_type = kwargs.get("transaction_type",
-                                                  to_edit.transaction_type)
-            to_edit.amount = round(kwargs.get("amount", to_edit.amount), 2)
-            to_edit.date = kwargs.get("date", to_edit.date)
-            to_edit.location = kwargs.get("location", to_edit.location)
-            to_edit.description = kwargs.get("description",
-                                             to_edit.description)
+            if len(kwargs) != 0:
+                # using dict.get(key, default) so that if the key DNE, it gets default value
+                to_edit.transaction_type = kwargs.get("transaction_type",
+                                                      to_edit.transaction_type)
+                to_edit.amount = round(kwargs.get("amount", to_edit.amount), 2)
+                to_edit.date = kwargs.get("date", to_edit.date)
+                to_edit.location = kwargs.get("location", to_edit.location)
+                to_edit.description = kwargs.get("description",
+                                                 to_edit.description)
             session.commit()
 
     def removeTransaction(self, transaction_id):
