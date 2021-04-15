@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { View } from './view.js';
 import { AddView } from './addview.js';
@@ -9,15 +9,27 @@ export function Transaction({data, getData})
 {
     const [show, setShow] = useState(false);
     const [row, setRow] = useState(false);
-   
+
     const [ showUpdate, setUpdate ] = useState(false);
+
+    const [ numData, setNumData ] = useState(5);
+    
+    const [ showData, setShowData ] = useState([]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-   
+
     const handleUpdate = () => {
       setShow(false);
       setUpdate(true);
+    }
+
+    const handleShowMore = () => {
+      setNumData((currentData) => currentData += 5);
+    }
+    
+    const handleShowLess = () => {
+      setNumData((currentData) => currentData -= 5);
     }
 
     const closeAdd = () => setRow(false);
@@ -25,6 +37,16 @@ export function Transaction({data, getData})
     const closeUpdate = () => setUpdate(false);
 
     const [itemData,setItem] = useState(null);
+    console.log(numData);
+    
+    useEffect(() => {
+      setShowData((currData) => {
+        const newData = data.slice(0, numData);
+        return newData;
+      })
+    }, [data, numData]);
+    
+    console.log(showData);
 
     return (
       <div>
@@ -41,7 +63,7 @@ export function Transaction({data, getData})
                 <th>Date</th>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {showData.map((item, index) => (
                 <tr onClick={() => { setShow(true); setItem(item)}} key={index}>
                   {item.type === 'Income' ?
                     <td className="colorTag" style={{ background: 'green' }}></td> :
@@ -59,11 +81,22 @@ export function Transaction({data, getData})
               ): null}
             </tbody>
           </table>
+          <div  className="showMore">
+            {numData > 5 ?
+              <a onClick={() => handleShowLess()}>
+                  Hide..
+              </a>:
+              null
+            }
+            <a onClick={() => handleShowMore()}>
+              ...Show More
+            </a>
+          </div>
           </>
         )}
         </div>
         <Button variant="success" onClick={() => showAdd()}>
-              Add
+          Add
         </Button>
         {showUpdate ?
           (

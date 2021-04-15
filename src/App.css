@@ -62,3 +62,17 @@ body {
 .totalIncome {
   border-right: solid lightgray;
 }
+
+.showMore {
+  text-decoration: underline;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wrap a:last-child {
+  margin-left: auto;
+}
+
+.showMore a:hover {
+  cursor: pointer;
+}
