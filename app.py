@@ -1,9 +1,7 @@
 '''
 Our server file
 '''
-# disabling some of the errors
 # pylint: disable= E1101, C0413, R0903, W0603, W1508
-
 import os
 import operator  # for reordering the scores table
 from flask import Flask, send_from_directory, json
@@ -16,19 +14,11 @@ from db_api import *
 import datetime
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
-
 APP = Flask(__name__, static_folder='./build/static')
-# Point SQLAlchemy to your Heroku database
 APP.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-# Gets rid of a warning
 APP.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 DB = SQLAlchemy(APP)
-# IMPORTANT: This must be AFTER creating db variable to prevent
-# circular import issues
-
 DB.create_all()
-
 USER = ''
 
 
