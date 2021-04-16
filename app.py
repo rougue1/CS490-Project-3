@@ -78,7 +78,7 @@ def update():
 
     if data:
         transaction_id = data["id_data"]
-        base = data["fomDataObj"]
+        base = data["formDataObj"]
         USER.editTransaction(
             transaction_id,
             base['type'],

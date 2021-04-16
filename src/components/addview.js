@@ -26,7 +26,9 @@ export function AddView({ updateData, show, onHide }) {
       updateData();
     }
   };
-
+  function amountFormat(num) {
+    return '$' + num;
+  }
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
@@ -41,7 +43,14 @@ export function AddView({ updateData, show, onHide }) {
           </Form.Control>
 
           <Form.Label>Amount: </Form.Label>
-          <Form.Control type="number" name="amount" step="0.01" min="0" />
+          <Form.Control
+            type="number"
+            name="amount"
+            step="0.01"
+            min="0"
+            precision="2"
+            format={amountFormat}
+          />
 
           <Form.Label>Date: </Form.Label>
           <Form.Control type="date" name="date" />
