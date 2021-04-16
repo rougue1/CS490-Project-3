@@ -101,12 +101,12 @@ export function Transaction({data, getData})
         {showUpdate ?
           (
           <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-          <UpdateView updateData={getData} show={showUpdate} onHide={closeUpdate} /> 
+            <UpdateView updateData={getData} show={showUpdate} onHide={closeUpdate} /> 
           </div>)
           : 
           null}
         <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-          <AddView updateData={getData} show={row} onHide={closeAdd} />
+          <AddView endPoint='/add' updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
         </div>
       </div>
     );

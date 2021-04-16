@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 //form validation
 
-export function UpdateView({updateData, show, onHide }) {
+export function UpdateView({updateData, show, onHide }) { //redundant code allow for addview and upateview to combine?
   
   
    const onUpdate = async (e) => {
