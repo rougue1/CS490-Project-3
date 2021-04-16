@@ -77,7 +77,8 @@ export function AddView({endPoint, updateData, show, onHide, showAdd }) {
                 </Form.Control>
               
               <Form.Label>Amount: </Form.Label>
-              <Form.Control required type="number" name="amount" step="0.01" min="0"/>
+        
+              <Form.Control required className="form-control" name="amount" step="0.01" precision="2" min="0"/>
               <Form.Control.Feedback type="invalid">Please enter an amount!</Form.Control.Feedback>
               
               <Form.Label>Date: </Form.Label>
