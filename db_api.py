@@ -46,7 +46,7 @@ class DBQuery:
         self.last_name = last_name
         self.add()
 
-    def get(self):
+    def getInfo(self):
         '''
         Method to get the full name, total balance, total income,
         and total expenses of a user.

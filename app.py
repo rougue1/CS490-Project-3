@@ -84,7 +84,7 @@ def userInfo():
     Get a users full info
     '''
     global USER
-    user_info = USER.get()
+    user_info = USER.getInfo()
     return jsonify(user_info)
 
 
