@@ -9,9 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 require('dotenv').config();
 
 function App() {
-  console.log(process.env.HI);
   const [loginStatus, setLoginStatus] = useState(false);
-
   return (
     <div className="App">
       <div className="wrap">
@@ -27,5 +25,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

@@ -150,7 +150,7 @@ export function Transaction({data, getData})
         <div className="transaction">
         {data.length === 0 ? (
           <b>No transactions to show</b>
-          ) : (
+        ) : (
           <>
           <select value={filterOptions} onChange={(e) => { handleFilter(e); setFilterOptions(e.target.value)}}>
             <option value="All"> Show All</option>
@@ -164,58 +164,56 @@ export function Transaction({data, getData})
                 <th>Amount</th>
                 <th>Location</th>
                 <th>Date</th>
-            </thead>
-            <tbody>
-              {showData.map((item, index) => (
-                <tr onClick={() => { setShow(true); setItem(item)}} key={index}>
-                  {item.type === 'Income' ?
-                    <td className="colorTag" style={{ background: 'green' }}></td> :
-                    <td className="colorTag" style={{ background: 'red' }}></td>
-                  }
-                  <td>$ {item.amount}</td>
-                  <td>{item.location}</td>
-                  <td>{item.date}</td>
-                </tr>
-              ))}
-              {show ? (
+              </thead>
+              <tbody>
+                {showData.map((item, index) => (
+                  <tr
+                    onClick={() => {
+                      setShow(true);
+                      setItem(item);
+                    }}
+                    key={index}
+                  >
+                    {item.type === 'Income' ? (
+                      <td className="colorTag" style={{ background: 'green' }}></td>
+                    ) : (
+                      <td className="colorTag" style={{ background: 'red' }}></td>
+                    )}
+                    <td>$ {item.amount}</td>
+                    <td>{item.location}</td>
+                    <td>{item.date}</td>
+                  </tr>
+                ))}
+                {show ? (
                   <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-                    <View list={itemData} show={show} onHide={handleClose} toogleUpdate={handleUpdate} updateData={getData}/>
+                    <View
+                      list={itemData}
+                      show={show}
+                      onHide={handleClose}
+                      toogleUpdate={handleUpdate}
+                      updateData={getData}
+                    />
                   </div>
-              ): null}
-            </tbody>
-          </table>
-          <div  className="showMore">
-            {numData > 5 ?
-              <a onClick={() => handleShowLess()}>
-                  Hide..
-              </a>:
-              null
-            }
-            <a onClick={() => handleShowMore()}>
-              ...Show More
-            </a>
-          </div>
+                ) : null}
+              </tbody>
+            </table>
+            <div className="showMore">
+              {numData > 5 ? <a onClick={() => handleShowLess()}>Hide..</a> : null}
+              <a onClick={() => handleShowMore()}>...Show More</a>
+            </div>
           </>
         )}
-        </div>
-        <Button variant="success" onClick={() => showAdd()}>
-          Add
-        </Button>
-        {showUpdate ?
-          (
-          <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-          <UpdateView updateData={getData} show={showUpdate} onHide={closeUpdate} />
-          </div>)
-          :
-          null}
-        
-        <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-          <AddView updateData={getData} show={row} onHide={closeAdd} />
-        </div>
       </div>
-    );
+      <Button variant="success" onClick={() => showAdd()}>
+        Add
+      </Button>
+      {}
+      <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
+        <AddView updateData={getData} show={row} onHide={closeAdd} />
+      </div>
+    </div>
+  );
 }
-
 Transaction.propTypes = {
   data: PropTypes.instanceOf(Array),
   getData: PropTypes.object,
@@ -224,5 +222,4 @@ Transaction.defaultProps = {
   data: PropTypes.instanceOf(Array),
   getData: PropTypes.object,
 };
-
 export default Transaction;
