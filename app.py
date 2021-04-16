@@ -46,7 +46,6 @@ def login():
     global USER
     user_info = request.json
     if user_info:
-        print(user_info)
         USER = DBQuery(user_info['userInfo']['GoogleId'],
                        user_info['userInfo']['Email'],
                        user_info['userInfo']['FirstName'],
@@ -64,7 +63,6 @@ def add():
     global USER
     user_info = request.json
     if user_info:
-        print(user_info)
         base = user_info['formDataObj']
         ##need month day year from year month day
         # datetime.datetime.strptime("2015-01-30", "%Y-%m-%d").strftime("%d-%m-%Y")
@@ -83,12 +81,29 @@ def add():
 
 @APP.route('/home', methods=['Get'])
 def home():
-    '''home function obtains user info'''
+    '''home function obtains user's transactions info'''
     global USER
     transactions = USER.getTransactions()
-    print(transactions)
     return (jsonify(transactions))
+    
+    
+@APP.route('/userInfo', methods=['Get'])
+def userInfo():
+    '''userData function obtains user info'''
+    global USER
+    userInfo = USER.getUserInfo()
+    return (jsonify(userInfo))
 
+@APP.route('/delete', methods=['Post'])
+def deleteInfo():
+    '''userData function obtains user info'''
+    global USER
+    data = request.json
+    if data:
+        transaction_id = data["id_data"]
+        USER.removeTransaction(transaction_id)
+        return (jsonify(200))
+    return (jsonify(400))
 
 if __name__ == "__main__":
     APP.run(

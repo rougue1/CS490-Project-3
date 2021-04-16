@@ -6,6 +6,22 @@ body {
   margin: 0px;
 }
 
+.transaction tr {
+  box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+  transition: all .2s ease-in-out;
+  border-radius: 5px;
+}
+
+.transaction td {
+  padding: 0.5rem 2rem;
+}
+
+.colorTag {
+  width: 15px;
+  padding: 0.5rem 0rem !important;
+  border-radius: 5px 0px 0px 5px;
+}
+
 .loginBox {
   background: rgba(255, 255, 255, 0.1);
   height: 275px;
@@ -22,12 +38,41 @@ body {
   justify-content: center;
 }
 
-.transaction {
-  background-color: lightgray;
+.transactionsTable {
+  border-collapse: separate;
+  border-spacing: 0 15px;
 }
-.transaction td {
-  padding: 0.5rem 2rem;
-}
+
 .transaction tr:hover {
-  background-color: gray;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.balanceBoard {
+  display: grid;
+  grid-row-gap: 5px;
+}
+
+.totalBalance {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border-bottom: solid lightgrey;
+}
+
+.totalIncome {
+  border-right: solid lightgray;
+}
+
+.showMore {
+  text-decoration: underline;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wrap a:last-child {
+  margin-left: auto;
+}
+
+.showMore a:hover {
+  cursor: pointer;
 }

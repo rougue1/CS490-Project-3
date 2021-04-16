@@ -25,7 +25,6 @@ export function GLogin({ setLoginStatus }) {
       },
     });
     const data = await res.json();
-    console.log(data);
 
     if (data === 200) {
       setLoginStatus(true);
