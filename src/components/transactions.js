@@ -44,8 +44,8 @@ export function Transaction({data, getData})
         return newData;
       })
     }, [data, numData]);
-   
-    // Display Month transactions for this month commit 2
+    
+    // Display Month transactions for this month 
    
     function showMonth(data)
     {
@@ -56,7 +56,7 @@ export function Transaction({data, getData})
         const month_year = date.slice(3, 11);
        
         const curr_date = new Date();
-        const curr_month_year = curr_date.toLocaleString('default', { month: 'short' }) + ' ' + curr_date.getFullYear();
+         const curr_month_year = curr_date.toLocaleString('default', { month: 'short' }) + ' ' + curr_date.getFullYear();
         if(curr_month_year === month_year)
         {
           month_data.push(data[i])
@@ -66,68 +66,8 @@ export function Transaction({data, getData})
       setShowData(month_data);
     }
    
-    // Display Month transactions for this year commit 4
-   
-    function showYear(data)
-    {
-      var year_data = [];
-      for (var i = 0; i < data.length; i++)
-      {
-        const date = data[i].date.slice(5, 16);
-        const year = date.slice(7, 11);
-       
-        const curr_date = new Date();
-        const curr_year = curr_date.getFullYear().toString();
-       
-        if(curr_year === year)
-        {
-          year_data.push(data[i])
-        }
-      }
-      setShowData(year_data);
-    }
-   
-    // Display Month transactions for this week commit 6
-   
-    function showWeek(data)
-    {
-      var week_data = [];
-      for (var i = 0; i < data.length; i++)
-      {
-        const today = new Date();
-       
-        var date = data[i].date.slice(5, 16);
-        var day = date.slice(0, 2);
-        var month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(date.slice(3, 6)) / 3;
-        var year = date.slice(7, 11);
-       
-        var lastWeek_day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDay().toString();
-        var lastWeek_month = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getMonth().toString();
-        var lastWeek_year = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getFullYear().toString();
-       
-        var today_day = today.getDate().toString();
-        var today_month = today.getMonth().toString();
-        var today_year = today.getFullYear().toString();
-       
-        var D_1 = [lastWeek_day, lastWeek_month, lastWeek_year];
-        var D_2 = [today_day, today_month, today_year];
-        var D_3 = [day, month, year];
-         
-        var d1 = new Date(D_1[2], parseInt(D_1[1]), D_1[0]);
-        var d2 = new Date(D_2[2], parseInt(D_2[1]), D_2[0]);
-        var d3 = new Date(D_3[2], parseInt(D_3[1]), D_3[0]);
-         
-        if (d3 >= d1 && d3 <= d2) {
-            week_data.push(data[i]);
-        }
-      }
-      setShowData(week_data);
-    }
-    
-      function favTutorial() {
-        var mylist = document.getElementById("myList");
-        document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;
-      }
+
+      
     return (
       <div>
         <div className="transaction">
@@ -186,20 +126,13 @@ export function Transaction({data, getData})
           :
           null}
           
-        {/* Button for week make a commit 5 */}
-          <Button variant="success" onClick={() => showWeek(data)}>
-            Show Week
-          </Button>
+        
          
-          {/* Button for month make a commit 1 */}
           <Button variant="success" onClick={() => showMonth(data)}>
             Show Month
           </Button>
          
-          {/* Button for year make a commit 3 */}
-          <Button variant="success" onClick={() => showYear(data)}>
-            Show Year
-          </Button>
+          
         
         <select>
           <option variant="success" onClick={() => showWeek(data)}> Show Week</option>
