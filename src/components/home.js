@@ -8,7 +8,6 @@ import { Transaction } from './transactions.js';
 export function Home() {
   const [data, setData] = useState([]);
   const [userData, setUserData] = useState({});
-
   function getData() {
     fetch('/home')
       .then((res) => res.json())
@@ -16,7 +15,6 @@ export function Home() {
         setData(val);
       });
   }
-
   function getUserInfo() {
     fetch('/userInfo')
       .then((res) => res.json())
@@ -24,7 +22,6 @@ export function Home() {
         setUserData(val);
       });
   }
-
   useEffect(() => {
     // fetch('/home')
     //   .then((res) => res.json())
@@ -33,11 +30,9 @@ export function Home() {
     //   });
     getData();
   }, []);
-
   useEffect(() => {
     getUserInfo();
   }, [data]);
-
   return (
     <div>
       <div>
@@ -60,5 +55,4 @@ export function Home() {
     </div>
   );
 }
-
 export default Home;
