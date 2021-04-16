@@ -68,6 +68,30 @@ def add():
     return jsonify(400)
 
 
+@APP.route('/update', methods=['POST'])
+def update():
+    '''
+    Update income or expense
+    '''
+    global USER
+    data = request.json
+
+    if data:
+        transaction_id = data["id_data"]
+        base = data["fomDataObj"]
+        USER.editTransaction(
+            transaction_id,
+            base['type'],
+            base['amount'],
+            base['date'],
+            base['location'],
+            base['description'],
+        )
+        print(jsonify(200))
+        return jsonify(200)
+    return jsonify(400)
+
+
 @APP.route('/home', methods=['Get'])
 def home():
     '''
