@@ -15,9 +15,10 @@ export function Transaction({data, getData})
     const [ numData, setNumData ] = useState(5);
    
     const [ showData, setShowData ] = useState([]);
+    
+    const [ filterOptions, setFilterOptions ] = useState('All');
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const handleUpdate = () => {
       setShow(false);
@@ -119,6 +120,29 @@ export function Transaction({data, getData})
       }
       setShowData(week_data);
     }
+    
+    function handleFilter(e)
+    {
+      if(e.target.value === 'Week')
+      {
+        showWeek(data);
+      }
+      else if(e.target.value === 'Month')
+      {
+        showMonth(data);
+      }
+      else if(e.target.value === 'Year')
+      {
+        showYear(data);
+      }
+      else
+      {
+        setShowData((currData) => {
+          const newData = data.slice(0, numData);
+          return newData;
+        })
+      }
+    }
 
       
     return (
@@ -128,6 +152,12 @@ export function Transaction({data, getData})
           <b>No transactions to show</b>
           ) : (
           <>
+          <select value={filterOptions} onChange={(e) => { handleFilter(e); setFilterOptions(e.target.value)}}>
+            <option value="All"> Show All</option>
+            <option value="Week"> Show Week</option>
+            <option value="Month"> Show Month</option>
+            <option value="Year"> Show Year</option>
+          </select>
           <table className="transactionsTable">
             <thead>
                 <th></th>
@@ -178,31 +208,6 @@ export function Transaction({data, getData})
           </div>)
           :
           null}
-          
-        
-         
-        {/* Button for week */ }
-        <Button variant="success" onClick={() => showWeek(data)}>
-          Show Week
-        </Button>
-       
-        {/* Button for month */}
-        <Button variant="success" onClick={() => showMonth(data)}>
-          Show Month
-        </Button>
-       
-        {/* Button for year */}
-        <Button variant="success" onClick={() => showYear(data)}>
-          Show Year
-        </Button>
-         
-          
-        
-        <select>
-          <option variant="success" onClick={() => showWeek(data)}> Show Week</option>
-          <option variant="success" onClick={() => showMonth(data)}> Show Month</option>
-          <option variant="success" onClick={() => showYear(data)}> Show Year</option>
-        </select>
         
         <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
           <AddView updateData={getData} show={row} onHide={closeAdd} />
