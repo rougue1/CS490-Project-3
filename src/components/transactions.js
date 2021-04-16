@@ -84,7 +84,41 @@ export function Transaction({data, getData})
       }
       setShowData(year_data);
     }
-   
+    
+    function showWeek(data)
+    {
+      var week_data = [];
+      for (var i = 0; i < data.length; i++)
+      {
+        const today = new Date();
+       
+        var date = data[i].date.slice(5, 16);
+        var day = date.slice(0, 2);
+        var month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(date.slice(3, 6)) / 3;
+        var year = date.slice(7, 11);
+       
+        var lastWeek_day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDay().toString();
+        var lastWeek_month = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getMonth().toString();
+        var lastWeek_year = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getFullYear().toString();
+       
+        var today_day = today.getDate().toString();
+        var today_month = today.getMonth().toString();
+        var today_year = today.getFullYear().toString();
+       
+        var D_1 = [lastWeek_day, lastWeek_month, lastWeek_year];
+        var D_2 = [today_day, today_month, today_year];
+        var D_3 = [day, month, year];
+         
+        var d1 = new Date(D_1[2], parseInt(D_1[1]), D_1[0]);
+        var d2 = new Date(D_2[2], parseInt(D_2[1]), D_2[0]);
+        var d3 = new Date(D_3[2], parseInt(D_3[1]), D_3[0]);
+         
+        if (d3 >= d1 && d3 <= d2) {
+            week_data.push(data[i]);
+        }
+      }
+      setShowData(week_data);
+    }
 
       
     return (
