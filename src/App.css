@@ -32,7 +32,6 @@ body {
 }
 
 .wrap {
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,4 +74,12 @@ body {
 
 .showMore a:hover {
   cursor: pointer;
+}
+
+.login {
+  height: 100vh;
+}
+
+.mainPage {
+  margin: 5vh;
 }

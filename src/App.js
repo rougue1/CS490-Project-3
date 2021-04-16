@@ -14,12 +14,14 @@ function App() {
     <div className="App">
       <div className="wrap">
         {loginStatus === true ? (
-          <div>
+          <div className="mainPage">
             <Home />
             <GLogout setLoginStatus={setLoginStatus} />
           </div>
         ) : (
-          <GLogin setLoginStatus={setLoginStatus} />
+          <div className="login wrap">
+            <GLogin setLoginStatus={setLoginStatus} />
+          </div>
         )}
       </div>
     </div>
