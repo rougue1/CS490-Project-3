@@ -79,6 +79,38 @@ def add():
         return jsonify(200)
     return jsonify(400)
 
+@APP.route('/delete', methods=['POST'])
+def deleteInfo():
+    '''userData function obtains user info'''
+    global USER
+    data = request.json
+    if data:
+        transaction_id = data["id_data"]
+        USER.removeTransaction(transaction_id)
+        return jsonify(200)
+    return (jsonify(400))
+    
+@APP.route('/update', methods=['POST'])
+def update():
+    '''
+    Update income or expense
+    '''
+    global USER
+    data = request.json
+
+    if data:
+        transaction_id = data["id_data"]
+        USER.editTransaction(transaction_id,
+            base['type'],
+            base['amount'],
+            correct_date,
+            base['location'],
+            base['description'],
+        )
+        print (jsonify(200))   
+        return jsonify(200)
+    return jsonify(400)
+
 @APP.route('/home', methods=['Get'])
 def home():
     '''home function obtains user's transactions info'''
@@ -94,16 +126,6 @@ def userInfo():
     userInfo = USER.getUserInfo()
     return (jsonify(userInfo))
 
-@APP.route('/delete', methods=['Post'])
-def deleteInfo():
-    '''userData function obtains user info'''
-    global USER
-    data = request.json
-    if data:
-        transaction_id = data["id_data"]
-        USER.removeTransaction(transaction_id)
-        return (jsonify(200))
-    return (jsonify(400))
 
 if __name__ == "__main__":
     APP.run(

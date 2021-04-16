@@ -54,6 +54,46 @@ class DBQuery:
                                     date, location, description)
         session.add(to_add)
         session.commit()
+        
+    def editTransaction(self, transaction_id, *args, **kwargs):
+        '''
+        Method to edit a transaction for a user.
+        transaction_id is needed as to know which transaction to edit.
+        Other variables are optional, but follow order:
+            transaction_type, amount, date, location and description.
+        Method allows setting specific things too, like:
+            transaction_type=
+            ...
+        '''
+
+        # dont do anything if nothing to edit
+        if len(args) == len(kwargs) == 0:
+            return
+
+        args = list(args)  # since tuple does not have extend()
+        to_edit = session.query(models.Transaction).filter(
+            models.Transaction.transaction_id == transaction_id,
+            models.Transaction.user_id == self.user_id).first()
+        if to_edit is not None:
+
+            # get pre-existing values for later
+            transaction_info = [
+                to_edit.transaction_type, to_edit.amount, to_edit.date,
+                to_edit.location, to_edit.description
+            ]
+            # if not enough arguments are passed in, use the pre-existing values
+            args.extend(transaction_info[len(args):])
+            to_edit.transaction_type, to_edit.amount, to_edit.date, to_edit.location, to_edit.description = args
+
+            # using dict.get(key, default) so that if the key DNE, it gets default value
+            to_edit.transaction_type = kwargs.get("transaction_type",
+                                                  to_edit.transaction_type)
+            to_edit.amount = round(kwargs.get("amount", to_edit.amount), 2)
+            to_edit.date = kwargs.get("date", to_edit.date)
+            to_edit.location = kwargs.get("location", to_edit.location)
+            to_edit.description = kwargs.get("description",
+                                             to_edit.description)
+            session.commit()    
 
     def removeTransaction(self, transaction_id):
         # match user id and transaction id to remove
