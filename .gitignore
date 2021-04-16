@@ -38,6 +38,8 @@ yarn-error.log*
 
 # Cache Files
 *.pyc
+__pycache__
+__pycache__/*
 
 # Temporaries
 temp.*
