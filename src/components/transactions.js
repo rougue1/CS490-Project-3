@@ -128,9 +128,20 @@ export function Transaction({data, getData})
           
         
          
-          <Button variant="success" onClick={() => showMonth(data)}>
-            Show Month
-          </Button>
+        {/* Button for week */ }
+        <Button variant="success" onClick={() => showWeek(data)}>
+          Show Week
+        </Button>
+       
+        {/* Button for month */}
+        <Button variant="success" onClick={() => showMonth(data)}>
+          Show Month
+        </Button>
+       
+        {/* Button for year */}
+        <Button variant="success" onClick={() => showYear(data)}>
+          Show Year
+        </Button>
          
           
         
