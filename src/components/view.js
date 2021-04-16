@@ -30,7 +30,7 @@ export function View({ list, show, onHide, toogleUpdate, updateData}) {
         }
         
       }
-    
+      
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
