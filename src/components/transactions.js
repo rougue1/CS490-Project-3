@@ -65,6 +65,25 @@ export function Transaction({data, getData})
      
       setShowData(month_data);
     }
+    
+    function showYear(data)
+    {
+      var year_data = [];
+      for (var i = 0; i < data.length; i++)
+      {
+        const date = data[i].date.slice(5, 16);
+        const year = date.slice(7, 11);
+       
+        const curr_date = new Date();
+        const curr_year = curr_date.getFullYear().toString();
+       
+        if(curr_year === year)
+        {
+          year_data.push(data[i])
+        }
+      }
+      setShowData(year_data);
+    }
    
 
       
