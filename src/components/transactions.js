@@ -198,27 +198,13 @@ export function Transaction({ data, getData }) {
             </div>
           </>
         )}
-        </div>
-        <Button variant="success" onClick={() => showAdd()}>
-          Add
-        </Button>
-        {showUpdate ?
-          (
-          <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-            <UpdateView updateData={getData} show={showUpdate} onHide={closeUpdate} /> 
-          </div>)
-          : 
-          null}
-        <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-          <AddView endPoint='/add' updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
-        </div>
       </div>
       <Button variant="success" onClick={() => showAdd()}>
         Add
       </Button>
       {}
       <div style={{ display: 'none' }} onClick={(e) => e.stopPropagation()}>
-        <AddView updateData={getData} show={row} onHide={closeAdd} />
+          <AddView endPoint='/add' updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
       </div>
     </div>
   );
