@@ -100,8 +100,7 @@ class DBQuery:
         # transaction = session.query(models.Transaction).filter(
         #     models.Transaction.user_id == self.user_id,
         #     models.Transaction.transaction_id == transaction_id).first()
-        if type(date) == str:
-            date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+        date = convertToDatetimeObj(date)
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, description)
         session.add(to_add)
