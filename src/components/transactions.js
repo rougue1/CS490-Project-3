@@ -3,19 +3,22 @@ import { Button } from 'react-bootstrap';
 import { View } from './view.js';
 import { AddView } from './addview.js';
 import { UpdateView } from './updateView.js';
+import { DeleteView } from './deleteView.js';
+import { Trash } from 'react-bootstrap-icons';
 import '../App.css';
 import PropTypes from 'prop-types';
 export function Transaction({ data, getData }) {
+  // useStates for pop-up logic for add, delete, update
   const [show, setShow] = useState(false);
   const [row, setRow] = useState(false);
-
   const [showUpdate, setUpdate] = useState(false);
-
+  const [showDelete, setDelete] = useState(false);
+  
+  // useStates for front-end UI
   const [numData, setNumData] = useState(5);
-
   const [showData, setShowData] = useState([]);
-
   const [filterOptions, setFilterOptions] = useState('All');
+
 
   const handleClose = () => setShow(false);
 
@@ -23,6 +26,10 @@ export function Transaction({ data, getData }) {
     setShow(false);
     setUpdate(true);
   };
+  
+  const handleDelete = () => setDelete(true);
+  const closeDelete = () => setDelete(false);
+  
 
   const handleShowMore = () => {
     setNumData((currentData) => (currentData += 5));
@@ -177,6 +184,7 @@ export function Transaction({ data, getData }) {
                     <td>$ {item.amount}</td>
                     <td>{item.location}</td>
                     <td>{item.date}</td>
+                    <td onClick={(e)=>{handleDelete(); setItem(item); e.stopPropagation();}}><Trash className="trash"/></td>
                   </tr>
                 ))}
                 {show ? (
@@ -187,6 +195,16 @@ export function Transaction({ data, getData }) {
                       onHide={handleClose}
                       toogleUpdate={handleUpdate}
                       updateData={getData}
+                    />
+                  </div>
+                ) : null}
+                {showDelete ? (
+                  <div style={{ display: 'none' }} >
+                    <DeleteView
+                      list={itemData}
+                      updateData={getData}
+                      closeDelete={closeDelete}
+                      showDelete={showDelete}
                     />
                   </div>
                 ) : null}

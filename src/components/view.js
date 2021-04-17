@@ -48,9 +48,6 @@ export function View({ list, show, onHide, toogleUpdate, updateData }) {
         <Button variant="primary" onClick={toogleUpdate}>
           Update
         </Button>
-        <Button variant="danger" onClick={toggleDelete}>
-          Delete
-        </Button>
       </Modal.Footer>
     </Modal>
   );

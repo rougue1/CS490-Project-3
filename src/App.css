@@ -83,3 +83,7 @@ body {
 .mainPage {
   margin: 5vh;
 }
+
+.trash:hover{
+  color:red;
+}
