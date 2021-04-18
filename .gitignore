@@ -45,3 +45,6 @@ __pycache__/*
 # Temporaries
 temp.*
 *temp.*
+
+# JetBrains
+.idea/
