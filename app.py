@@ -3,14 +3,11 @@ Our server file
 """
 # pylint: disable= E1101, C0413, R0903, W0603, W1508
 import os
-import operator  # for reordering the scores table
-from flask import Flask, send_from_directory, json
+from flask import Flask, send_from_directory
 from flask import request, jsonify
-from flask_socketio import SocketIO
-from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
-from db_api import *
+from db_api import DBQuery
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 APP = Flask(__name__, static_folder="./build/static")
@@ -18,7 +15,7 @@ APP.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 APP.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 DB = SQLAlchemy(APP)
 DB.create_all()
-USER = DBQuery
+USER = ''
 
 
 @APP.route('/', defaults={"filename": "index.html"})
@@ -122,5 +119,3 @@ if __name__ == "__main__":
         host=os.getenv("IP", "0.0.0.0"),
         port=8081 if os.getenv("C9_PORT") else int(os.getenv("PORT", 8081)),
     )
-
-

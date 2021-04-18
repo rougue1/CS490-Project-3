@@ -8,7 +8,7 @@ test('Valid Login', () => {
   render(<App />);
   //making sure login page is working
   const linkElement = screen.getByText('Login with Google');
-  expect(linkElement).toBeInTheDocument(); 
+  expect(linkElement).toBeInTheDocument();
   fireEvent.click(linkElement);
   
   //mocking a successful login by mounting component

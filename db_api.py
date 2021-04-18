@@ -2,6 +2,7 @@
 Class that communicates with the DB. Abstraction so that app.py doesn't
 get overloaded with code.
 """
+# pylint: disable= E1101, C0413, R0903, W0603, W1508, E1136, R0913
 import datetime
 import models
 from app import DB
@@ -10,19 +11,19 @@ DB.create_all()
 session = DB.session()
 
 
-def convert_to_datetime_obj(d):
+def convert_to_datetime_obj(date):
     """
     Function that converts a string to a datetime object,
     following proper format.
     """
-    if isinstance(d, str):
-        if '-' in d:
-            d = d.replace('-', '/')
-            d = datetime.datetime.strptime(
-                d, "%Y/%m/%d").strftime("%m/%d/%Y")
+    if isinstance(date, str):
+        if '-' in date:
+            date = date.replace('-', '/')
+            date = datetime.datetime.strptime(
+                date, "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
-            d = datetime.datetime.strptime(d, "%m/%d/%Y")
-    return d
+            date = datetime.datetime.strptime(date, "%m/%d/%Y")
+    return date
 
 
 class DBQuery:
@@ -39,8 +40,8 @@ class DBQuery:
     def __init__(self, user_id: str, email: str, first_name: str,
                  last_name: str):
         """
-        params:
-            all are strings
+        Initialize the user with data that comes from GoogleLogin.
+        Creates the user if not already created.
         """
         self.user_id = user_id
         self.email = email
@@ -76,6 +77,7 @@ class DBQuery:
     def add(self):
         """
         Method to add a user.
+        Adds all user info to user_info table if the user isn't already there.
         Since the DBQuery is initialized with all needed data, this method
         is just to abstract/split the code to add a user.
         """
