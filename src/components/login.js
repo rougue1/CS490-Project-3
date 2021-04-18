@@ -52,11 +52,11 @@ export function GLogin({ setLoginStatus }) {
 }
 
 GLogin.propTypes = {
-  setLoginStatus: PropTypes.bool,
+  setLoginStatus: PropTypes.func,
 };
 
 GLogin.defaultProps = {
-  setLoginStatus: PropTypes.bool,
+  setLoginStatus: PropTypes.func,
 };
 
 export default GLogin;
