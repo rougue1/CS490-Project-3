@@ -3,24 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export function View({ list, show, onHide, toogleUpdate, updateData }) {
-  const toggleDelete = async (e) => {
-    onHide();
-    const id_data = list.id;
-    //send to backend
-    const res = await fetch('/delete', {
-      method: 'POST',
-      body: JSON.stringify({
-        id_data,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await res.json();
-    if (data === 200) {
-      updateData();
-    }
-  };
+  console.log(updateData);
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
