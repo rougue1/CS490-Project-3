@@ -130,18 +130,18 @@ export function AddView({endPoint, updateData, show, onHide, showAdd }) {
 }
 
 AddView.propTypes = {
-  showAdd: PropTypes.checkPropTypes(),
+  showAdd: PropTypes.func,
   endPoint: PropTypes.string,
-  updateData: PropTypes.Array,
+  updateData: PropTypes.func,
   show: PropTypes.bool,
-  onHide: PropTypes.bool,
+  onHide: PropTypes.func,
 };
 AddView.defaultProps = {
-  showAdd: PropTypes.checkPropTypes(),
+  showAdd: PropTypes.func,
   endPoint: PropTypes.string,
-  updateData: PropTypes.Array,
+  updateData: PropTypes.func,
   show: PropTypes.bool,
-  onHide: PropTypes.bool,
+  onHide: PropTypes.func,
 };
 
 export default AddView;
