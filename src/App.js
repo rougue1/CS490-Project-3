@@ -7,6 +7,7 @@ import { GLogin } from './components/login';
 import { Home } from './components/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 require('dotenv').config();
+import PropTypes from 'prop-types';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -27,4 +28,15 @@ function App() {
     </div>
   );
 }
+
+App.propTypes = {
+  setLoginStatus: PropTypes.func,
+}
+
+App.defaultProps = {
+  setLoginStatus: PropTypes.func,
+}
+
+
+
 export default App;
