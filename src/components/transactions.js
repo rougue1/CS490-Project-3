@@ -1,8 +1,9 @@
+/*eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { View } from './view.js';
 import { AddView } from './addview.js';
-import { UpdateView } from './updateView.js';
+// import { UpdateView } from './updateView.js';
 import { DeleteView } from './deleteView.js';
 import { Trash } from 'react-bootstrap-icons';
 import '../App.css';
@@ -11,7 +12,7 @@ export function Transaction({ data, getData }) {
   // useStates for pop-up logic for add, delete, update
   const [show, setShow] = useState(false);
   const [row, setRow] = useState(false);
-  const [showUpdate, setUpdate] = useState(false);
+  const [showUpdate, setUpdate] = useState(false); 
   const [showDelete, setDelete] = useState(false);
   
   // useStates for front-end UI
@@ -41,12 +42,12 @@ export function Transaction({ data, getData }) {
 
   const closeAdd = () => setRow(false);
   const showAdd = () => setRow(true);
-  const closeUpdate = () => setUpdate(false);
+  // const closeUpdate = () => setUpdate(false);
 
   const [itemData, setItem] = useState(null);
 
   useEffect(() => {
-    setShowData((currData) => {
+    setShowData(() => {
       const newData = data.slice(0, numData);
       return newData;
     });
@@ -134,7 +135,7 @@ export function Transaction({ data, getData }) {
     } else if (e.target.value === 'Year') {
       showYear(data);
     } else {
-      setShowData((currData) => {
+      setShowData(() => {
         const newData = data.slice(0, numData);
         return newData;
       });
@@ -229,10 +230,10 @@ export function Transaction({ data, getData }) {
 }
 Transaction.propTypes = {
   data: PropTypes.instanceOf(Array),
-  getData: PropTypes.object,
+  getData: PropTypes.func,
 };
 Transaction.defaultProps = {
   data: PropTypes.instanceOf(Array),
-  getData: PropTypes.object,
+  getData: PropTypes.func,
 };
 export default Transaction;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,7 @@ export function DeleteView({ list, updateData, closeDelete, showDelete }) {
   const showResult = () => setResult(true);
   const closeResult = () => setResult(false);
   
-  const toggleDelete = async (e) => {
+  const toggleDelete = async () => {
     const id_data = list.id;
     //send to backend
     const res = await fetch('/delete', {
