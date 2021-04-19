@@ -12,7 +12,7 @@ This app will allow users to login, and create a personal expense profile. Users
  * Mihir Rana
  * Raj Patel
  
-## Technologies we used
+### Technologies we used
 
 In this project, we used the Flask framework, as our web server and the React library for client side functionality. In addtion,
 we have used Google Authentication for ease of login and React-Bootstrap to streamline our html and css visuals.
