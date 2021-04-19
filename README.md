@@ -29,10 +29,11 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 
 ## Flask and create-react-app
 
-## Requirements
+### Requirements
 
-1. `npm install`
-2. `pip install -r requirements.txt`
+1. `pip install flask`
+2. `npm install`
+3. `pip install -r requirements.txt`
 
 ## Setup
 
@@ -41,6 +42,7 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
    + REACT_APP_GOOGLE_CLIENT_ID = "Your_OAuth_client_ID"
    + DATABASE_URL = "Your_database_url"
 
+## Setting up Google Authentication
 <details>
   <summary><b>How to get an OAuth 2.0 client ID</b></summary>
   
