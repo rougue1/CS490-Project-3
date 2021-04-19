@@ -19,8 +19,8 @@ def convert_to_datetime_obj(date):
     if isinstance(date, str):
         if '-' in date:
             date = date.replace('-', '/')
-            date = datetime.datetime.strptime(
-                date, "%Y/%m/%d").strftime("%m/%d/%Y")
+            date = datetime.datetime.strptime(date,
+                                              "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
             date = datetime.datetime.strptime(date, "%m/%d/%Y")
     return date
@@ -32,10 +32,10 @@ class DBQuery:
     A DBQuery object is a user, and the methods deal with the user's transactions.
     Initialized with data returned from GoogleLogin.
     """
-    user_id = ""
-    email = ""
-    first_name = ""
-    last_name = ""
+    user_id = ''
+    email = ''
+    first_name = ''
+    last_name = ''
 
     def __init__(self, user_id: str, email: str, first_name: str,
                  last_name: str):
