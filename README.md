@@ -79,7 +79,7 @@ respective players.
 7) Making a new user: 
    - `create user some_username_here superuser password 'some_unique_new_password_here'`
    - `\q` (to quit sql)
-8) Now to save your passwords to a `sql.env` file with the following format `SQL_USER=` and `SQL_PASSWORD=`.
+8) Now to save your passwords to a `sql.env` file with the following format `SQL_USER=""` and `SQL_PASSWORD=""`.
 
 ### SQLAlchemy
 ---
