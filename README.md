@@ -60,12 +60,26 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 ## React-Bootstrap
 
 #### About
+It is a front-end framework to help design our webpage faster and easier.
+
+#### Requirements
+1. `npm install react-bootstrap bootstrap`
+2. Adding this line in App.js `import 'bootstrap/dist/css/bootstrap.min.css';`
 
 
 ## Enzyme-Adapter-React-17
 
 #### About
+It is a JavaScript testing utility for React that makes it easier to assert, manipulate, and traverse your React Components' output.
 
+#### Requirements
+1. `npm install --save-dev @wojtekmaj/enzyme-adapter-react-17`
+2. Add the following to setupTests.js: 
+   ```
+    import { configure } from 'enzyme';
+    import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+    configure({ adapter: new Adapter() }); 
+   ```
 
 ## Setting up Our Database (PostgresSql)
 
