@@ -1,6 +1,13 @@
-# CS490-Project-3
+# CS490-Project-3: Income/Expense Tracker
 
-# Flask and create-react-app
+This repository consists of python, javascript, html and css files which would allow users to sign in to the app via google login
+to manage their income or expenses. Each user can see their total income or expense and their current balance. Furthermore, users
+can sort by week, month, year!
+
+## Technologies we used
+
+In this project, we used the Flask framework, as our web server and the React library for client side functionality. In addtion,
+we have used react-bootstrap to streamline our html and css visuals.
 
 ## Requirements
 
