@@ -60,8 +60,8 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 ## Setting up Our Database (PostgresSql)
 
 #### About
-PostgresSql is an open-source relational database management system which is also SQL compliance. We will be using this as our database to store the usernames and scores of the
-respective players.
+PostgresSql is an open-source relational database management system which is also SQL compliance. We will be using this as our database to store the the expenses of the
+respective users.
 
 #### Installation
 1) `sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql  docs`
@@ -96,19 +96,34 @@ To now query and access our database we will use SQLAlchemy.
 2) Create new app: `heroku create`
 3) Add a database on our heroku app:`heroku addons:create heroku-postgresql:hobby-dev`
 4) To see the config vars that are set by heroku for us: `heroku config`
-5) Set the database variable as an environment variable: `export DATABASE_URL='pas config value here'`
+5) Set the database variable as an environment variable: `export DATABASE_URL='paste config value here'`
 
+## Deploying our App to Heroku 
 
+#### About
+Heroku is a cloud platform company which will essentially allow us to host our code on their servers and we can run our game on there.
 
+#### Installation
+1. `npm install -g heroku`
+
+#### Setup 
+1) First we will need to create a free account on [Heroku](https://www.heroku.com/).
+2) Next, we will create a  `requirements.txt` file which will list all the libraries and packages our app uses. This information is needed because Heroku's servers will 
+  download said packages and libraries so it can run the app on their servers.
+  In your terminal, type the following:
+  1. `touch requirements.txt`
+  2. `pip freeze > requirements.txt`
+3) Once that is done, we will need a `Procfile`, which is a file that will tell Heroku what command to use to run our app.
+  1. In your terminal, type: `touch Procfile`
+  2. Next, open up the `Procfile` and type your commands needed to run your app. In my case I would write: `web: python main.py`. 
+4) Now for the actual deploying part, open your terminal and follow along:
+  1. Login to Heroku via terminal: `heroku login -i`
+  2. Next go to your project folder and create the heroku app: `heroku create --buildpack heroku/python`
+  3. Now we will add the nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
+  4. Now we will push our code to heroku: `git push heroku main`
 
 ## Run Application
 
 1. Run command in terminal (in your project directory): `python app.py`
 2. Run command in another terminal, `cd` into the project directory, and run `npm run start`
 3. Preview web page in browser '/'
-
-## Deploy to Heroku
-
-1. Create a Heroku app: `heroku create --buildpack heroku/python`
-2. Add nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
-3. Push to Heroku: `git push heroku main`
