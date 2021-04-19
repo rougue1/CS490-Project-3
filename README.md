@@ -11,8 +11,8 @@
 
 1. Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
 2. Add following to .env file:
-   + REACT_APP_GOOGLE_CLIENT_ID = "<Your OAuth client ID>"
-   + DATABASE_URL = "<Your database url>"
+   + REACT_APP_GOOGLE_CLIENT_ID = "Your_OAuth_client_ID"
+   + DATABASE_URL = "Your_database_url"
    
   *([Click here](https://console.cloud.google.com/apis/credentials) to signup and create a google OAuth client ID)*
 
