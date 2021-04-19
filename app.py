@@ -18,7 +18,7 @@ APP.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 APP.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 DB = SQLAlchemy(APP)
 DB.create_all()
-USER = DBQuery
+USER = ''
 
 
 @APP.route('/', defaults={"filename": "index.html"})
