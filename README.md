@@ -25,7 +25,7 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 - [Google Developer Account](https://console.cloud.google.com/apis/dashboard) (For Google Authentication)
 - [React-Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
 - [Enzyme-Adapter-React-17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
-
+---
 
 ## Flask and create-react-app
 
