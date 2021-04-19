@@ -17,6 +17,15 @@ This app will allow users to login, and create a personal expense profile. Users
 In this project, we used the Flask framework, as our web server and the React library for client side functionality. In addtion,
 we have used Google Authentication for ease of login and React-Bootstrap to streamline our html and css visuals.
 
+#### References
+---
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/#)
+- [React Docs](https://reactjs.org/docs/getting-started.html)
+- [SQLAlchemy Docs](https://docs.sqlalchemy.org/en/14/)
+- [Google Developer Account](https://console.cloud.google.com/apis/dashboard) (For Google Authentication)
+- [React-Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
+- [Enzyme-Adapter-React-17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
+
 
 ## Flask and create-react-app
 
