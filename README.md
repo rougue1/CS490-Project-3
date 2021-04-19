@@ -1,5 +1,18 @@
 # CS490-Project-3
 ## Expense Tracker
+
+### Description
+
+Expense tracker is a basic web app that allows users to keep track of their incomes and expenses in one place. 
+This app will allow users to login, and create a personal expense profile. Users will be able to add new incomes or expenses, and also access the ones added on the website.
+
+#### Team Members:
+ * Abishek Vasudevan
+ * Aman Hirpara
+ * Mihir Rana
+ * Raj Patel
+
+
 ## Flask and create-react-app
 
 ## Requirements
