@@ -43,6 +43,7 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
    + DATABASE_URL = "Your_database_url"
 
 ## Setting up Google Authentication
+
 <details>
   <summary><b>How to get an OAuth 2.0 client ID</b></summary>
   
@@ -55,6 +56,48 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
   7. From the drop-down menu, select the Web application and click on **Creat**.
   8. Copy your Client ID.
 </details>
+## Setting up Our Database (PostgresSql)
+---
+
+#### About
+PostgresSql is an open-source relational database management system which is also SQL compliance. We will be using this as our database to store the usernames and scores of the
+respective players.
+
+#### Installation
+1) `sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql  docs`
+
+#### Setup
+1) Once you have installed PostgreSql using the command above we initialize the database.
+2) Initialize: `sudo service postgresql initdb`
+3) To start the service: `sudo service postgresql start`
+4) Now we can make a superuser(if an error says 'could not change directory' that means it worked): `sudo -u postgres createuser --superuser $USER`
+5) Now lets make a database: `sudo -u postgres createdb $USER`
+6) To ensure that your user shows up follow the commands:
+   - `psql`
+   - `\du`
+   - `\l`
+7) Making a new user: 
+   - `create user some_username_here superuser password 'some_unique_new_password_here'`
+   - `\q` (to quit sql)
+8) Now to save your passwords to a `sql.env` file with the following format `SQL_USER=` and `SQL_PASSWORD=`.
+
+### SQLAlchemy
+---
+
+#### About
+To now query and access our database we will use SQLAlchemy.
+
+#### Installation
+1) `pip install psycopg2-binary`
+2) `pip install Flask-SQLAlchemy==2.1`
+
+#### Creating new database for Heroku and connect our code
+1) Login to heroku: `heroku login -i`
+2) Create new app: `heroku create`
+3) Add a database on our heroku app:`heroku addons:create heroku-postgresql:hobby-dev`
+4) To see the config vars that are set by heroku for us: `heroku config`
+5) Set the database variable as an environment variable: `export DATABASE_URL='pas config value here'`
+
 
 
 
