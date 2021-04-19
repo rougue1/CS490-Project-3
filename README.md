@@ -56,8 +56,9 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
   7. From the drop-down menu, select the Web application and click on **Creat**.
   8. Copy your Client ID.
 </details>
+
 ## Setting up Our Database (PostgresSql)
----
+--
 
 #### About
 PostgresSql is an open-source relational database management system which is also SQL compliance. We will be using this as our database to store the usernames and scores of the
