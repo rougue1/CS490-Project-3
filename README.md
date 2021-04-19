@@ -58,7 +58,6 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 </details>
 
 ## Setting up Our Database (PostgresSql)
---
 
 #### About
 PostgresSql is an open-source relational database management system which is also SQL compliance. We will be using this as our database to store the usernames and scores of the
