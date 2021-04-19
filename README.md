@@ -35,7 +35,7 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 2. `npm install`
 3. `pip install -r requirements.txt`
 
-## Setup
+### Setup
 
 1. Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
 2. Add following to .env file:
