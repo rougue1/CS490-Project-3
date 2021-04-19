@@ -13,8 +13,21 @@
 2. Add following to .env file:
    + REACT_APP_GOOGLE_CLIENT_ID = "Your_OAuth_client_ID"
    + DATABASE_URL = "Your_database_url"
-   
-  *([Click here](https://console.cloud.google.com/apis/credentials) to signup and create a google OAuth client ID)*
+
+<details>
+  <summary><b>How to get an OAuth 2.0 client ID</b></summary>
+  
+  1. Go to the Google [Developers Console](https://console.cloud.google.com/apis/dashboard).
+  2. Navigate to the tab "Credentials".
+  3. Create a new project.
+  4. Navigate to the tab “OAuth consent screen”.
+  5. Enter the Application name, Authorized domains, and click the button **Save**.
+  6. Click on **Create Credentials** and from the dropdown list select *OAuth client ID*.
+  7. From the drop-down menu, select the Web application and click on **Creat**.
+  8. Copy your Client ID.
+</details>
+
+
 
 ## Run Application
 
