@@ -1,6 +1,6 @@
 # CS490-Project-3
-
-# Flask and create-react-app
+## Expense Tracker
+## Flask and create-react-app
 
 ## Requirements
 
@@ -10,6 +10,11 @@
 ## Setup
 
 1. Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
+2. Add following to .env file:
+   + REACT_APP_GOOGLE_CLIENT_ID = "<Your OAuth client ID>"
+   + DATABASE_URL = "<Your database url>"
+   
+  *([Click here](https://console.cloud.google.com/apis/credentials) to signup and create a google OAuth client ID)*
 
 ## Run Application
 
@@ -18,8 +23,6 @@
 3. Preview web page in browser '/'
 
 ## Deploy to Heroku
-
-_Don't do the Heroku step for assignments, you only need to deploy for Project 2_
 
 1. Create a Heroku app: `heroku create --buildpack heroku/python`
 2. Add nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
