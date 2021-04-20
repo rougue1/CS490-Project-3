@@ -6,4 +6,5 @@ disable=
     invalid-envvar-default,
     unsubscriptable-object,
     too-many-arguments,
+    wildcard-import
 

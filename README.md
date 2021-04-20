@@ -54,4 +54,5 @@
   - `cyclic-import`: Not sure how to import DB variable from app and while also importing db_api within app.
   - `invalid-envvar-default`: Not sure why this was an error. Using normal convention of geting env vars (within app.py).
   - `unsubscriptable-object`: Miscellaneous error when specifying return type of function for ease.
-  - `too-many-arguments`: Unavoidable 
+  - `too-many-arguments`: Unavoidable since we _need_ to pass those many variables into the editTransaction function.
+  - `wildcard-import`: Some weird error in C9.
