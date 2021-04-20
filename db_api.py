@@ -2,7 +2,6 @@
 Class that communicates with the DB. Abstraction so that app.py doesn't
 get overloaded with code.
 """
-# pylint: disable= E1101, C0413, R0903, W0603, W1508, E1136, R0913
 import datetime
 import models
 from app import DB
@@ -20,12 +19,12 @@ def convert_to_datetime_obj(date):
         if '-' in date:
             date = date.replace('-', '/')
             date = datetime.datetime.strptime(date,
-                                              "%Y/%m/%d").strftime("%m/%d/%Y")
+                                             "%Y/%m/%d").strftime("%m/%d/%Y").date()
         else:
-            date = datetime.datetime.strptime(date, "%m/%d/%Y")
+            date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
     return date
-
-def getUserInfo(full_name, transactions):
+    
+def get_the_user_info(full_name, transactions):
     total_balance = 0
     total_income = 0
     total_expense = 0
@@ -42,6 +41,7 @@ def getUserInfo(full_name, transactions):
         "income": round(total_income, 2),
         "expense": round(total_expense, 2)
     }
+
 
 class DBQuery:
     """
@@ -73,12 +73,23 @@ class DBQuery:
         """
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        info = []
-        for transaction in transactions:
-            info.append({'transaction_type': transaction.transaction_type, 'amount': transaction.amount})
         full_name = self.first_name + ' ' + self.last_name
-        user_info = getUserInfo(full_name, info)
-        return user_info
+        total_balance = 0
+        total_income = 0
+        total_expense = 0
+        for transaction in transactions:
+            if transaction.transaction_type == 'Income':
+                total_balance += transaction.amount
+                total_income += transaction.amount
+            else:
+                total_balance -= transaction.amount
+                total_expense += transaction.amount
+        return {
+            "full_name": full_name,
+            "balance": round(total_balance, 2),
+            "income": round(total_income, 2),
+            "expense": round(total_expense, 2)
+        }
 
     def add(self):
         """
@@ -105,7 +116,7 @@ class DBQuery:
         user.delete()
         session.commit()
 
-    def get_transactions(self) -> list[dict]:
+    def get_transactions(self):
         """
         Method to get all transactions of a user.
         """
