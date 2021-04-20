@@ -1,12 +1,18 @@
+"""
+Layout of schemas of tables to be created
+"""
+
+# pylint: disable= E1101, C0413, R0903, W0603, W1508, E1136, R0913
+
 from sqlalchemy import ForeignKey, Column, Integer, Float, String, Date
 from sqlalchemy.orm import relationship
 from app import DB
 
 
 class Users(DB.Model):
-    '''
+    """
     User table to store different users in the app.
-    '''
+    """
     __tablename__ = "user_info"
 
     user_id = Column(String, unique=True, nullable=False, primary_key=True)
@@ -25,16 +31,16 @@ class Users(DB.Model):
         self.last_name = last_name
 
     def __repr__(self):
-        return '<UserID %r>' % self.user_id
+        return "<UserID %r>" % self.user_id
 
     def __str__(self):
         return "UserID: {}, Email: {}".format(self.user_id, self.email)
 
 
 class Transaction(DB.Model):
-    '''
+    """
     Transactions table for users to add their transactions.
-    '''
+    """
     __tablename__ = "transactions"
 
     # user_id of the user entering transaction
@@ -76,8 +82,8 @@ class Transaction(DB.Model):
         self.description = description
 
     def __repr__(self):
-        return '<TransactionID %r>' % self.transaction_id
+        return "<TransactionID %r>" % self.transaction_id
 
     def __str__(self):
-
-        return f"ID -> {self.transaction_id}: User {self.user_id} had {self.transaction_type} from {self.location} for amount {self.amount} on {self.date}"
+        return f"ID -> {self.transaction_id}: User {self.user_id} had {self.transaction_type}" \
+               f" from {self.location} for amount {self.amount} on {self.date}"

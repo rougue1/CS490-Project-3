@@ -1,31 +1,26 @@
-import React from 'react';
-import { Button, Modal, Form } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Button, Modal, Form } from "react-bootstrap";
+import PropTypes from "prop-types";
 
-//form validation
+// form validation
 
 export function UpdateView({ updateData, show, onHide }) {
   const onUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target),
-      formDataObj = Object.fromEntries(formData.entries());
-    console.log(formDataObj);
-    const res = await fetch('/update', {
-      method: 'POST',
+    const formData = new FormData(e.target);
+    const formDataObj = Object.fromEntries(formData.entries());
+    const res = await fetch("/update", {
+      method: "POST",
       body: JSON.stringify({
         formDataObj,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     const data = await res.json();
-    console.log(data);
 
-    if (data === 200) {
-      console.log('Stored in db!');
-      updateData();
-    }
+    if (data === 200) updateData();
   };
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
@@ -62,12 +57,12 @@ export function UpdateView({ updateData, show, onHide }) {
   );
 }
 UpdateView.propTypes = {
-  updateData: PropTypes.Array,
+  updateData: PropTypes.instanceOf(Array),
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
 UpdateView.defaultProps = {
-  updateData: PropTypes.Array,
+  updateData: PropTypes.instanceOf(Array),
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };

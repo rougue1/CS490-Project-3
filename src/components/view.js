@@ -1,9 +1,8 @@
-import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
-export function View({ list, show, onHide, toogleUpdate, updateData }) {
-  console.log(updateData);
+export function View({ list, show, onHide, toggleUpdate }) {
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
@@ -28,7 +27,7 @@ export function View({ list, show, onHide, toogleUpdate, updateData }) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={toogleUpdate}>
+        <Button variant="primary" onClick={toggleUpdate}>
           Update
         </Button>
       </Modal.Footer>
@@ -37,16 +36,16 @@ export function View({ list, show, onHide, toogleUpdate, updateData }) {
 }
 View.propTypes = {
   show: PropTypes.bool,
-  updateData: PropTypes.Array,
+  updateData: PropTypes.instanceOf(Array),
   onHide: PropTypes.bool,
-  toogleUpdate: PropTypes.bool,
+  toggleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
 View.defaultProps = {
   show: PropTypes.bool,
-  updateData: PropTypes.Array,
+  updateData: PropTypes.instanceOf(Array),
   onHide: PropTypes.bool,
-  toogleUpdate: PropTypes.bool,
+  toggleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
 export default View;
