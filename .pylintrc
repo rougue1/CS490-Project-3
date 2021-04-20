@@ -1,0 +1,9 @@
+[MASTER]
+ignore=temp.py, yapf_formatter.py, tests
+disable=
+    global-statement,
+    cyclic-import,
+    invalid-envvar-default,
+    unsubscriptable-object,
+    too-many-arguments,
+

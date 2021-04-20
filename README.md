@@ -33,26 +33,25 @@
   - `react/no-unused-prop-types`: Error happened in `src/App.js`, prop setLoginStatus was used in a different file so had to add to ignore.
   - `import/no-extraneous-dependencies`: Weird error when importing bootstrap.
   - `react/jsx-filename-extension`: Weird error when writing html code in a return statement.
-  - `no-restricted-globals`
-  - `control-has-associated-label`
-  - `no-noninteractive-element-interactions`
-  - `click-events-have-key-events`
-  - `no-static-element-interactions`
-  - `anchor-is-valid`
-  - `jsx-a11y/control-has-associated-label`
-  - `jsx-a11y/no-noninteractive-element-interactions`
-  - `jsx-a11y/click-events-have-key-events`
-  - `jsx-a11y/no-static-element-interactions`
-  - `jsx-a11y/anchor-is-valid`
+  - `no-restricted-globals`: Couldn't use event variable in addview.js
+  - `control-has-associated-label`: Couldn't just have a tag without the "label" tag along with it.
+  - Miscellaneous errors which couldn't be fixed (couldn't find any working solutions - even online):  
+    - `no-noninteractive-element-interactions`
+    - `click-events-have-key-events`
+    - `no-static-element-interactions`
+    - `anchor-is-valid`
+    - `jsx-a11y/control-has-associated-label`
+    - `jsx-a11y/no-noninteractive-element-interactions`
+    - `jsx-a11y/click-events-have-key-events`
+    - `jsx-a11y/no-static-element-interactions`
+    - `jsx-a11y/anchor-is-valid`
 
 ### Python
 
 - Formatted using yapf formatter (yapf -i). Checkout `yapf_formatter.py`. Linted using pylint (ignores added to individual files).
 - Linter ignores:
-  - `E1101`:
-  - `C0413`:
-  - `R0903`:
-  - `W0603`:
-  - `W1508`:
-  - `E1136`:
-  - `R0913`:
+  - `global-statement`: Unable to avoid using global variable to set the current user in app.py
+  - `cyclic-import`: Not sure how to import DB variable from app and while also importing db_api within app.
+  - `invalid-envvar-default`: 
+  - `unsubscriptable-object`: 
+  - `too-many-arguments`: 

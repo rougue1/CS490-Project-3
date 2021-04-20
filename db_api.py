@@ -2,7 +2,6 @@
 Class that communicates with the DB. Abstraction so that app.py doesn't
 get overloaded with code.
 """
-# pylint: disable= E1101, C0413, R0903, W0603, W1508, E1136, R0913
 import datetime
 import models
 from app import DB
