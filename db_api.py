@@ -25,6 +25,25 @@ def convert_to_datetime_obj(date):
     return date
 
 
+def get_user_info(full_name, transactions):
+    total_balance = 0
+    total_income = 0
+    total_expense = 0
+    for transaction in transactions:
+        if transaction['transaction_type'] == 'Income':
+            total_balance += transaction['amount']
+            total_income += transaction['amount']
+        else:
+            total_balance -= transaction['amount']
+            total_expense += transaction['amount']
+    return {
+        "full_name": full_name,
+        "balance": round(total_balance, 2),
+        "income": round(total_income, 2),
+        "expense": round(total_expense, 2)
+    }
+
+
 class DBQuery:
     """
     Class that allows communication with the DB.
@@ -55,30 +74,19 @@ class DBQuery:
         info = self.get_info()
         return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(info["full_name"], info["balance"], info["income"], info["expense"])
     
-    def get_info(self) -> dict:
+    def get_info(self):
         """
         Method to get the full name, total balance, total income,
         and total expenses of a user.
         """
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        full_name = self.first_name + ' ' + self.last_name
-        total_balance = 0
-        total_income = 0
-        total_expense = 0
+        info = []
         for transaction in transactions:
-            if transaction.transaction_type == 'Income':
-                total_balance += transaction.amount
-                total_income += transaction.amount
-            else:
-                total_balance -= transaction.amount
-                total_expense += transaction.amount
-        return {
-            "full_name": full_name,
-            "balance": round(total_balance, 2),
-            "income": round(total_income, 2),
-            "expense": round(total_expense, 2)
-        }
+            info.append({'transaction_type': transaction.transaction_type, 'amount': transaction.amount})
+        full_name = self.first_name + ' ' + self.last_name
+        user_info = get_user_info(full_name, info)
+        return user_info
 
     def add(self):
         """
