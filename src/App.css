@@ -118,3 +118,20 @@ body {
   font-size: 3.5rem;
   margin-bottom: 2.5rem;
 }
+
+.googleLoginButton {
+  width: 19em;
+  height: 4em;
+  background: white;
+  border-radius: 50px;
+  font-family: sans-serif;
+  font-size: 20px;
+  color: #51308E;
+  letter-spacing: 4px;
+  transition: 100ms ease-in-out;
+}
+
+.googleLoginButton:hover {
+  transform: scale(1.025);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
