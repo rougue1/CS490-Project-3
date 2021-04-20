@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export function DeleteView({ list, updateData, closeDelete, showDelete }) {
   const [viewDelete, setDelete] = useState(showDelete);
   const [theConfirm, setConfirm] = useState(false);
   const [result, setResult] = useState(false);
-  
+
   const handleLocalDelete = () => setDelete(false);
-  
+
   const handleConfirm = () => setConfirm(true);
   const closeConfirm = () => setConfirm(false);
-  
+
   const showResult = () => setResult(true);
   const closeResult = () => setResult(false);
-  
+
   const toggleDelete = async () => {
-    const id_data = list.id;
-    //send to backend
-    const res = await fetch('/delete', {
-      method: 'POST',
+    const idData = list.id;
+    // send to backend
+    const res = await fetch("/delete", {
+      method: "POST",
       body: JSON.stringify({
-        id_data,
+        id_data: idData,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     const data = await res.json();
@@ -32,18 +32,15 @@ export function DeleteView({ list, updateData, closeDelete, showDelete }) {
       updateData();
     }
   };
-  
+
   return (
     <div>
       <Modal show={viewDelete} onHide={closeDelete} backdrop="static" keyboard={false}>
-        <Modal.Header closeButton >
+        <Modal.Header closeButton>
           <Modal.Title>Delete following items?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>
-            Amount:
-             ${list.amount}
-          </div>
+          <div>Amount: ${list.amount}</div>
           <div>
             Date:
             {list.date}
@@ -58,7 +55,13 @@ export function DeleteView({ list, updateData, closeDelete, showDelete }) {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={() => { handleConfirm(); handleLocalDelete();}}>
+          <Button
+            variant="danger"
+            onClick={() => {
+              handleConfirm();
+              handleLocalDelete();
+            }}
+          >
             Delete
           </Button>
         </Modal.Footer>
@@ -69,24 +72,40 @@ export function DeleteView({ list, updateData, closeDelete, showDelete }) {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete the selected items? You CANNOT undo your changes!</Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={ () => {showResult(); closeConfirm(); toggleDelete();}}> 
+          <Button
+            variant="danger"
+            onClick={() => {
+              showResult();
+              closeConfirm();
+              toggleDelete();
+            }}
+          >
             Yes, I want to delete!
           </Button>
-          <Button variant="secondary" onClick={ () => {closeConfirm(); closeDelete();}}> 
+          <Button
+            variant="secondary"
+            onClick={() => {
+              closeConfirm();
+              closeDelete();
+            }}
+          >
             No, I do not want to delete!
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal show={result} onHide={() => {closeResult(); closeDelete();}}>
+      <Modal
+        show={result}
+        onHide={() => {
+          closeResult();
+          closeDelete();
+        }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Confirmation</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           The following items have been deleted!
-          <div>
-            Amount:
-             ${list.amount}
-          </div>
+          <div>Amount: ${list.amount}</div>
           <div>
             Date:
             {list.date}
@@ -105,13 +124,13 @@ export function DeleteView({ list, updateData, closeDelete, showDelete }) {
   );
 }
 DeleteView.propTypes = {
-  updateData: PropTypes.obj,
+  updateData: PropTypes.func,
   list: PropTypes.instanceOf(Array),
   closeDelete: PropTypes.func,
   showDelete: PropTypes.bool,
 };
 DeleteView.defaultProps = {
-  updateData: PropTypes.obj,
+  updateData: PropTypes.func,
   list: PropTypes.instanceOf(Array),
   closeDelete: PropTypes.func,
   showDelete: PropTypes.bool,

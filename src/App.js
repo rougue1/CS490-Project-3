@@ -1,12 +1,12 @@
-import './App.css';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { GLogout } from './components/logout';
-import { GLogin } from './components/login';
-import { Home } from './components/home';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { GLogout } from "./components/logout";
+import { GLogin } from "./components/login";
+import { Home } from "./components/home";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-require('dotenv').config();
+require("dotenv").config();
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);

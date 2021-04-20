@@ -67,7 +67,7 @@ def update():
     data = request.json
 
     if data:
-        transaction_id = data["id_data"]
+        transaction_id = data["idData"]
         base = data["formDataObj"]
         USER.edit_transaction(
             transaction_id,
@@ -108,7 +108,7 @@ def delete_transaction():
     global USER
     data = request.json
     if data:
-        transaction_id = data["id_data"]
+        transaction_id = data["idData"]
         USER.remove_transaction(transaction_id)
         return jsonify(200)
     return jsonify(400)
