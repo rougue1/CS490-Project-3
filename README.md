@@ -188,3 +188,5 @@ Heroku is a cloud platform company which will essentially allow us to host our c
   - `unsubscriptable-object`: Miscellaneous error when specifying return type of function for ease.
   - `too-many-arguments`: Unavoidable since we _need_ to pass those many variables into the editTransaction function.
   - `wildcard-import`: Some weird error in C9.
+  - `unused-wildcard-import`: Continuing with previous error ignored.
+
