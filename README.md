@@ -1,6 +1,9 @@
 # CS490-Project-3
 ## Expense Tracker
 
+### Heroku Link
+https://cs490-project3-sprint-1.herokuapp.com/
+
 ### Description
 
 Expense tracker is a basic web app that allows users to keep track of their incomes and expenses in one place. 
