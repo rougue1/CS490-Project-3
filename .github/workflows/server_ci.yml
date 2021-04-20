@@ -40,8 +40,8 @@ jobs:
       - name: Lint app.py
         run: pylint app.py
         
-#       - name: Lint db_api.py
-#         run: pylint db_api.py
+      - name: Lint db_api.py
+        run: pylint db_api.py
         
       - name: Lint models.py
         run: pylint models.py
