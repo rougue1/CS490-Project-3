@@ -30,6 +30,10 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 - [Enzyme-Adapter-React-17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
 ---
 
+## Issues
+1. Github Continuous Integration error:
+   - Got some import module error from test/unmocked/unit_test.py: `from db_api import *` gave a ModuleNotFoundError, but works normally when running locally/on C9.
+
 ## Flask and create-react-app
 
 ### Requirements
@@ -189,4 +193,5 @@ Heroku is a cloud platform company which will essentially allow us to host our c
   - `too-many-arguments`: Unavoidable since we _need_ to pass those many variables into the editTransaction function.
   - `wildcard-import`: Some weird error in C9.
   - `unused-wildcard-import`: Continuing with previous error ignored.
+
 
