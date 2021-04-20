@@ -10,7 +10,7 @@ import sys
 # This lets you import from the parent directory (one level up)
 sys.path.append(os.path.abspath('../../'))
 
-from db_api import DBQuery, convert_to_datetime_obj
+from db_api import *
 
 USER_NAME = 'user'
 DATA_INPUT = 'data'
@@ -114,7 +114,7 @@ class UpdateUserTestCase(unittest.TestCase):
     def test_convert_datetime_obj(self):
         """ This test checks the update board function on app functions file side """
         for test in self.success_test_params_get_date_time_obj:
-            actual_result = convertToDatetimeObj(test['data'])
+            actual_result = convert_to_datetime_obj(test['data'])
 
             expected_result = test["expected"]
             self.assertEqual(actual_result, expected_result)
@@ -123,7 +123,7 @@ class UpdateUserTestCase(unittest.TestCase):
     def test_get_user_info(self):
         """ This test checks the update board function on app functions file side """
         for test in self.success_test_params_get_user_info:
-            actual_result = getUserInfo(test['user'], test['data'])
+            actual_result = get_the_user_info(test['user'], test['data'])
 
             expected_result = test["expected"]
             self.assertEqual(actual_result, expected_result)

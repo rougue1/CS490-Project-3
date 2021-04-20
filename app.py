@@ -7,7 +7,7 @@ from flask import Flask, send_from_directory
 from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
-from db_api import DBQuery
+from db_api import *
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 APP = Flask(__name__, static_folder="./build/static")
@@ -108,7 +108,7 @@ def delete_transaction():
     global USER
     data = request.json
     if data:
-        transaction_id = data["idData"]
+        transaction_id = data["id_data"]
         USER.remove_transaction(transaction_id)
         return jsonify(200)
     return jsonify(400)
