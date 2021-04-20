@@ -3,13 +3,14 @@ unmocked testing for date conversion and getting user info
 '''
 # pylint: disable-all
 
-from db_api import DBQuery, convert_to_datetime_obj
 import unittest
 import os
 import sys
 
 # This lets you import from the parent directory (one level up)
 sys.path.append(os.path.abspath('../../'))
+
+from db_api import DBQuery, convert_to_datetime_obj
 
 USER_NAME = 'user'
 DATA_INPUT = 'data'
