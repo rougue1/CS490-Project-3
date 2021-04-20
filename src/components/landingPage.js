@@ -9,6 +9,10 @@ export function LandingPage({ setLoginStatus })
         <div className="landingPage">
           <section className="login wrap">
             <GLogin setLoginStatus={setLoginStatus} />
+            <div className="pointer">
+                <p>About App</p>
+                <div className="arrow"></div>
+            </div>
           </section>
           <section className="feature1">
             <div>
