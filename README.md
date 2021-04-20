@@ -52,6 +52,6 @@
 - Linter ignores:
   - `global-statement`: Unable to avoid using global variable to set the current user in app.py
   - `cyclic-import`: Not sure how to import DB variable from app and while also importing db_api within app.
-  - `invalid-envvar-default`: 
-  - `unsubscriptable-object`: 
-  - `too-many-arguments`: 
+  - `invalid-envvar-default`: Not sure why this was an error. Using normal convention of geting env vars (within app.py).
+  - `unsubscriptable-object`: Miscellaneous error when specifying return type of function for ease.
+  - `too-many-arguments`: Unavoidable 
