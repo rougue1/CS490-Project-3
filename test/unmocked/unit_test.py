@@ -3,7 +3,7 @@ unmocked testing for date conversion and getting user info
 '''
 # pylint: disable-all
 
-from db_api import DBQuery
+from db_api import DBQuery, convert_to_datetime_obj
 import unittest
 import os
 import sys
