@@ -1,16 +1,16 @@
 /*eslint-disable */
-import { render, screen, fireEvent } from '@testing-library/react';
-import  App from './App';
-import  Home  from './components/home.js';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from "@testing-library/react";
+import App from "./App";
+import Home from "./components/home.js";
+import { mount } from "enzyme";
 
-test('Valid Login', () => {
+test("Valid Login", () => {
   render(<App />);
   //making sure login page is working
-  const linkElement = screen.getByText('Login with Google');
-  expect(linkElement).toBeInTheDocument(); 
+  const linkElement = screen.getByText("Login with Google");
+  expect(linkElement).toBeInTheDocument();
   fireEvent.click(linkElement);
-  
+
   //mocking a successful login by mounting component
   const wrapper = mount(<Home />);
   expect(wrapper.text()).toMatch("Welcome,");
@@ -20,10 +20,10 @@ test('Valid Login', () => {
 
 test("Unsuccessful Login", () => {
   render(<App />);
-  
-  const linkElement  = screen.getByText("Login with Google");
-  const welcome = screen.getByText("Welcome to expense tracker")
-  const theContinue = screen.getByText("Please login to continue")
+
+  const linkElement = screen.getByText("Login with Google");
+  const welcome = screen.getByText("Welcome to expense tracker");
+  const theContinue = screen.getByText("Please login to continue");
   expect(linkElement).toBeInTheDocument();
 
   fireEvent.click(linkElement);
@@ -31,5 +31,4 @@ test("Unsuccessful Login", () => {
   expect(linkElement).toBeInTheDocument();
   expect(welcome).toBeInTheDocument();
   expect(theContinue).toBeInTheDocument();
-  
 });
