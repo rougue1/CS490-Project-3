@@ -1,8 +1,10 @@
-/* eslint-disable*/
+import React from "react";
+import PropTypes from "prop-types";
 import { GLogin } from "./login";
 import ClipBoard from "../styles/images/ClipBoard.png";
 import icon from "../styles/images/icon.png";
 import Chart from "../styles/images/Chart.png";
+
 export function LandingPage({ setLoginStatus })
 {
     return (
@@ -11,12 +13,12 @@ export function LandingPage({ setLoginStatus })
             <GLogin setLoginStatus={setLoginStatus} />
             <div className="pointer">
                 <p>About App</p>
-                <div className="arrow"></div>
+                <div className="arrow" />
             </div>
           </section>
           <section className="feature1">
             <div>
-                <img src={ ClipBoard } />
+                <img src={ ClipBoard } alt="ClipBoard"/>
             </div>
             <div className="textContent">
                 <h2>Manage your expenses in one place</h2>
@@ -31,12 +33,12 @@ export function LandingPage({ setLoginStatus })
                    You can also set a budget for a week, month, or year, and the app will let you know if you go over budget.</p>
             </div>
             <div>
-                <img src={icon} />
+                <img src={icon} alt="calculations"/>
             </div>
           </section>
           <section className="feature3">
             <div>
-                <img src={Chart} />
+                <img src={Chart} alt="Chart"/>
             </div>
             <div className="textContent">
                 <h2>Have a visual understanding of your expenses</h2>
@@ -47,3 +49,13 @@ export function LandingPage({ setLoginStatus })
         </div>
     );
 }
+
+LandingPage.propTypes = {
+  setLoginStatus: PropTypes.func,
+};
+
+LandingPage.defaultProps = {
+  setLoginStatus: PropTypes.func,
+};
+
+export default LandingPage;
