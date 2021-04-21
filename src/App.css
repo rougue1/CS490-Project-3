@@ -6,6 +6,11 @@ body {
   margin: 0px;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
 .transaction tr {
   box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
   transition: all 0.2s ease-in-out;
@@ -96,10 +101,9 @@ body {
 .feature3 {
   display: grid;
   grid-template-columns: 50% 50%;
-  padding: 2em 2em;
+  padding: 4em 2em;
   align-items: center;
   justify-items: center;
-  height: 35em;
 }
 
 .textContent {
@@ -132,7 +136,8 @@ body {
   transition: 100ms ease-in-out;
 }
 
-.googleLoginButton:hover {
+.googleLoginButton:hover,
+.googleLoginButton:focus {
   transform: scale(1.025);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -153,4 +158,18 @@ body {
   width: 8px;
   height: 8px;
   transform: rotate(45deg);
+}
+
+@media (max-width: 40em) {
+  .feature1,
+  .feature2,
+  .feature3 {
+    display: block;
+  }
+  
+  .googleLoginButton {
+    width: 21em;
+    height: 5em;
+    font-size: 10px;
+  }
 }
