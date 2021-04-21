@@ -173,3 +173,19 @@ img {
     font-size: 10px;
   }
 }
+
+@media (max-height: 40em) {
+  .login {
+    height: 100vh;
+  }
+  
+  .pointer {
+    bottom: 0;
+  }
+  
+  .googleLoginButton {
+    width: 21em;
+    height: 5em;
+    font-size: 10px;
+  }
+}
