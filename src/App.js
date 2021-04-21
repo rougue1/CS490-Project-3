@@ -1,9 +1,9 @@
 import "./App.css";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { GLogout } from "./components/logout";
+import { BrowserRouter as Router } from "react-router-dom";
 import { LandingPage } from "./components/landingPage";
-import { Home } from "./components/home";
+import { NavBar } from "./components/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 require("dotenv").config();
@@ -11,18 +11,19 @@ require("dotenv").config();
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
   return (
-    <div className="App">
-      <div className="wrap">
-        {loginStatus === true ? (
-          <div className="mainPage">
-            <Home />
-            <GLogout setLoginStatus={setLoginStatus} />
-          </div>
-        ) : (
-          <LandingPage setLoginStatus={setLoginStatus} />
-        )}
+    <Router>
+      <div className="App">
+        <div className="wrap">
+          {loginStatus === true ? (
+            <div className="mainPage">
+              <NavBar setLoginStatus={setLoginStatus} />
+            </div>
+          ) : (
+            <LandingPage setLoginStatus={setLoginStatus} />
+          )}
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
