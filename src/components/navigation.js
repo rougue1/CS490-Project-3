@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Switch,
   Route,
@@ -10,37 +10,57 @@ import { Home } from "./home";
 
 export function NavBar({ setLoginStatus })
 {
+    const [userData, setUserData] = useState({});
+
+    function getUserInfo() {
+    fetch("/userInfo")
+      .then((res) => res.json())
+      .then((val) => {
+        setUserData(val);
+      });
+    }
+    
+    useEffect(() => {
+        getUserInfo();
+    }, []);
     
     return (
         <div>
+            <div>
+                <h1>Welcome, {userData.full_name}</h1>
+            </div>
             <nav>
-                <ul>
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                      <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                      <Link to="/users">Users</Link>
-                    </li>
-                    <li>
-                        <GLogout setLoginStatus={setLoginStatus} />
-                    </li>
-                </ul>
+                <li>
+                  <Link to="/stats">Stats</Link>
+                </li>
+                <li>
+                  <Link to="/history">History</Link>
+                </li>
+                <li>
+                  <Link to="/home">Home</Link>
+                </li>
+                <li>
+                  <Link to="/chart">Chart</Link>
+                </li>
+                <li>
+                    <GLogout setLoginStatus={setLoginStatus} />
+                </li>
             </nav>
             
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
-                <Route path="/about">
-                    <h1>about</h1>
+                <Route path="/stats">
+                    <h1>Stats</h1>
                 </Route>
-                <Route path="/users">
-                    <h1>user</h1>
+                <Route path="/history">
+                    <h1>History</h1>
                 </Route>
-                <Route path="/">
-                    <Home setLoginStatus={setLoginStatus} />
+                <Route path="/home">
+                    <Home userData={userData} getUserInfo={getUserInfo} />
+                </Route>
+                <Route path="/chart">
+                    <h1>Chart</h1>
                 </Route>
             </Switch>
         </div>    
