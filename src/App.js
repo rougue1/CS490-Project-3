@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";

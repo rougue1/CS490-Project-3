@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../styles/landingpage.css";
 import { GLogin } from "./login";
 import ClipBoard from "../styles/images/ClipBoard.png";
 import icon from "../styles/images/icon.png";
