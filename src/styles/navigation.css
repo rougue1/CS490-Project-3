@@ -1,0 +1,61 @@
+.header {
+    height: 25vh;
+    display: grid;
+    grid-template-rows: 70% 15%;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    background: linear-gradient(343.8deg, #845EC2 17.83%, #543C88 88.01%);;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.navBar {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.navBar a {
+    color: black;
+}
+
+.navBar a:hover {
+    text-decoration: none;
+}
+
+.navBtn {
+  background-color: white;
+  color: black;
+  padding: 0.5em 1em;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  letter-spacing: 3px;
+  font-size: 1em;
+}
+
+.navBtn.underline_slide::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #51308E;
+  height: 3px;
+  border-radius: 50px; 
+  transition: transform 300ms ease-in-out;
+  transform: scaleX(0);
+}
+
+.navBtn.underline_slide:hover::before,
+.navBtn.underline_slide:focus::before {
+  transform: scaleX(1);
+}
+
+.underline_slide {
+  content: '';
+}

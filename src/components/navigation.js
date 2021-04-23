@@ -5,6 +5,7 @@ import {
   Link
 } from "react-router-dom";
 import PropTypes from "prop-types";
+import "../styles/navigation.css";
 import { GLogout } from "./logout";
 import { Home } from "./home";
 
@@ -26,29 +27,29 @@ export function NavBar({ setLoginStatus })
     
     return (
         <div>
-            <div>
+            <div className="header">
+              <div className="title">
                 <h1>Welcome, {userData.full_name}</h1>
-            </div>
-            <nav>
-                <li>
-                  <Link to="/stats">Stats</Link>
-                </li>
-                <li>
-                  <Link to="/history">History</Link>
-                </li>
-                <li>
-                  <Link to="/home">Home</Link>
-                </li>
-                <li>
-                  <Link to="/chart">Chart</Link>
-                </li>
-                <li>
+              </div>
+              <nav className="navBar">
+                <div>
+                  <Link className="navBtn underline_slide" to="/stats">Stats</Link>
+                </div>
+                <div>
+                  <Link className="navBtn underline_slide" to="/history">History</Link>
+                </div>
+                <div>
+                  <Link className="navBtn underline_slide" to="/home">Home</Link>
+                </div>
+                <div>
+                  <Link className="navBtn underline_slide" to="/chart">Chart</Link>
+                </div>
+                <div>
                     <GLogout setLoginStatus={setLoginStatus} />
-                </li>
-            </nav>
-            
-            {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+                </div>
+              </nav>
+            </div>
+
             <Switch>
                 <Route path="/stats">
                     <h1>Stats</h1>
