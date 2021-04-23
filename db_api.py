@@ -19,13 +19,16 @@ def convert_to_datetime_obj(date):
         if '-' in date:
             date = date.replace('-', '/')
             date = datetime.datetime.strptime(date,
-                                              "%Y/%m/%d").strftime("%m/%d/%Y").date()
+                                              "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
             date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
     return date
 
 
-def get_user_info(full_name, transactions):
+def get_the_user_info(full_name, transactions):
+    """
+        unmocked getting user info function
+    """
     total_balance = 0
     total_income = 0
     total_expense = 0
@@ -42,6 +45,10 @@ def get_user_info(full_name, transactions):
         "income": round(total_income, 2),
         "expense": round(total_expense, 2)
     }
+
+
+def get_user_info(full_name, transactions):
+    return get_the_user_info(full_name, transactions)
 
 
 class DBQuery:
@@ -76,7 +83,10 @@ class DBQuery:
             models.Users).filter_by(user_id=self.user_id).first().transactions
         info = []
         for transaction in transactions:
-            info.append({'transaction_type': transaction.transaction_type, 'amount': transaction.amount})
+            info.append({
+                'transaction_type': transaction.transaction_type,
+                'amount': transaction.amount
+            })
         full_name = self.first_name + ' ' + self.last_name
         user_info = get_user_info(full_name, info)
         return user_info
@@ -106,32 +116,38 @@ class DBQuery:
         user.delete()
         session.commit()
 
-    def get_transactions(self) -> list[dict]:
+    def get_transactions(self):
         """
         Method to get all transactions of a user.
         """
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
         transactions.sort(key=lambda x: x.date)
-        transactions_list = []
-        for transaction in transactions:
-            transactions_list.append({
-                "id": transaction.transaction_id,
-                "type": transaction.transaction_type,
-                "amount": transaction.amount,
-                "date": transaction.date,
-                "location": transaction.location,
-                "description": transaction.description
-            })
+        transactions_list = [{
+            "id": transaction.transaction_id,
+            "type": transaction.transaction_type,
+            "amount": transaction.amount,
+            "date": transaction.date,
+            "location": transaction.location,
+            "category": transaction.category,
+            "description": transaction.description
+        } for transaction in transactions]
         return transactions_list
 
-    def add_transaction(self, transaction_type: str, amount: str, date: str,
-                        location: str, description: str):
+    def get_transaction_categories(self):
+        transactions = session.query(
+            models.Users).filter_by(user_id=self.user_id).first().transactions
+        user_categories = [
+            transaction.category for transaction in transactions
+        ]
+        return user_categories
+
+    def add_transaction(self, transaction_type: str, amount: float, date: str,
+                        location: str, category: str, description: str):
         """
         Method to add a transaction for the user.
         All values are needed.
         """
-        print(f"DBAPI: amount: {amount}")
         if isinstance(date, str):
             if '-' in date:
                 date = date.replace('-', '/')
@@ -140,7 +156,7 @@ class DBQuery:
             else:
                 date = datetime.datetime.strptime(date, "%m/%d/%Y")
         to_add = models.Transaction(self.user_id, transaction_type, amount,
-                                    date, location, description)
+                                    date, location, category, description)
         session.add(to_add)
         session.commit()
 
@@ -149,7 +165,7 @@ class DBQuery:
         Method to edit a transaction for a user.
         transaction_id is needed as to know which transaction to edit.
         Other variables are optional, but follow order:
-            transaction_type, amount, date, location and description.
+            transaction_type, amount, date, location, category and description.
         Method allows setting specific things too, like:
             transaction_type=
         """
@@ -160,16 +176,16 @@ class DBQuery:
             models.Transaction.transaction_id == transaction_id,
             models.Transaction.user_id == self.user_id).first()
         if to_edit is not None:
-            if len(args) != 6:
+            if len(args) != 7:
                 transaction_info = [
                     to_edit.transaction_type, to_edit.amount, to_edit.date,
-                    to_edit.location, to_edit.description
+                    to_edit.location, to_edit.category, to_edit.description
                 ]
                 args.extend(transaction_info[len(args):])
             args[3] = convert_to_datetime_obj(args[3])
             [
                 to_edit.transaction_type, to_edit.amount, to_edit.date,
-                to_edit.location, to_edit.description
+                to_edit.location, to_edit.category, to_edit.description
             ] = args
             if len(kwargs) != 0:
                 to_edit.transaction_type = kwargs.get("transaction_type",
@@ -177,6 +193,7 @@ class DBQuery:
                 to_edit.amount = round(kwargs.get("amount", to_edit.amount), 2)
                 to_edit.date = kwargs.get("date", to_edit.date)
                 to_edit.location = kwargs.get("location", to_edit.location)
+                to_edit.category = kwargs.get("category", to_edit.category)
                 to_edit.description = kwargs.get("description",
                                                  to_edit.description)
             session.commit()

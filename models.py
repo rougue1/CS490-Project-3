@@ -43,6 +43,12 @@ class Transaction(DB.Model):
     """
     __tablename__ = "transactions"
 
+    # id of the transaction, supposed to be autoincrement according to user's list of transactions
+    transaction_id = Column(Integer,
+                            nullable=False,
+                            primary_key=True,
+                            autoincrement=True)
+
     # user_id of the user entering transaction
     user_id = Column(String, ForeignKey("user_info.user_id",
                                         ondelete="CASCADE"))
@@ -59,26 +65,24 @@ class Transaction(DB.Model):
     # location/origin of the transaction
     location = Column(String, nullable=False)
 
+    # category of transaction; ex: Transport, Food, Groceries, etc.
+    category = Column(String, nullable=False)
+
     # a short description of the transaction
     description = Column(String, nullable=False)
-
-    # id of the transaction, supposed to be autoincrement according to user's list of transactions
-    transaction_id = Column(Integer,
-                            nullable=False,
-                            primary_key=True,
-                            autoincrement=True)
 
     user_info = relationship("Users",
                              primaryjoin=user_id == Users.user_id,
                              back_populates="transactions")
 
     def __init__(self, user_id, transaction_type, amount, date, location,
-                 description):
+                 category, description):
         self.user_id = user_id
         self.transaction_type = transaction_type
         self.amount = amount
         self.date = date
         self.location = location
+        self.category = category
         self.description = description
 
     def __repr__(self):
