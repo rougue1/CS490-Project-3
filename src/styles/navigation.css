@@ -1,8 +1,10 @@
 .header {
-    height: 25vh;
+    height: 14em;
     display: grid;
-    grid-template-rows: 70% 15%;
+    grid-template-rows: 70% 30%;
     align-items: center;
+    position: fixed;
+    width: 100%;
 }
 
 .title {
@@ -19,6 +21,7 @@
     grid-template-columns: 20% 20% 20% 20% 20%;
     height: 100%;
     align-items: center;
+    background-color: white;
 }
 
 .navBar a {
