@@ -73,7 +73,14 @@ class DBQuery:
         self.first_name = first_name
         self.last_name = last_name
         self.add()
-
+    
+    def __str__(self):
+        """
+        Print all needed info of a user on printing of object.
+        """
+        info = self.get_info()
+        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(info["full_name"], info["balance"], info["income"], info["expense"])
+    
     def get_info(self):
         """
         Method to get the full name, total balance, total income,
