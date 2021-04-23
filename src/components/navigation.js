@@ -32,6 +32,11 @@ export function NavBar({ setLoginStatus })
                 <h1>Welcome, {userData.full_name}</h1>
               </div>
               <nav className="navBar">
+                <div className="burger">
+                  <div>{}</div>
+                  <div>{}</div>
+                  <div>{}</div>
+                </div>
                 <div>
                   <Link className="navBtn underline_slide" to="/stats">Stats</Link>
                 </div>

@@ -18,7 +18,7 @@
 
 .navBar {
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 0% 20% 20% 20% 20% 20%;
     height: 100%;
     align-items: center;
     background-color: white;
@@ -41,6 +41,7 @@
   cursor: pointer;
   letter-spacing: 3px;
   font-size: 1em;
+  display: inline-block;
 }
 
 .navBtn.underline_slide::before {
@@ -63,4 +64,30 @@
 
 .underline_slide {
   content: '';
+}
+
+.burger div {
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  margin: 5px;
+  display: none;
+}
+
+
+@media screen and (max-width:680px) {
+  .navBar {
+    position: absolute;
+    width: 80%;
+    right: 0;
+    height: 80vh;
+    top: 10em;
+    grid-template-columns: 0;
+    grid-template-rows: 0% 20% 20% 20% 20% 20%;
+    justify-content: center;
+    background-color: lightgray;
+  }
+  .burger div {
+    display: block;
+  }
 }
