@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState, useEffect } from "react";
 import {
   Switch,
@@ -12,6 +13,8 @@ import { Home } from "./home";
 export function NavBar({ setLoginStatus })
 {
     const [userData, setUserData] = useState({});
+    const [ navActive, setNavActive ] = useState("");
+    const [ burgerIcon, changeBurgerIcon ] = useState("");
 
     function getUserInfo() {
     fetch("/userInfo")
@@ -27,19 +30,13 @@ export function NavBar({ setLoginStatus })
     
     
     const navSlide = () => {
-      const burger = document.querySelector('.burger');
-      const nav = document.querySelector('.navLinks');
-      
-      nav.classList.toggle('navLinkActive');
-      burger.classList.toggle('toggle');
+      navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
+      burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
     }
     
     const toggleNav = () => {
-      const nav = document.querySelector('.navLinks');
-      const burger = document.querySelector('.burger');
-      
-      nav.classList.toggle('navLinkActive');
-      burger.classList.toggle('toggle');
+      navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
+      burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
     }
     
     return (
@@ -49,7 +46,7 @@ export function NavBar({ setLoginStatus })
                 <h1>Welcome, {userData.full_name}</h1>
               </div>
               <nav className="navBar">
-                <div className="navLinks">
+                <div className={`navLinks ${  navActive}`}>
                   <div>
                     <Link className="navBtn underline_slide" to="/stats" onClick={toggleNav}>STATS</Link>
                   </div>
@@ -66,7 +63,7 @@ export function NavBar({ setLoginStatus })
                       <GLogout setLoginStatus={setLoginStatus} />
                   </div>
                 </div>
-                <div className="burger" onClick={navSlide}>
+                <div className={`burger ${  burgerIcon}`} onClick={navSlide}>
                   <div className="line1">{}</div>
                   <div className="line2">{}</div>
                   <div className="line3">{}</div>
