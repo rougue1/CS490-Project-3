@@ -27,10 +27,19 @@ export function NavBar({ setLoginStatus })
     
     
     const navSlide = () => {
-      // const burger = document.querySelector('.burger');
+      const burger = document.querySelector('.burger');
       const nav = document.querySelector('.navLinks');
       
       nav.classList.toggle('navLinkActive');
+      burger.classList.toggle('toggle');
+    }
+    
+    const toggleNav = () => {
+      const nav = document.querySelector('.navLinks');
+      const burger = document.querySelector('.burger');
+      
+      nav.classList.toggle('navLinkActive');
+      burger.classList.toggle('toggle');
     }
     
     return (
@@ -42,25 +51,25 @@ export function NavBar({ setLoginStatus })
               <nav className="navBar">
                 <div className="navLinks">
                   <div>
-                    <Link className="navBtn underline_slide" to="/stats">Stats</Link>
+                    <Link className="navBtn underline_slide" to="/stats" onClick={toggleNav}>STATS</Link>
                   </div>
                   <div>
-                    <Link className="navBtn underline_slide" to="/history">History</Link>
+                    <Link className="navBtn underline_slide" to="/history" onClick={toggleNav}>HISTORY</Link>
                   </div>
                   <div>
-                    <Link className="navBtn underline_slide" to="/home">Home</Link>
+                    <Link className="navBtn underline_slide" to="/home" onClick={toggleNav}>HOME</Link>
                   </div>
                   <div>
-                    <Link className="navBtn underline_slide" to="/chart">Chart</Link>
+                    <Link className="navBtn underline_slide" to="/chart" onClick={toggleNav}>CHART</Link>
                   </div>
                   <div>
                       <GLogout setLoginStatus={setLoginStatus} />
                   </div>
                 </div>
                 <div className="burger" onClick={navSlide}>
-                  <div>{}</div>
-                  <div>{}</div>
-                  <div>{}</div>
+                  <div className="line1">{}</div>
+                  <div className="line2">{}</div>
+                  <div className="line3">{}</div>
                 </div>
               </nav>
             </div>
