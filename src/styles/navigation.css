@@ -16,12 +16,22 @@
     color: white;
 }
 
+/*.navBar {*/
+/*    display: grid;*/
+/*    grid-template-columns: 20% 20% 20% 20% 20%;*/
+/*    height: 100%;*/
+/*    align-items: center;*/
+/*    background-color: white;*/
+/*}*/
+
 .navBar {
-    display: grid;
-    grid-template-columns: 0% 20% 20% 20% 20% 20%;
-    height: 100%;
-    align-items: center;
-    background-color: white;
+  display: flex;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .navBar a {
@@ -66,28 +76,50 @@
   content: '';
 }
 
+.burger {
+  display: none;
+}
+
 .burger div {
   width: 30px;
   height: 3px;
   background-color: black;
-  margin: 5px;
-  display: none;
+  margin-top: 5px;
 }
 
 
 @media screen and (max-width:680px) {
-  .navBar {
+  .navLinks {
     position: absolute;
-    width: 80%;
-    right: 0;
-    height: 80vh;
-    top: 10em;
-    grid-template-columns: 0;
-    grid-template-rows: 0% 20% 20% 20% 20% 20%;
-    justify-content: center;
-    background-color: lightgray;
+    right: 0px;
+    width: 65%;
+    height: 92vh;
+    top: 12em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
   }
+  
+  .navBar {
+    justify-self: end;
+  }
+  
+  .burger {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  
   .burger div {
     display: block;
+    justify-content: center;
   }
+}
+
+.navLinkActive {
+  transform: translateX(0%);
 }

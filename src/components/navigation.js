@@ -25,6 +25,14 @@ export function NavBar({ setLoginStatus })
         getUserInfo();
     }, []);
     
+    
+    const navSlide = () => {
+      // const burger = document.querySelector('.burger');
+      const nav = document.querySelector('.navLinks');
+      
+      nav.classList.toggle('navLinkActive');
+    }
+    
     return (
         <div>
             <div className="header">
@@ -32,25 +40,27 @@ export function NavBar({ setLoginStatus })
                 <h1>Welcome, {userData.full_name}</h1>
               </div>
               <nav className="navBar">
-                <div className="burger">
+                <div className="navLinks">
+                  <div>
+                    <Link className="navBtn underline_slide" to="/stats">Stats</Link>
+                  </div>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/history">History</Link>
+                  </div>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/home">Home</Link>
+                  </div>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/chart">Chart</Link>
+                  </div>
+                  <div>
+                      <GLogout setLoginStatus={setLoginStatus} />
+                  </div>
+                </div>
+                <div className="burger" onClick={navSlide}>
                   <div>{}</div>
                   <div>{}</div>
                   <div>{}</div>
-                </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/stats">Stats</Link>
-                </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/history">History</Link>
-                </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/home">Home</Link>
-                </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/chart">Chart</Link>
-                </div>
-                <div>
-                    <GLogout setLoginStatus={setLoginStatus} />
                 </div>
               </nav>
             </div>
