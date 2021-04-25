@@ -23,22 +23,21 @@ export function NavBar({ setLoginStatus })
         setUserData(val);
       });
     }
-    
+
     useEffect(() => {
         getUserInfo();
     }, []);
-    
-    
+
     const navSlide = () => {
       navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
       burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
     }
-    
+
     const toggleNav = () => {
       navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
       burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
     }
-    
+
     return (
         <div>
             <div className="header">
@@ -72,6 +71,7 @@ export function NavBar({ setLoginStatus })
             </div>
 
             <Switch>
+              <div className="pageBody">
                 <Route path="/stats">
                     <h1>Stats</h1>
                 </Route>
@@ -84,6 +84,7 @@ export function NavBar({ setLoginStatus })
                 <Route path="/chart">
                     <h1>Chart</h1>
                 </Route>
+              </div>
             </Switch>
         </div>    
     );
