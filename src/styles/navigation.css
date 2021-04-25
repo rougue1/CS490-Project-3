@@ -35,7 +35,8 @@
 }
 
 .navBar a:hover {
-    text-decoration: none;
+  text-decoration: none;
+  color: black;
 }
 
 .navBtn {
@@ -108,8 +109,17 @@
     color: white;
   }
   
+  .navBar a:hover {
+    text-decoration: none;
+    color: white;
+  }
+  
   .navBtn {
     color: white;
+  }
+  
+  .navBtn.underline_slide::before {
+    background-color: white;
   }
   
   .burger {
