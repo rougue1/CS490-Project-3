@@ -1,7 +1,6 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-// import PropTypes from 'prop-types';
 import { Transaction } from "./transactions.js";
 
 export function Home({userData, getUserInfo}) {

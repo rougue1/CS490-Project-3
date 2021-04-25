@@ -17,7 +17,7 @@ export function GLogout({ setLoginStatus }) {
     <GoogleLogout 
       clientId={clientId}
       render={renderProps => (
-        <button type="button" className="navBtn underline_slide" onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</button>
+        <button type="button" className="navBtn underline_slide" onClick={renderProps.onClick} disabled={renderProps.disabled}>LOGOUT</button>
       )}
       buttonText="Logout"
       onLogoutSuccess={onSuccess}

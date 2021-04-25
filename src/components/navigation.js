@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState, useEffect } from "react";
 import {
   Switch,
@@ -12,6 +13,8 @@ import { Home } from "./home";
 export function NavBar({ setLoginStatus })
 {
     const [userData, setUserData] = useState({});
+    const [ navActive, setNavActive ] = useState("");
+    const [ burgerIcon, changeBurgerIcon ] = useState("");
 
     function getUserInfo() {
     fetch("/userInfo")
@@ -25,6 +28,17 @@ export function NavBar({ setLoginStatus })
         getUserInfo();
     }, []);
     
+    
+    const navSlide = () => {
+      navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
+      burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
+    }
+    
+    const toggleNav = () => {
+      navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
+      burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
+    }
+    
     return (
         <div>
             <div className="header">
@@ -32,20 +46,27 @@ export function NavBar({ setLoginStatus })
                 <h1>Welcome, {userData.full_name}</h1>
               </div>
               <nav className="navBar">
-                <div>
-                  <Link className="navBtn underline_slide" to="/stats">Stats</Link>
+                <div className={`navLinks ${  navActive}`}>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/stats" onClick={toggleNav}>STATS</Link>
+                  </div>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/history" onClick={toggleNav}>HISTORY</Link>
+                  </div>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/home" onClick={toggleNav}>HOME</Link>
+                  </div>
+                  <div>
+                    <Link className="navBtn underline_slide" to="/chart" onClick={toggleNav}>CHART</Link>
+                  </div>
+                  <div>
+                      <GLogout setLoginStatus={setLoginStatus} />
+                  </div>
                 </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/history">History</Link>
-                </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/home">Home</Link>
-                </div>
-                <div>
-                  <Link className="navBtn underline_slide" to="/chart">Chart</Link>
-                </div>
-                <div>
-                    <GLogout setLoginStatus={setLoginStatus} />
+                <div className={`burger ${  burgerIcon}`} onClick={navSlide}>
+                  <div className="line1">{}</div>
+                  <div className="line2">{}</div>
+                  <div className="line3">{}</div>
                 </div>
               </nav>
             </div>

@@ -1,8 +1,10 @@
 .header {
-    height: 25vh;
+    min-height: 19vh;
     display: grid;
-    grid-template-rows: 70% 15%;
+    grid-template-rows: 70% 30%;
     align-items: center;
+    position: fixed;
+    width: 100%;
 }
 
 .title {
@@ -15,10 +17,17 @@
 }
 
 .navBar {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    height: 100%;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: white;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
 }
 
 .navBar a {
@@ -26,11 +35,12 @@
 }
 
 .navBar a:hover {
-    text-decoration: none;
+  text-decoration: none;
+  color: black;
 }
 
 .navBtn {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
   color: black;
   padding: 0.5em 1em;
   border: none;
@@ -38,6 +48,7 @@
   cursor: pointer;
   letter-spacing: 3px;
   font-size: 1em;
+  display: inline-block;
 }
 
 .navBtn.underline_slide::before {
@@ -60,4 +71,89 @@
 
 .underline_slide {
   content: '';
+}
+
+.burger {
+  display: none;
+}
+
+.burger div {
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  margin-top: 5px;
+  transition: all 100ms ease-in-out;
+}
+
+
+@media screen and (max-width:680px) {
+  .navLinks {
+    position: absolute;
+    background-color: #51308E;
+    right: 0px;
+    width: 65%;
+    height: 82vh;
+    top: 19vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in;
+  }
+  
+  .navBar {
+    justify-self: end;
+  }
+  
+  .navBar a {
+    color: white;
+  }
+  
+  .navBar a:hover {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navBtn {
+    color: white;
+  }
+  
+  .navBtn.underline_slide::before {
+    background-color: white;
+  }
+  
+  .burger {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  
+  .burger div {
+    display: block;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width:680px) {
+  .title h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.navLinkActive {
+  transform: translateX(0%);
+}
+
+.toggle .line1{
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2{
+  opacity: 0;
+}
+
+.toggle .line3{
+  transform: rotate(45deg) translate(-5px, -6px);
 }
