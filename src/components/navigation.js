@@ -15,6 +15,7 @@ export function NavBar({ setLoginStatus })
     const [userData, setUserData] = useState({});
     const [ navActive, setNavActive ] = useState("");
     const [ burgerIcon, changeBurgerIcon ] = useState("");
+    const [ activeTab, setActiveTab ] = useState("home");
 
     function getUserInfo() {
     fetch("/userInfo")
@@ -33,9 +34,15 @@ export function NavBar({ setLoginStatus })
       burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
     }
 
-    const toggleNav = () => {
+    const toggleNav = (id) => {
       navActive === "" ? setNavActive("navLinkActive") : setNavActive("");
       burgerIcon === "" ? changeBurgerIcon("toggle") : changeBurgerIcon("");
+      
+      let element = document.getElementById(activeTab);
+      element.classList.remove("underline");
+      setActiveTab(id);
+      element = document.getElementById(id);
+      element.classList.add("underline");
     }
 
     return (
@@ -47,16 +54,16 @@ export function NavBar({ setLoginStatus })
               <nav className="navBar">
                 <div className={`navLinks ${  navActive}`}>
                   <div>
-                    <Link className="navBtn underline_slide" to="/stats" onClick={toggleNav}>STATS</Link>
+                    <Link id="stats" className="navBtn underline_slide" to="/stats" onClick={() => toggleNav("stats")}>STATS</Link>
                   </div>
                   <div>
-                    <Link className="navBtn underline_slide" to="/history" onClick={toggleNav}>HISTORY</Link>
+                    <Link id="history" className="navBtn underline_slide" to="/history" onClick={() => toggleNav("history")}>HISTORY</Link>
                   </div>
                   <div>
-                    <Link className="navBtn underline_slide" to="/home" onClick={toggleNav}>HOME</Link>
+                    <Link id="home" className="navBtn underline_slide  underline" to="/home" onClick={() => toggleNav("home")}>HOME</Link>
                   </div>
                   <div>
-                    <Link className="navBtn underline_slide" to="/chart" onClick={toggleNav}>CHART</Link>
+                    <Link id="chart" className="navBtn underline_slide" to="/chart" onClick={() => toggleNav("chart")}>CHART</Link>
                   </div>
                   <div>
                       <GLogout setLoginStatus={setLoginStatus} />

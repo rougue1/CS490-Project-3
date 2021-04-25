@@ -64,6 +64,17 @@
   transform: scaleX(0);
 }
 
+.navBtn.underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #51308E;
+  height: 4px;
+  border-radius: 50px;
+}
+
 .navBtn.underline_slide:hover::before,
 .navBtn.underline_slide:focus::before {
   transform: scaleX(1);
