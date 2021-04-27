@@ -46,6 +46,7 @@ img {
 .balanceBoard {
   display: grid;
   grid-row-gap: 5px;
+  width: 50%;
 }
 
 .totalBalance {
@@ -89,7 +90,18 @@ img {
 }
 
 .pageBody {
-  padding-top: 20vh;
+  padding: 3em;
+  overflow: auto;
+  height: 81vh;
+  display: flex;
+  justify-content: center;
+}
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55em;
 }
 
 .trash:hover {

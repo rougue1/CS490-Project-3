@@ -3,7 +3,6 @@
     display: grid;
     grid-template-rows: 70% 30%;
     align-items: center;
-    position: fixed;
     width: 100%;
 }
 
