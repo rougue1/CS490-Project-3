@@ -1,7 +1,6 @@
 """
 Our server file
 """
-# pylint: disable= E1101, C0413, R0903, W0603, W1508
 import os
 from flask import Flask, send_from_directory
 from flask import request, jsonify
@@ -53,7 +52,8 @@ def add():
     data = request.json["formDataObj"]
     if data:
         USER.add_transaction(data["type"], data["amount"], data["date"],
-                             data["location"], data["description"])
+                             data["location"], data["category"],
+                             data["description"])
         return jsonify(200)
     return jsonify(400)
 
@@ -75,6 +75,7 @@ def update():
             base["amount"],
             base["date"],
             base["location"],
+            base["category"],
             base["description"],
         )
         print(jsonify(200))

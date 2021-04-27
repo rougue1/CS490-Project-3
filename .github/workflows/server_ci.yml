@@ -39,17 +39,17 @@ jobs:
 
       - name: Lint app.py
         run: pylint app.py
-        
+
       - name: Lint db_api.py
         run: pylint db_api.py
-        
+
       - name: Lint models.py
         run: pylint models.py
-    
+
       # Run Unmocked tests
       - name: Run Unmocked Tests
-        run: python test/unmocked/unit_test.py
-        
+        run: python tests/unmocked/unit_test.py
+
 #       # Run Mocked tests
 #       - name: Run Mocked Tests
-#         run: python test/mocked/unit_tests.py 
+#         run: python tests/mocked/unit_tests.py

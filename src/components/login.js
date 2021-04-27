@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { GoogleLogin } from "react-google-login";
+import { useHistory } from "react-router-dom";
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 export function GLogin({ setLoginStatus }) {
+  const history = useHistory();
   const onSuccess = async (googleUser) => {
     const userInfo = {
       GoogleId: googleUser.profileObj.googleId,
@@ -27,6 +29,7 @@ export function GLogin({ setLoginStatus }) {
 
     if (data === 200) {
       setLoginStatus(true);
+      history.push("/home");
     }
   };
   return (
@@ -35,7 +38,14 @@ export function GLogin({ setLoginStatus }) {
       <h5>Please login to continue</h5>
       <br />
       <br />
-      <GoogleLogin clientId={clientId} buttonText="Login with Google" onSuccess={onSuccess} />
+      <GoogleLogin 
+        clientId={clientId} 
+        render={renderProps => (
+          <button type="button" className="googleLoginButton" onClick={renderProps.onClick} disabled={renderProps.disabled}>Login with Google</button>
+        )}
+        buttonText="Login with Google" 
+        onSuccess={onSuccess} 
+      />
     </div>
   );
 }
