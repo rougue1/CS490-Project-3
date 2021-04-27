@@ -193,5 +193,3 @@ Heroku is a cloud platform company which will essentially allow us to host our c
   - `too-many-arguments`: Unavoidable since we _need_ to pass those many variables into the addTransaction function.
   - `wildcard-import`: Some weird error in C9.
   - `unused-wildcard-import`: Continuing with previous error ignored.
-
-
