@@ -27,7 +27,7 @@ def convert_to_datetime_obj(date):
 
 def get_the_user_info(full_name, transactions):
     """
-        unmocked getting user info function
+    Unmocked getting user info function
     """
     total_balance = 0
     total_income = 0
