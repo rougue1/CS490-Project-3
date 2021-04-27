@@ -6,7 +6,6 @@ import { View } from "./view";
 import { AddView } from "./addview";
 // import { UpdateView } from './updateView';
 import { DeleteView } from "./deleteView";
-import "../App.css";
 
 export function Transaction({ data, getData }) {
   // useStates for pop-up logic for add, delete, update
