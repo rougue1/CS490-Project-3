@@ -27,16 +27,28 @@ export function Charts()
         {
           label: 'Rainfall',
           backgroundColor: [
-            'red',
-            '#C9DE00',
-
+            '#98ddca',
+            '#d5ecc2',
+            '#ffd3b4',
+            '#ffaaa7',
+            '#eca3f5', 
+            '#fdbaf8', 
+            '#b0efeb', 
+            '#edffa9'
 
           ],
           hoverBackgroundColor: [
-          '#501800',
-          '#4B5000',
+          '#98ddca',
+          '#d5ecc2',
+          '#ffd3b4',
+          '#ffaaa7',
+          '#eca3f5', 
+          '#fdbaf8', 
+          '#b0efeb', 
+          '#edffa9'
 
           ],
+          hoverOffset: 5,
           data: chartData[1],
         }
       ]
