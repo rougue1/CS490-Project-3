@@ -99,6 +99,54 @@ def get_user_info():
     """
     global USER
     return jsonify(USER.get_info())
+    
+@APP.route("/chartInfo", methods=["Get"])
+def get_chart_info():
+    """
+    Get chart info
+    """
+    global USER
+
+    transactions = USER.get_transactions()
+    categories = USER.get_transaction_categories()
+    # sums = [sum([transaction["amount"] for transaction in transactions if transaction["category"]==category and transaction["type"]=="Expense"]) for category in categories]
+    # print(sums)
+    
+    sums = []
+    expense_cat = []  
+    
+    print(categories)
+    print(transactions)
+    
+    new_categories = []
+    for item in categories:
+        if item not in new_categories:
+            new_categories.append(item)
+    
+    print(new_categories)
+    flag_expense = False
+    for category in new_categories: #go thru all of the categories
+        li = []
+        for transaction in transactions:
+            if transaction["category"] == category and transaction["type"] == "Expense":
+                 flag_expense = True
+                 print(transaction["type"])
+                 li.append(transaction["amount"])
+                #  sums.append(sum(li))
+                 
+                 if category not in expense_cat:
+                    expense_cat.append(category)
+         
+        if flag_expense:    
+            sums.append(sum(li))
+            flag_expense = False
+        
+    print(sums)
+    print(expense_cat)
+    
+        
+    return jsonify([expense_cat,sums])
+    
 
 
 @APP.route("/delete", methods=["Post"])

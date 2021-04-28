@@ -9,6 +9,9 @@ import PropTypes from "prop-types";
 import "../styles/navigation.css";
 import { GLogout } from "./logout";
 import { Home } from "./home";
+import { Stats } from "./stats";
+import { History } from "./history";
+import { Charts } from "./charts";
 
 export function NavBar({ setLoginStatus })
 {
@@ -80,16 +83,16 @@ export function NavBar({ setLoginStatus })
             <Switch>
               <div className="pageBody">
                 <Route path="/stats">
-                    <h1>Stats</h1>
+                    <Stats />
                 </Route>
                 <Route path="/history">
-                    <h1>History</h1>
+                    <History />
                 </Route>
                 <Route path="/home">
                     <Home userData={userData} getUserInfo={getUserInfo} />
                 </Route>
                 <Route path="/chart">
-                    <h1>Chart</h1>
+                    <Charts />
                 </Route>
               </div>
             </Switch>
