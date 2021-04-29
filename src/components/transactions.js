@@ -4,7 +4,6 @@ import { Trash } from "react-bootstrap-icons";
 import PropTypes from "prop-types";
 import { View } from "./view";
 import { AddView } from "./addview";
-// import { UpdateView } from './updateView';
 import { DeleteView } from "./deleteView";
 
 export function Transaction({ data, getData }) {
@@ -18,10 +17,13 @@ export function Transaction({ data, getData }) {
   const [showData, setShowData] = useState([]);
   const [filterOptions, setFilterOptions] = useState("All");
 
-  const handleClose = () => setShow(false);
-
+  const handleClose = () => {
+    setShow(false);
+    getData();
+  }
   const handleUpdate = () => {
     setShow(false);
+    getData();
   };
 
   const handleDelete = () => setDelete(true);
@@ -125,7 +127,7 @@ export function Transaction({ data, getData }) {
       setShowData(() => data.slice(0, numData));
     }
   }
-
+  console.log(data);
   return (
     <div>
       <div className="transaction">
