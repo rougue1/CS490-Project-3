@@ -21,7 +21,7 @@ def convert_to_datetime_obj(date):
             date = datetime.datetime.strptime(date,
                                               "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
-            date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+            date = datetime.datetime.strptime(date, "%m/%d/%Y")
     return date
 
 
