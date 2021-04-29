@@ -44,6 +44,12 @@ export function Transaction({ data, getData }) {
 
   useEffect(() => {
     setShowData(() => data.slice(0, numData));
+    
+    console.log(showData.length);
+    if(showData.length === 0)
+      setDelete(false);
+    
+    
   }, [data, numData]);
 
   // Display Month transactions for this month
@@ -127,7 +133,7 @@ export function Transaction({ data, getData }) {
       setShowData(() => data.slice(0, numData));
     }
   }
-  console.log(data);
+  
   return (
     <div>
       <div className="transaction">
