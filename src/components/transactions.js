@@ -17,6 +17,8 @@ export function Transaction({ data, getData }) {
   // const [numData, setNumData] = useState(5);
   const [showData, setShowData] = useState([]);
   // const [filterOptions, setFilterOptions] = useState("All");
+  
+  const history = useHistory();
 
   const history = useHistory();
 
@@ -35,7 +37,6 @@ export function Transaction({ data, getData }) {
   const handleShowAll = () => {
     console.log("In");
     history.push("/history");
-
     const element = document.getElementById("home");
     element.classList.remove("underline");
   };
@@ -48,7 +49,6 @@ export function Transaction({ data, getData }) {
   useEffect(() => {
     setShowData(() => data.slice(0, 5));
   }, [data]);
-
   // Display Month transactions for this month
 
   // function showMonth(monthData) {
