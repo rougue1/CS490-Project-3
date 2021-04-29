@@ -1,66 +1,76 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { Doughnut } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 export function Charts()
-{   
+{
     const [chartData, setChartData] = useState([[], []]);
-    
-     function getData() {
-        fetch("/chartInfo")
-          .then((res) => res.json())
-          .then((val) => {
-            console.log(val);
-            console.log(val[0]);
-            console.log(val[1]);
-            setChartData(val);
-          });
-      }
-      
+
+    function getData() {
+      fetch("/chartInfo")
+        .then((res) => res.json())
+        .then((val) => {
+          console.log("Transactions:", val.transactions);
+          setChartData(val);
+        });
+    }
+
     useEffect(()=>{
         getData();
-        
     },[]);
     
-    const state = {
-      labels: chartData[0],
+    const data = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
       datasets: [
         {
           label: 'Rainfall',
+          data: [65, 59, 80, 81, 56, 55, 40],
           backgroundColor: [
-            '#98ddca',
-            '#d5ecc2',
-            '#ffd3b4',
-            '#ffaaa7',
-            '#eca3f5', 
-            '#fdbaf8', 
-            '#b0efeb', 
-            '#edffa9'
-
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
           ],
-          hoverBackgroundColor: [
-          '#98ddca',
-          '#d5ecc2',
-          '#ffd3b4',
-          '#ffaaa7',
-          '#eca3f5', 
-          '#fdbaf8', 
-          '#b0efeb', 
-          '#edffa9'
-
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
           ],
-          hoverOffset: 5,
-          data: chartData[1],
+          borderWidth: 1
         }
       ]
     }
     
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+        
+      },
+    };
+    
+    
+
     return (
         <div>
             <h1>Charts</h1>
-            <Doughnut
-                data={state}
+            <Bar
+                data={data}
                 height={400}
                 width={600}
+                options={config}
             />
         </div>
     );

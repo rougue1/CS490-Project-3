@@ -2,6 +2,8 @@
 Our server file
 """
 import os
+import datetime
+from calendar import monthrange
 from flask import Flask, send_from_directory
 from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -52,7 +54,7 @@ def add():
     data = request.json["formDataObj"]
     if data:
         USER.add_transaction(data["type"], data["amount"], data["date"],
-                             data["location"], data["category"],
+                             data["location"], data["category"].lower(),
                              data["description"])
         return jsonify(200)
     return jsonify(400)
@@ -106,46 +108,24 @@ def get_chart_info():
     Get chart info
     """
     global USER
-
     transactions = USER.get_transactions()
     categories = USER.get_transaction_categories()
     # sums = [sum([transaction["amount"] for transaction in transactions if transaction["category"]==category and transaction["type"]=="Expense"]) for category in categories]
-    # print(sums)
-    
-    sums = []
-    expense_cat = []  
-    
-    print(categories)
-    print(transactions)
-    
-    new_categories = []
-    for item in categories:
-        if item not in new_categories:
-            new_categories.append(item)
-    
-    print(new_categories)
-    flag_expense = False
-    for category in new_categories: #go thru all of the categories
-        li = []
+    today = dt.datetime.today().date()
+    days_in_month = monthrange(today.year, today.month)[1]
+    days_in_year = 365 if today.year % 4 != 0 else 366
+    today_last_month = (dt.datetime.now() - dt.timedelta(days_in_month)).date()
+    today_last_year = (datetime.datetime.now() - datetime.timedelta(days_in_year)).date()
+    data = {"income_month": [[], []], "income_year": [[], []], "expense_month": [[], []], "expense_year": [[], []]}
+    for category in categories:
         for transaction in transactions:
-            if transaction["category"] == category and transaction["type"] == "Expense":
-                 flag_expense = True
-                 print(transaction["type"])
-                 li.append(transaction["amount"])
-                #  sums.append(sum(li))
-                 
-                 if category not in expense_cat:
-                    expense_cat.append(category)
-         
-        if flag_expense:    
-            sums.append(sum(li))
-            flag_expense = False
+            if transaction["category"] == category and transaction["type"] == "Income":
+                if today_last_month <= today <= transaction["date"]:
+                    data["income_month"][0].append(category)
+                    data["income_month"][1] = 
         
-    print(sums)
-    print(expense_cat)
-    
         
-    return jsonify([expense_cat,sums])
+    return jsonify({"transactions": transactions, "categories": categories})
     
 
 

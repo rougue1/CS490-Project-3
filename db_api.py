@@ -144,9 +144,10 @@ class DBQuery:
     def get_transaction_categories(self):
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        user_categories = [
+        user_categories = []
+        user_categories = list(set([
             transaction.category for transaction in transactions
-        ]
+        ]))
         return user_categories
 
     def add_transaction(self, transaction_type: str, amount: float, date: str,
