@@ -1,36 +1,37 @@
-import React from "react";
+/* eslint-disable*/
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { UpdateView } from "./updateView";
 
-export function View({ list, show, onHide, toggleUpdate }) {
+export function View({ list, show, onHide, toogleUpdate, getData }) {
+  const [showUpdate, setUpdate] = useState(false);
+
+  const handleShow = () => {
+    //toogleUpdate();
+    setUpdate(true);
+  };
+
   return (
     <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
         <Modal.Title>Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>
-          Amount:
-          {list.amount}
-        </div>
-        <div>
-          Date:
-          {list.date}
-        </div>
-        <div>
-          Location:
-          {list.location}
-        </div>
-        <div>
-          Description:
-          {list.description}
-        </div>
+        <div>Amount: ${list.amount}</div>
+        <div>Date: {list.date}</div>
+        <div>Location: {list.location}</div>
+        <div>Catagory: {list.category}</div>
+        <div>Description: {list.description}</div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={toggleUpdate}>
+        <Button variant="primary" onClick={() => handleShow()}>
           Update
         </Button>
       </Modal.Footer>
+      <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
+        <UpdateView updateData={getData} show={showUpdate} onHide={onHide} id={list.id} />
+      </div>
     </Modal>
   );
 }
