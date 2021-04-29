@@ -67,8 +67,9 @@ def update():
     data = request.json
 
     if data:
-        transaction_id = data["idData"]
-        base = data["formDataObj"]
+        transaction_id = data['id']
+        base = data['formDataObj']
+        print(base["location"])
         USER.edit_transaction(
             transaction_id,
             base["type"],

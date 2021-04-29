@@ -1,53 +1,62 @@
-import React from "react";
+/* eslint-disable*/
+import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 // form validation
 
-export function UpdateView({ updateData, show, onHide }) {
-  
+export function UpdateView({ show, onHide, id }) {
+  // function updateData() {
+  //   fetch("/home")
+  //     .then((res) => res.json())
+  //     .then((val) => {
+  //       setData(val);
+  //     });
+  // }
+
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
-  
+
   // confirmation popup
   const closeConfirm = () => setConfirm(false);
   const viewConfirm = () => {
     setConfirm(true);
   };
-  
+
   // add another income or expense
   const closeAnother = () => setAnother(false);
   const viewAnother = () => setAnother(true);
-  
+
   const onUpdate = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData.entries());
-    
+
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      setValidated(true);
+      // setValidated(true);
     } else {
       onHide(); // hide the pop up
       setValidated(false); // hide errors after correct input fields
       viewConfirm(); // show the confirmation
       // send to backend
-    
-    const res = await fetch("/update", {
-      method: "POST",
-      body: JSON.stringify({
-        formDataObj,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
 
-    if (data === 200) updateData();
+      const res = await fetch("/update", {
+        method: "POST",
+        body: JSON.stringify({
+          formDataObj,
+          id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+
+      // if (data === 200) updateData();
     }
   };
   return (
@@ -78,7 +87,7 @@ export function UpdateView({ updateData, show, onHide }) {
             <Form.Control.Feedback type="invalid">Please enter a location!</Form.Control.Feedback>
 
             <Form.Label>Category: </Form.Label>
-            <Form.Control required type="text" name="category"/>
+            <Form.Control required type="text" name="category" />
             <Form.Control.Feedback type="invalid">Please choose a category!</Form.Control.Feedback>
 
             <Form.Label>Description: </Form.Label>
@@ -131,12 +140,10 @@ export function UpdateView({ updateData, show, onHide }) {
   );
 }
 UpdateView.propTypes = {
-  updateData: PropTypes.instanceOf(Array),
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
 UpdateView.defaultProps = {
-  updateData: PropTypes.instanceOf(Array),
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
