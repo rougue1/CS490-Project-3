@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import "../styles/navigation.css";
 import { GLogout } from "./logout";
 import { Home } from "./home";
-import { Stats } from "./stats";
 import { History } from "./history";
 import { Charts } from "./charts";
 
@@ -57,9 +56,6 @@ export function NavBar({ setLoginStatus })
               <nav className="navBar">
                 <div className={`navLinks ${  navActive}`}>
                   <div>
-                    <Link id="stats" className="navBtn underline_slide" to="/stats" onClick={() => toggleNav("stats")}>STATS</Link>
-                  </div>
-                  <div>
                     <Link id="history" className="navBtn underline_slide" to="/history" onClick={() => toggleNav("history")}>HISTORY</Link>
                   </div>
                   <div>
@@ -82,9 +78,6 @@ export function NavBar({ setLoginStatus })
 
             <Switch>
               <div className="pageBody">
-                <Route path="/stats">
-                    <Stats />
-                </Route>
                 <Route path="/history">
                     <History />
                 </Route>

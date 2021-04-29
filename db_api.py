@@ -21,7 +21,7 @@ def convert_to_datetime_obj(date):
             date = datetime.datetime.strptime(date,
                                               "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
-            date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+            date = datetime.datetime.strptime(date, "%m/%d/%Y")
     return date
 
 
@@ -155,13 +155,7 @@ class DBQuery:
         Method to add a transaction for the user.
         All values are needed.
         """
-        if isinstance(date, str):
-            if '-' in date:
-                date = date.replace('-', '/')
-                date = datetime.datetime.strptime(
-                    date, "%Y/%m/%d").strftime("%m/%d/%Y")
-            else:
-                date = datetime.datetime.strptime(date, "%m/%d/%Y")
+        date = convert_to_datetime_obj(date)
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, category, description)
         session.add(to_add)
@@ -179,6 +173,7 @@ class DBQuery:
         if len(args) == len(kwargs) == 0:
             return
         args = list(args)  # since tuple does not have extend()
+        print(args)
         to_edit = session.query(models.Transaction).filter(
             models.Transaction.transaction_id == transaction_id,
             models.Transaction.user_id == self.user_id).first()
@@ -189,7 +184,7 @@ class DBQuery:
                     to_edit.location, to_edit.category, to_edit.description
                 ]
                 args.extend(transaction_info[len(args):])
-            args[3] = convert_to_datetime_obj(args[3])
+            args[2] = convert_to_datetime_obj(args[2])
             [
                 to_edit.transaction_type, to_edit.amount, to_edit.date,
                 to_edit.location, to_edit.category, to_edit.description
