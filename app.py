@@ -184,6 +184,7 @@ def get_chart_info():
                     income_cat_month.append(category)
                     
                     
+                    
         if flag_expense_year:    
             sums.append(sum(li_expense_year))
             flag_expense_year = False
