@@ -9,6 +9,7 @@ from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
 from db_api import *
+from datetime import datetime, timedelta
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 APP = Flask(__name__, static_folder="./build/static")
@@ -69,8 +70,9 @@ def update():
     data = request.json
 
     if data:
-        transaction_id = data["idData"]
-        base = data["formDataObj"]
+        transaction_id = data['id']
+        base = data['formDataObj']
+        print(base["location"])
         USER.edit_transaction(
             transaction_id,
             base["type"],
