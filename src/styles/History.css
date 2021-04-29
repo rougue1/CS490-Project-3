@@ -1,0 +1,25 @@
+.dropDowns {
+    display: flex;
+    margin: 1em;
+    width: 60%;
+    justify-content: center;
+}
+
+.typeFilter {
+    margin-left: auto;
+}
+
+.dropDowns select {
+    border: none;
+    border-bottom: solid 3px #543C88;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px;
+}
+
+.historyWarp {
+    display: flex;
+    flex-direction: column;
+    align-item: center;
+    width: 100%;
+}

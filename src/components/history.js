@@ -4,6 +4,7 @@ import { Trash } from "react-bootstrap-icons";
 import { View } from "./view";
 import { AddView } from "./addview";
 import { DeleteView } from "./deleteView";
+import "../styles/History.css";
 
 export function History()
 {
@@ -164,35 +165,40 @@ export function History()
   }
 
     return (
-        <div>
+        <div className="historyWarp">
           <div className="transaction">
             {data.length === 0 ? (
               <b>No transactions to show</b>
             ) : (
               <>
-                <select
-                  value={filterOptions}
-                  onChange={(e) => {
-                    handleFilter(e);
-                    setFilterOptions(e.target.value);
-                  }}
-                >
-                  <option value="All"> Show All</option>
-                  <option value="Week"> Show Week</option>
-                  <option value="Month"> Show Month</option>
-                  <option value="Year"> Show Year</option>
-                </select>
-                <select
-                  value={filterOptionsIE}
-                  onChange={(e) => {
-                    handleFilterIE(e);
-                    setFilterOptionsIE(e.target.value);
-                  }}
-                >
-                  <option value="Both"> Both</option>
-                  <option value="Income"> Income</option>
-                  <option value="Expense"> Expense</option>
-                </select>
+                <div className="dropDowns">
+                  <select
+                    className="timeFilter"
+                    value={filterOptions}
+                    onChange={(e) => {
+                      handleFilter(e);
+                      setFilterOptions(e.target.value);
+                    }}
+                  >
+                    <option value="All"> Show All</option>
+                    <option value="Week"> Show Week</option>
+                    <option value="Month"> Show Month</option>
+                    <option value="Year"> Show Year</option>
+                  </select>
+                  <select
+                    className="typeFilter"
+                    value={filterOptionsIE}
+                    onChange={(e) => {
+                      handleFilterIE(e);
+                      setFilterOptionsIE(e.target.value);
+                    }}
+                  >
+                    <option value="Both"> Both</option>
+                    <option value="Income"> Income</option>
+                    <option value="Expense"> Expense</option>
+                  </select>
+                </div>
+                <div>
                 <table className="transactionsTable">
                   <thead>
                     <th />
@@ -252,6 +258,7 @@ export function History()
                     ) : null}
                   </tbody>
                 </table>
+                </div>
               </>
             )}
           </div>
