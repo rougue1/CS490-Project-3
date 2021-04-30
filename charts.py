@@ -46,8 +46,8 @@ def groupData(data_expense):
     dm = dgm.to_dict()['amount']
     dy = dgy.to_dict()['amount']
 
-    dw_lable = []
-    dw_data = []
+    dd_lable = []
+    dd_data = []
     dm_lable = []
     dm_data = []
     dy_lable = []
@@ -62,10 +62,12 @@ def groupData(data_expense):
         dm_data.append(dm[d])
         
     for d in dd:
-        dw_lable.append(d)
-        dw_data.append(dd[d])
+        dd_lable.append(d)
+        dd_data.append(dd[d])
 
-    return [dw_lable, dw_data, dm_lable, dm_data, dy_lable, dy_data]
+    return {"days" : {"labels": dd_lable, "data": dd_data}, 
+            "month": {"labels": dm_lable, "data": dm_data}, 
+            "year": {"labels": dy_lable, "data": dy_data}}
 
 
              
@@ -90,7 +92,7 @@ def get_chart_data(transactions):
         expense_chart = groupData(data_expense)
         income_chart = groupData(data_income)
         
-    return [expense_chart, income_chart]
+    return {"line": [expense_chart, income_chart]}
 '''
     Email: "ahirpara2000@gmail.com"
     FirstName: "Aman"

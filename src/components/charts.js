@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Bar, Line } from 'react-chartjs-2';
+import "../styles/charts.css";
 
 export function Charts()
 {   
@@ -54,20 +55,15 @@ export function Charts()
         fetch("/chartInfo")
           .then((res) => res.json())
           .then((val) => {
-            // console.log(val);
-            // console.log(val[0][0]);
-            // console.log(val[0][1]);
             setChartData(val[0]);
             setExpense([val[0][0],val[0][1]]);
             setIncome([val[0][2],val[0][3]]);
-            
-            // console.log(val[1][1]);
-            
-            setLineLableExpense([val[1][0][0], val[1][0][2], val[1][0][4]]);
-            setLineDataExpense([val[1][0][1], val[1][0][3], val[1][0][5]]);
-            
-            setLineLableIncome([val[1][1][0], val[1][1][2], val[1][1][4]]);
-            setLineDataIncome([val[1][1][1], val[1][1][3], val[1][1][5]]);
+
+            setLineLableExpense([val[1].line[0].days.labels, val[1].line[0].month.labels, val[1].line[0].year.labels]);
+            setLineDataExpense([val[1].line[0].days.data, val[1].line[0].month.data, val[1].line[0].year.data]);
+
+            setLineLableIncome([val[1].line[1].days.labels, val[1].line[1].month.labels, val[1].line[1].year.labels]);
+            setLineDataIncome([val[1].line[1].days.data, val[1].line[1].month.data, val[1].line[1].year.data]);
           });
       }
       
@@ -76,8 +72,8 @@ export function Charts()
         
     },[]);
     
-    // console.log(lineLableExpense);
-    // console.log(lineDataExpense);
+    // console.log(lineLableExpense[0]);
+    // console.log(lineDataExpense[0]);
     // console.log(lineLableIncome);
     // console.log(lineDataIncome);
     
@@ -151,37 +147,77 @@ export function Charts()
           label: 'Spent',
           data: lineDataExpense[0],
           fill: false,
-          borderColor: 'rgb(75, 192, 192)',
+          borderColor: '#ff7171',
+          tension: 0.1
+        }]
+    }
+    const line_Income = {
+      labels: lineLableIncome[0],
+        datasets: [{
+          label: 'Earned',
+          data: lineDataIncome[0],
+          fill: false,
+          borderColor: '#98ddca',
           tension: 0.1
         }]
     }
     return (
-        <div>
-          <select
-              value={filterOptions}
-              onChange={(e) => {
-                handleFilter(e);
-                setFilterOptions(e.target.value);
-              }}>
-              <option value="Year"> Show Year</option>
-              <option value="Month"> Show Month</option>
-          </select>
-            <h1>Charts</h1>
-            <Bar
-                data={state}
-                height={400}
-                width={600}
-            />
-            <Bar
-                data={stateIncome}
-                height={400}
-                width={600}
-            />
-            <Line
-                data={line_Expense}
-                height={400}
-                width={600}
-            />
+        <div className="chartsBody">
+          <div className="sectionWrap">
+            <section>
+              <select
+                  value={filterOptions}
+                  onChange={(e) => {
+                    handleFilter(e);
+                    setFilterOptions(e.target.value);
+                  }}>
+                  <option value="Year"> Show Year</option>
+                  <option value="Month"> Show Month</option>
+              </select>
+              <div className="barChartWrap">
+                <div className="chart-wrap">
+                  <Bar
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={state}
+                  />
+                </div>
+                <div className="chart-wrap">
+                  <Bar
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={stateIncome}
+                  />
+                </div>
+              </div>
+            </section>
+            <section>
+              <div className="lineChartWrap">
+                <div className="chart-wrap">
+                  <Line
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={line_Expense}
+                  />
+                </div>  
+                <div className="chart-wrap">
+                  <Line
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={line_Income}
+                  />
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
     );
 }
