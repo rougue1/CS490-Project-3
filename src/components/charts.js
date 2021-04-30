@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
 export function Charts()
 {   
@@ -8,6 +8,11 @@ export function Charts()
     const [filterOptions, setFilterOptions] = useState("Year");
     const [labelIncome, setIncome] = useState([[],[]]);
     const [labeExpense, setExpense] = useState([[],[]]);
+    
+    const [ lineLableIncome, setLineLableIncome ] = useState([[], [], []]);
+    const [ lineDataIncome, setLineDataIncome ] = useState([[], [], []]);
+    const [ lineLableExpense, setLineLableExpense ] = useState([[], [], []]);
+    const [ lineDataExpense, setLineDataExpense ] = useState([[], [], []]);
     /*
         Expense Year
       0: labels
@@ -49,13 +54,20 @@ export function Charts()
         fetch("/chartInfo")
           .then((res) => res.json())
           .then((val) => {
-            console.log(val);
-            console.log(val[0]);
-            console.log(val[1]);
-            setChartData(val);
-            setExpense([val[0],val[1]]);
-            setIncome([val[2],val[3]]);
-
+            // console.log(val);
+            // console.log(val[0][0]);
+            // console.log(val[0][1]);
+            setChartData(val[0]);
+            setExpense([val[0][0],val[0][1]]);
+            setIncome([val[0][2],val[0][3]]);
+            
+            // console.log(val[1][1]);
+            
+            setLineLableExpense([val[1][0][0], val[1][0][2], val[1][0][4]]);
+            setLineDataExpense([val[1][0][1], val[1][0][3], val[1][0][5]]);
+            
+            setLineLableIncome([val[1][1][0], val[1][1][2], val[1][1][4]]);
+            setLineDataIncome([val[1][1][1], val[1][1][3], val[1][1][5]]);
           });
       }
       
@@ -63,6 +75,11 @@ export function Charts()
         getData();
         
     },[]);
+    
+    // console.log(lineLableExpense);
+    // console.log(lineDataExpense);
+    // console.log(lineLableIncome);
+    // console.log(lineDataIncome);
     
     const state = {
       labels: labeExpense[0],
@@ -128,7 +145,16 @@ export function Charts()
         }
       ]
     }
-    
+    const line_Expense = {
+        labels: lineLableExpense[0],
+        datasets: [{
+          label: 'Spent',
+          data: lineDataExpense[0],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+    }
     return (
         <div>
           <select
@@ -151,7 +177,11 @@ export function Charts()
                 height={400}
                 width={600}
             />
-            
+            <Line
+                data={line_Expense}
+                height={400}
+                width={600}
+            />
         </div>
     );
 }

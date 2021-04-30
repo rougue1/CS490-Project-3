@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
 from db_api import *
 from datetime import datetime, timedelta
+from charts import *
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
 APP = Flask(__name__, static_folder="./build/static")
@@ -113,7 +114,8 @@ def get_chart_info():
     categories = USER.get_transaction_categories()
     # sums = [sum([transaction["amount"] for transaction in transactions if transaction["category"]==category and transaction["type"]=="Expense"]) for category in categories]
     # print(sums)
-    
+    line_chart_data = get_chart_data(transactions)
+    # print(line_chart_data)
     sums = []
     sum_income = []
     sum_expense_month = []
@@ -123,8 +125,8 @@ def get_chart_info():
     expense_cat_month = []
     income_cat_month = []
     
-    print(categories)
-    print(transactions)
+    # print(categories)
+    # print(transactions)
     
     #removing duplicate categories
     new_categories = []
@@ -132,7 +134,7 @@ def get_chart_info():
         if item not in new_categories:
             new_categories.append(item)
     
-    print(new_categories)
+    # print(new_categories)
     flag_expense_year = False
     flag_income_year = False
     flag_expense_month = False
@@ -158,9 +160,9 @@ def get_chart_info():
         for transaction in transactions:
             
             if transaction["category"] == category and transaction["type"] == "Expense" and transaction['date'] >= past_year and transaction['date'] <= restrict_today:
-                 print(transaction["date"])
+                #  print(transaction["date"])
                  flag_expense_year = True
-                 print(transaction["type"])
+                #  print(transaction["type"])
                  li_expense_year.append(transaction["amount"])
                  if category not in expense_cat:
                     expense_cat.append(category)
@@ -202,13 +204,13 @@ def get_chart_info():
             flag_income_month = False
         
         
-    print(sums)
-    print(expense_cat)
-    print(sum_income)
-    print(income_cat)
+    # print(sums)
+    # print(expense_cat)
+    # print(sum_income)
+    # print(income_cat)
     
                     #expense year , value| income year, value | expense month , values | income month, values
-    return jsonify([expense_cat,sums, income_cat, sum_income,  expense_cat_month, sum_expense_month, income_cat_month, sum_income_month])
+    return jsonify([[expense_cat,sums, income_cat, sum_income,  expense_cat_month, sum_expense_month, income_cat_month, sum_income_month], line_chart_data])
     # return jsonify({transactions,categories)
     
 
