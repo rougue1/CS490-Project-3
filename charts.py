@@ -1,24 +1,5 @@
-import os
-from flask import Flask, send_from_directory
-from flask import request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv, find_dotenv
-from db_api import *
 from datetime import datetime, timedelta
 import pandas as pd
-load_dotenv(find_dotenv())
-
-APP = Flask(__name__, static_folder="./build/static")
-APP.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
-APP.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-DB = SQLAlchemy(APP)
-DB.create_all()
-USER = ''
-
-# USER = DBQuery("109613092934114349003",
-#               "ahirpara2000@gmail.com",
-#               "Aman",
-#               "Hirpara")
 
 def groupData(data_expense):
     now = datetime.now()
@@ -35,12 +16,12 @@ def groupData(data_expense):
     #dfw=df
     df.date = pd.to_datetime(df.date)
     dgd = dfd.groupby(pd.Grouper(key='date', freq='1D')).sum() # groupby each 1 week
-    dgm = dfm.groupby(pd.Grouper(key='date', freq='1M')).sum() # groupby each 1 month
-    dgy = df.groupby(pd.Grouper(key='date', freq='1Y')).sum() # groupby each 1 Year
+    dgm = dfm.groupby(pd.Grouper(key='date', freq='1W')).sum() # groupby each 1 month
+    dgy = df.groupby(pd.Grouper(key='date', freq='1M')).sum() # groupby each 1 Year
     # print(dgw)
     dgd.index = dgd.index.strftime('%A')
-    dgm.index = dgm.index.strftime('%B')
-    dgy.index = dgy.index.strftime('%Y')
+    dgm.index = dgm.index.strftime('%d %b')
+    dgy.index = dgy.index.strftime('%B')
     
     dd = dgd.to_dict()['amount']
     dm = dgm.to_dict()['amount']
@@ -69,10 +50,6 @@ def groupData(data_expense):
             "month": {"labels": dm_lable, "data": dm_data}, 
             "year": {"labels": dy_lable, "data": dy_data}}
 
-
-             
-             
-# print(USER.get_transactions())
 def get_chart_data(transactions):
     now = datetime.now()
     
@@ -93,12 +70,3 @@ def get_chart_data(transactions):
         income_chart = groupData(data_income)
         
     return {"line": [expense_chart, income_chart]}
-'''
-    Email: "ahirpara2000@gmail.com"
-    FirstName: "Aman"
-    FullName: "Aman Hirpara"
-    GoogleId: "109613092934114349003"
-    LastName: "Hirpara"
-'''
-              
-#get_chart_data(USER.get_transactions())
