@@ -120,13 +120,14 @@ def get_chart_info():
     sum_income = []
     sum_expense_month = []
     sum_income_month = []
+    sum_expense_week = []
+    sum_income_week = []
     expense_cat = []  
     income_cat = []
     expense_cat_month = []
     income_cat_month = []
-    
-    # print(categories)
-    # print(transactions)
+    expense_cat_week = []
+    income_cat_week = []
     
     #removing duplicate categories
     new_categories = []
@@ -139,11 +140,15 @@ def get_chart_info():
     flag_income_year = False
     flag_expense_month = False
     flag_income_month = False
+    flag_expense_week = False
+    flag_income_week = False
     
     restrict_today = datetime.today().strftime("%Y-%m-%d")
     restrict_today = datetime.date(datetime.strptime(restrict_today,'%Y-%m-%d'))
+    past_week = (datetime.today() - timedelta(7)).strftime("%Y-%m-%d")
     past_month = (datetime.today() - timedelta(30)).strftime("%Y-%m-%d")
     past_year = (datetime.today() - timedelta(365)).strftime("%Y-%m-%d")
+    past_week = datetime.date(datetime.strptime(past_week, '%Y-%m-%d'))
     past_month = datetime.date(datetime.strptime(past_month, '%Y-%m-%d'))
     past_year = datetime.date(datetime.strptime(past_year, '%Y-%m-%d'))
     
@@ -156,6 +161,8 @@ def get_chart_info():
         li_income_year = []
         li_expense_month = []
         li_income_month = []
+        li_income_week = []
+        li_expense_week = []
         
         for transaction in transactions:
             
@@ -185,6 +192,18 @@ def get_chart_info():
                 if category not in income_cat_month:
                     income_cat_month.append(category)
                     
+            if transaction["category"] == category and transaction["type"] == "Expense" and transaction['date'] >= past_week and transaction['date'] <= restrict_today:
+                flag_expense_week = True
+                li_expense_week.append(transaction["amount"])
+                if category not in expense_cat_week:
+                    expense_cat_week.append(category)
+                    
+            if transaction["category"] == category and transaction["type"] == "Income" and transaction['date'] >= past_week and transaction['date'] <= restrict_today:
+                flag_income_week = True
+                li_income_week.append(transaction["amount"])
+                if category not in income_cat_week:
+                    income_cat_week.append(category)
+                    
                     
                     
         if flag_expense_year:    
@@ -202,6 +221,14 @@ def get_chart_info():
         if flag_income_month:
             sum_income_month.append(sum(li_income_month))
             flag_income_month = False
+            
+        if flag_expense_week:
+            sum_expense_week.append(sum(li_expense_week))
+            flag_expense_week = False
+            
+        if flag_income_week:
+            sum_income_week.append(sum(li_income_week))
+            flag_income_week = False
         
         
     # print(sums)
@@ -210,7 +237,7 @@ def get_chart_info():
     # print(income_cat)
     
                     #expense year , value| income year, value | expense month , values | income month, values
-    return jsonify([[expense_cat,sums, income_cat, sum_income,  expense_cat_month, sum_expense_month, income_cat_month, sum_income_month], line_chart_data])
+    return jsonify([[expense_cat,sums, income_cat, sum_income,  expense_cat_month, sum_expense_month, income_cat_month, sum_income_month, expense_cat_week, sum_expense_week, income_cat_week, sum_income_week], line_chart_data])
     # return jsonify({transactions,categories)
     
 
