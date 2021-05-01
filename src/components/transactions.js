@@ -19,7 +19,7 @@ export function Transaction({ data, getData }) {
   const handleClose = () => {
     setShow(false);
     getData();
-  }
+  };
   const handleUpdate = () => {
     setShow(false);
     getData();
