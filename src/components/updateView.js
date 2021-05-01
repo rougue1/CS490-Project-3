@@ -1,9 +1,13 @@
+/* eslint-disable*/
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useHistory } from 'react-router'
+// form validation
 
-export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
-  // form validation
+export function UpdateView({ show, onHide, id }) {
+  const history = useHistory();
+  
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
@@ -18,26 +22,27 @@ export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
   const closeAnother = () => setAnother(false);
   const viewAnother = () => setAnother(true);
 
-  const onFormSubmit = async (e) => {
+  const onUpdate = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData.entries());
 
-    // form validation
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      setValidated(true);
+      // setValidated(true);
     } else {
       onHide(); // hide the pop up
       setValidated(false); // hide errors after correct input fields
       viewConfirm(); // show the confirmation
       // send to backend
-      const res = await fetch(endPoint, {
+
+      const res = await fetch("/update", {
         method: "POST",
         body: JSON.stringify({
           formDataObj,
+          id,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -45,17 +50,16 @@ export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
       });
       const data = await res.json();
 
-      if (data === 200) updateData();
+      if (data === 200) {}
     }
   };
-
   return (
     <div>
       <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
         <Modal.Header closeButton onClick={() => setValidated(false)}>
-          <Modal.Title>Add Expense or Income</Modal.Title>
+          <Modal.Title>Update Expense or Income</Modal.Title>
         </Modal.Header>
-        <Form noValidate validated={validated} onSubmit={onFormSubmit}>
+        <Form onSubmit={onUpdate}>
           <Modal.Body>
             <Form.Label>Type</Form.Label>
             <Form.Control as="select" name="type">
@@ -77,7 +81,7 @@ export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
             <Form.Control.Feedback type="invalid">Please enter a location!</Form.Control.Feedback>
 
             <Form.Label>Category: </Form.Label>
-            <Form.Control required type="text" name="category"/>
+            <Form.Control required type="text" name="category" />
             <Form.Control.Feedback type="invalid">Please choose a category!</Form.Control.Feedback>
 
             <Form.Label>Description: </Form.Label>
@@ -106,44 +110,15 @@ export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal show={showAnother} onHide={closeAnother}>
-        <Modal.Header>
-          <Modal.Title>Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Want to add another income or expense!</Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={() => {
-              closeAnother();
-              showAdd();
-            }}
-          >
-            Add Expense or Income
-          </Button>
-          <Button variant="danger" onClick={closeAnother}>
-            Done
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }
-
-AddView.propTypes = {
-  showAdd: PropTypes.func,
-  endPoint: PropTypes.string,
-  updateData: PropTypes.func,
+UpdateView.propTypes = {
   show: PropTypes.bool,
-  onHide: PropTypes.func,
+  onHide: PropTypes.bool,
 };
-
-AddView.defaultProps = {
-  showAdd: PropTypes.func,
-  endPoint: PropTypes.string,
-  updateData: PropTypes.func,
+UpdateView.defaultProps = {
   show: PropTypes.bool,
-  onHide: PropTypes.func,
+  onHide: PropTypes.bool,
 };
-
-export default AddView;
+export default UpdateView;

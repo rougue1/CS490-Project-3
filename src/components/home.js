@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Transaction } from "./transactions.js";
 
-export function Home({ userData, getUserInfo }) {
+export function Home({userData, getUserInfo}) {
   const [data, setData] = useState([]);
-
+  
   function getData() {
     fetch("/home")
       .then((res) => res.json())
@@ -13,15 +13,15 @@ export function Home({ userData, getUserInfo }) {
         setData(val);
       });
   }
-
+  
   useEffect(() => {
     getData();
   }, []);
-
+  
   useEffect(() => {
     getUserInfo();
   }, [data]);
-
+  
   return (
     <div className="Home">
       <div className="balanceBoard">
