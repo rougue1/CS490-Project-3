@@ -218,7 +218,7 @@ export function History()
                         )}
                         <td>${item.amount}</td>
                         <td>{item.location}</td>
-                        <td>{item.date}</td>
+                        <td>{item.date.slice(0, 16)}</td>
                         <td
                           onClick={(e) => {
                             handleDelete();

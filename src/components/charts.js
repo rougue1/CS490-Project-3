@@ -59,19 +59,24 @@ export function Charts()
           .then((res) => res.json())
           .then((val) => {
             // setChartData(val[0]);
-            console.log(val[0]);
+            // console.log(Object.keys(val[1].line[0]).length);
+            
             setExpense([val[0][0],val[0][4],val[0][8]]);
             setDataExpense([val[0][1],val[0][5],val[0][9]]);
             
             setIncome([val[0][2],val[0][6],val[0][10]]);
             setDataIncome([val[0][3],val[0][7],val[0][11]]);
             
-
-            setLineLableExpense([val[1].line[0].year.labels, val[1].line[0].month.labels, val[1].line[0].days.labels]);
-            setLineDataExpense([val[1].line[0].year.data, val[1].line[0].month.data, val[1].line[0].days.data]);
-
-            setLineLableIncome([val[1].line[1].year.labels, val[1].line[1].month.labels, val[1].line[1].days.labels]);
-            setLineDataIncome([val[1].line[1].year.data, val[1].line[1].month.data, val[1].line[1].days.data]);
+            if(val[1].line[0].length !== 0)
+            {
+              setLineLableExpense([val[1].line[0].year.labels, val[1].line[0].month.labels, val[1].line[0].days.labels]);
+              setLineDataExpense([val[1].line[0].year.data, val[1].line[0].month.data, val[1].line[0].days.data]);
+            }
+            else if(val[1].line[1].length !== 0)
+            {
+              setLineLableIncome([val[1].line[1].year.labels, val[1].line[1].month.labels, val[1].line[1].days.labels]);
+              setLineDataIncome([val[1].line[1].year.data, val[1].line[1].month.data, val[1].line[1].days.data]);
+            }
           });
       }
       
