@@ -5,6 +5,7 @@ get overloaded with code.
 import datetime
 import models
 from app import DB
+import sqlalchemy as sa
 
 DB.create_all()
 session = DB.session()
@@ -156,7 +157,11 @@ class DBQuery:
         Method to add a transaction for the user.
         All values are needed.
         """
+<<<<<<< HEAD
         date = convert_to_datetime_obj()
+=======
+        date = convert_to_datetime_obj(date)
+>>>>>>> 5df0ede027d011c9aee406c97c896b467a064e97
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, category, description)
         session.add(to_add)

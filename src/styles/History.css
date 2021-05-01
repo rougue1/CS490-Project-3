@@ -1,7 +1,6 @@
 .dropDowns {
     display: flex;
     margin: 1em;
-    width: 60%;
     justify-content: center;
 }
 
@@ -20,6 +19,6 @@
 .historyWarp {
     display: flex;
     flex-direction: column;
-    align-item: center;
     width: 100%;
+    align-items: center;
 }

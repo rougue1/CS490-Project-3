@@ -27,7 +27,6 @@ export function History()
   const [showDelete, setDelete] = useState(false);
 
   const [showData, setShowData] = useState([]);
-  const [ filterData1, setFilterData1 ] = useState([]);
   const [filterOptions, setFilterOptions] = useState("All");
   const [filterOptionsIE, setFilterOptionsIE] = useState("All");
 
@@ -65,7 +64,6 @@ export function History()
         monthDataArray.push(monthData[i]);
       }
     }
-    setFilterData1(monthDataArray);
     setShowData(monthDataArray);
   }
 
@@ -82,7 +80,6 @@ export function History()
         yearDataArray.push(yearData[i]);
       }
     }
-    setFilterData1(yearDataArray);
     setShowData(yearDataArray);
   }
 
@@ -117,7 +114,6 @@ export function History()
         weekDataArray.push(weekData[i]);
       }
     }
-    setFilterData1(weekDataArray);
     setShowData(weekDataArray);
   }
 
@@ -129,7 +125,6 @@ export function History()
     } else if (e.target.value === "Year") {
       showYear(data);
     } else {
-      setFilterData1(() => data);
       setShowData(() => data);
     }
     setFilterOptionsIE("All");
@@ -140,26 +135,26 @@ export function History()
     let tempData = [];
     if(e.target.value === "Income") 
     {
-      for(let i = 0; i < filterData1.length; i+=1)
+      for(let i = 0; i < data.length; i+=1)
       {
-          if(filterData1[i].type === "Income")
+          if(data[i].type === "Income")
           {
-            tempData.push(filterData1[i]);
+            tempData.push(data[i]);
           }
       }
     }
     else if(e.target.value === "Expense") 
     {
-      for(let i = 0; i < filterData1.length; i+=1)
+      for(let i = 0; i < data.length; i+=1)
       {
-          if(filterData1[i].type === "Expense")
+          if(data[i].type === "Expense")
           {
-            tempData.push(filterData1[i]);
+            tempData.push(data[i]);
           }
       }
     }
     else {
-      tempData = filterData1;
+      tempData = data;
     }
     setShowData(tempData);
   }

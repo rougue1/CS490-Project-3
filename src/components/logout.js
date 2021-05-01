@@ -10,7 +10,7 @@ export function GLogout({ setLoginStatus }) {
 
   const onSuccess = () => {
     setLoginStatus(false);
-    history.push("/login");
+    history.push("/");
   };
 
   return (
