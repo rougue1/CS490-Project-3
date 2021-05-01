@@ -3,17 +3,8 @@ import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-// form validation
-
 export function UpdateView({ show, onHide, id }) {
-  // function updateData() {
-  //   fetch("/home")
-  //     .then((res) => res.json())
-  //     .then((val) => {
-  //       setData(val);
-  //     });
-  // }
-
+  
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
@@ -63,7 +54,7 @@ export function UpdateView({ show, onHide, id }) {
     <div>
       <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
         <Modal.Header closeButton onClick={() => setValidated(false)}>
-          <Modal.Title>Add Expense or Income</Modal.Title>
+          <Modal.Title>Update Expense or Income</Modal.Title>
         </Modal.Header>
         <Form onSubmit={onUpdate}>
           <Modal.Body>
