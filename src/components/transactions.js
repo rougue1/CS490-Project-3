@@ -13,7 +13,7 @@ export function Transaction({ data, getData }) {
   const [showDelete, setDelete] = useState(false);
 
   const [showData, setShowData] = useState([]);
-  
+
   const history = useHistory();
 
   const handleClose = () => {
@@ -31,7 +31,7 @@ export function Transaction({ data, getData }) {
   const handleShowAll = () => {
     console.log("In");
     history.push("/history");
-    
+
     const element = document.getElementById("home");
     element.classList.remove("underline");
   };

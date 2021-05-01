@@ -29,6 +29,8 @@ jmespath==0.10.0
 lazy-object-proxy==1.5.2
 MarkupSafe==1.1.1
 mccabe==0.6.1
+numpy==1.19.5
+pandas==1.1.5
 parso==0.1.1
 pbr==5.5.1
 pexpect==4.8.0

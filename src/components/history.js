@@ -6,10 +6,9 @@ import { AddView } from "./addview";
 import { DeleteView } from "./deleteView";
 import "../styles/History.css";
 
-export function History()
-{
+export function History() {
   const [data, setData] = useState([]);
-  
+
   function getData() {
     fetch("/home")
       .then((res) => res.json())
@@ -17,11 +16,11 @@ export function History()
         setData(val);
       });
   }
-  
+
   useEffect(() => {
     getData();
   }, []);
-  
+
   const [show, setShow] = useState(false);
   const [row, setRow] = useState(false);
   const [showDelete, setDelete] = useState(false);
@@ -129,142 +128,133 @@ export function History()
     }
     setFilterOptionsIE("All");
   }
-  
-  function handleFilterIE(e) 
-  {
+
+  function handleFilterIE(e) {
     let tempData = [];
-    if(e.target.value === "Income") 
-    {
-      for(let i = 0; i < data.length; i+=1)
-      {
-          if(data[i].type === "Income")
-          {
-            tempData.push(data[i]);
-          }
+    if (e.target.value === "Income") {
+      for (let i = 0; i < data.length; i += 1) {
+        if (data[i].type === "Income") {
+          tempData.push(data[i]);
+        }
       }
-    }
-    else if(e.target.value === "Expense") 
-    {
-      for(let i = 0; i < data.length; i+=1)
-      {
-          if(data[i].type === "Expense")
-          {
-            tempData.push(data[i]);
-          }
+    } else if (e.target.value === "Expense") {
+      for (let i = 0; i < data.length; i += 1) {
+        if (data[i].type === "Expense") {
+          tempData.push(data[i]);
+        }
       }
-    }
-    else {
+    } else {
       tempData = data;
     }
     setShowData(tempData);
   }
 
-    return (
-        <div className="historyWarp">
-          <div className="transaction">
-            {data.length === 0 ? (
-              <b>No transactions to show</b>
-            ) : (
-              <>
-                <div className="dropDowns">
-                  <select
-                    className="timeFilter"
-                    value={filterOptions}
-                    onChange={(e) => {
-                      handleFilter(e);
-                      setFilterOptions(e.target.value);
-                    }}
-                  >
-                    <option value="All"> Show All</option>
-                    <option value="Week"> Show Week</option>
-                    <option value="Month"> Show Month</option>
-                    <option value="Year"> Show Year</option>
-                  </select>
-                  <select
-                    className="typeFilter"
-                    value={filterOptionsIE}
-                    onChange={(e) => {
-                      handleFilterIE(e);
-                      setFilterOptionsIE(e.target.value);
-                    }}
-                  >
-                    <option value="Both"> Both</option>
-                    <option value="Income"> Income</option>
-                    <option value="Expense"> Expense</option>
-                  </select>
-                </div>
-                <div>
-                <table className="transactionsTable">
-                  <thead>
-                    <th />
-                    <th>Amount</th>
-                    <th>Location</th>
-                    <th>Date</th>
-                  </thead>
-                  <tbody>
-                    {showData.map((item, index) => (
-                      <tr
-                        onClick={() => {
-                          setShow(true);
+  return (
+    <div className="historyWarp">
+      <div className="transaction">
+        {data.length === 0 ? (
+          <b>No transactions to show</b>
+        ) : (
+          <>
+            <div className="dropDowns">
+              <select
+                className="timeFilter"
+                value={filterOptions}
+                onChange={(e) => {
+                  handleFilter(e);
+                  setFilterOptions(e.target.value);
+                }}
+              >
+                <option value="All"> Show All</option>
+                <option value="Week"> Show Week</option>
+                <option value="Month"> Show Month</option>
+                <option value="Year"> Show Year</option>
+              </select>
+              <select
+                className="typeFilter"
+                value={filterOptionsIE}
+                onChange={(e) => {
+                  handleFilterIE(e);
+                  setFilterOptionsIE(e.target.value);
+                }}
+              >
+                <option value="Both"> Both</option>
+                <option value="Income"> Income</option>
+                <option value="Expense"> Expense</option>
+              </select>
+            </div>
+            <div>
+              <table className="transactionsTable">
+                <thead>
+                  <th />
+                  <th>Amount</th>
+                  <th>Location</th>
+                  <th>Date</th>
+                </thead>
+                <tbody>
+                  {showData.map((item, index) => (
+                    <tr
+                      onClick={() => {
+                        setShow(true);
+                        setItem(item);
+                      }}
+                      /* eslint-disable-next-line react/no-array-index-key */
+                      key={index}
+                    >
+                      {item.type === "Income" ? (
+                        <td className="colorTag" style={{ background: "green" }} />
+                      ) : (
+                        <td className="colorTag" style={{ background: "red" }} />
+                      )}
+                      <td>${item.amount}</td>
+                      <td>{item.location}</td>
+                      <td>{item.date}</td>
+                      <td
+                        onClick={(e) => {
+                          handleDelete();
                           setItem(item);
+                          e.stopPropagation();
                         }}
-                        /* eslint-disable-next-line react/no-array-index-key */
-                        key={index}
                       >
-                        {item.type === "Income" ? (
-                          <td className="colorTag" style={{ background: "green" }} />
-                        ) : (
-                          <td className="colorTag" style={{ background: "red" }} />
-                        )}
-                        <td>${item.amount}</td>
-                        <td>{item.location}</td>
-                        <td>{item.date}</td>
-                        <td
-                          onClick={(e) => {
-                            handleDelete();
-                            setItem(item);
-                            e.stopPropagation();
-                          }}
-                        >
-                          <Trash className="trash" />
-                        </td>
-                      </tr>
-                    ))}
-                    {show ? (
-                      <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
-                        <View
-                          list={itemData}
-                          show={show}
-                          onHide={handleClose}
-                          toogleUpdate={handleUpdate}
-                          updateData={getData}
-                        />
-                      </div>
-                    ) : null}
-                    {showDelete ? (
-                      <div style={{ display: "none" }}>
-                        <DeleteView
-                          list={itemData}
-                          updateData={getData}
-                          closeDelete={closeDelete}
-                          showDelete={showDelete}
-                        />
-                      </div>
-                    ) : null}
-                  </tbody>
-                </table>
-                </div>
-              </>
-            )}
-          </div>
-          <Button variant="success" onClick={() => showAdd()}>
-            Add
-          </Button>
-          <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
-            <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
-          </div>
-        </div>
-    );
+                        <Trash className="trash" />
+                      </td>
+                    </tr>
+                  ))}
+                  {show ? (
+                    <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
+                      <View
+                        list={itemData}
+                        show={show}
+                        onHide={handleClose}
+                        toogleUpdate={handleUpdate}
+                        updateData={getData}
+                      />
+                    </div>
+                  ) : null}
+                  {showDelete ? (
+                    <div style={{ display: "none" }}>
+                      <DeleteView
+                        list={itemData}
+                        updateData={getData}
+                        closeDelete={closeDelete}
+                        showDelete={showDelete}
+                      />
+                    </div>
+                  ) : null}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
+      <Button variant="success" onClick={() => showAdd()}>
+        Add
+      </Button>
+      <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
+        <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
+      </div>
+    </div>
+  );
 }
 
 export default History;

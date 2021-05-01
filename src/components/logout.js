@@ -7,17 +7,24 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 export function GLogout({ setLoginStatus }) {
   const history = useHistory();
-  
+
   const onSuccess = () => {
     setLoginStatus(false);
     history.push("/");
   };
 
   return (
-    <GoogleLogout 
+    <GoogleLogout
       clientId={clientId}
-      render={renderProps => (
-        <button type="button" className="navBtn underline_slide" onClick={renderProps.onClick} disabled={renderProps.disabled}>LOGOUT</button>
+      render={(renderProps) => (
+        <button
+          type="button"
+          className="navBtn underline_slide"
+          onClick={renderProps.onClick}
+          disabled={renderProps.disabled}
+        >
+          LOGOUT
+        </button>
       )}
       buttonText="Logout"
       onLogoutSuccess={onSuccess}

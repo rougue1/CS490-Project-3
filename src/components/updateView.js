@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { useHistory } from 'react-router'
+import { useHistory } from "react-router";
 // form validation
 
 export function UpdateView({ show, onHide, id }) {
   const history = useHistory();
-  
+
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
@@ -50,7 +50,8 @@ export function UpdateView({ show, onHide, id }) {
       });
       const data = await res.json();
 
-      if (data === 200) {}
+      if (data === 200) {
+      }
     }
   };
   return (

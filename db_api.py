@@ -74,14 +74,16 @@ class DBQuery:
         self.first_name = first_name
         self.last_name = last_name
         self.add()
-    
+
     def __str__(self):
         """
         Print all needed info of a user on printing of object.
         """
         info = self.get_info()
-        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(info["full_name"], info["balance"], info["income"], info["expense"])
-    
+        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(
+            info["full_name"], info["balance"], info["income"],
+            info["expense"])
+
     def get_info(self):
         """
         Method to get the full name, total balance, total income,
@@ -146,9 +148,8 @@ class DBQuery:
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
         user_categories = []
-        user_categories = list(set([
-            transaction.category for transaction in transactions
-        ]))
+        user_categories = list(
+            set([transaction.category for transaction in transactions]))
         return user_categories
 
     def add_transaction(self, transaction_type: str, amount: float, date: str,
@@ -157,11 +158,7 @@ class DBQuery:
         Method to add a transaction for the user.
         All values are needed.
         """
-<<<<<<< HEAD
-        date = convert_to_datetime_obj()
-=======
         date = convert_to_datetime_obj(date)
->>>>>>> 5df0ede027d011c9aee406c97c896b467a064e97
         to_add = models.Transaction(self.user_id, transaction_type, amount,
                                     date, location, category, description)
         session.add(to_add)
