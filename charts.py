@@ -6,23 +6,18 @@ def groupData(data_expense):
     now = datetime.now()
     df = pd.DataFrame(data_expense)
 
-    # dfw=df[df['date'].dt.month == now.month]
-
     today = datetime.today()
-    week_prior = today - timedelta(weeks=1)
+    week_prior =  today - timedelta(weeks=1)
 
     dfd = df[df['date'] >= week_prior]
-    # print(dfw)
-    dfm = df[df['date'].dt.year == now.year]
-    #dfw=df
+
+    dfm=df[df['date'].dt.year == now.year]
+
     df.date = pd.to_datetime(df.date)
-    dgd = dfd.groupby(pd.Grouper(key='date',
-                                 freq='1D')).sum()  # groupby each 1 week
-    dgm = dfm.groupby(pd.Grouper(key='date',
-                                 freq='1W')).sum()  # groupby each 1 month
-    dgy = df.groupby(pd.Grouper(key='date',
-                                freq='1M')).sum()  # groupby each 1 Year
-    # print(dgw)
+    dgd = dfd.groupby(pd.Grouper(key='date', freq='1D')).sum() # groupby each 1 Day
+    dgm = dfm.groupby(pd.Grouper(key='date', freq='1W')).sum() # groupby each 1 Week
+    dgy = df.groupby(pd.Grouper(key='date', freq='1M')).sum() # groupby each 1 Month
+
     dgd.index = dgd.index.strftime('%A')
     dgm.index = dgm.index.strftime('%d %b')
     dgy.index = dgy.index.strftime('%B')
@@ -80,9 +75,17 @@ def get_chart_data(transactions):
         elif (transaction["type"] == "Income"):
             data_income["amount"].append(transaction['amount'])
             data_income["date"].append(pd.to_datetime(transaction['date']))
-
+            
     if len(data_expense["amount"]) > 0 and len(data_income["amount"]) > 0:
         expense_chart = groupData(data_expense)
         income_chart = groupData(data_income)
+        
+    if len(data_expense["amount"]) == 0:
+        expense_chart = []
+        income_chart = groupData(data_income)
+    
+    if len(data_income["amount"]) == 0:
+        income_chart = []
+        expense_chart = groupData(data_expense)
 
     return {"line": [expense_chart, income_chart]}

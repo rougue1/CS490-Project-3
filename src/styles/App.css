@@ -107,3 +107,10 @@ img {
 .trash:hover {
   color: red;
 }
+
+
+@media (max-width: 575px) {
+  .transactionsTable {
+    font-size: 0.8rem;
+  }
+}
