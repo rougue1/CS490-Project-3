@@ -59,7 +59,7 @@ export function Charts()
           .then((res) => res.json())
           .then((val) => {
             // setChartData(val[0]);
-            // console.log(Object.keys(val[1].line[0]).length);
+            // console.log(val[0]);
             
             setExpense([val[0][0],val[0][4],val[0][8]]);
             setDataExpense([val[0][1],val[0][5],val[0][9]]);
@@ -84,7 +84,7 @@ export function Charts()
         getData();
         
     },[]);
-    console.log()
+    console.log(dataIncome);
     const state = {
       labels: labeExpense[chartData],
       datasets: [
@@ -145,7 +145,7 @@ export function Charts()
 
           ],
           hoverOffset: 5,
-          data: dataExpense[chartData],
+          data: dataIncome[chartData],
         }
       ]
     }
