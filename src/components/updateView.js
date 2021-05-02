@@ -22,7 +22,6 @@ export function UpdateView({ show, onHide, id, list }) {
 
   // add another income or expense
   const closeAnother = () => setAnother(false);
-  const viewAnother = () => setAnother(true);
 
   const onUpdate = async (e) => {
     e.preventDefault();
@@ -33,7 +32,7 @@ export function UpdateView({ show, onHide, id, list }) {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      // setValidated(true);
+      setValidated(true);
     } else {
       onHide(); // hide the pop up
       setValidated(false); // hide errors after correct input fields

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { View } from "./view";
 import { AddView } from "./addview";
@@ -93,19 +92,24 @@ export function History()
       const month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(date.slice(3, 6)) / 3;
       const year = date.slice(7, 11);
 
-      const lastWeekDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDay().toString();
+      const lastWeekDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDate().toString();
       const lastWeekMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getMonth().toString();
       const lastWeekYear = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
         .getFullYear()
         .toString();
-
+        
+    
       const currDay = today.getDate().toString();
       const currMonth = today.getMonth().toString();
       const currYear = today.getFullYear().toString();
 
+      
       const D_1 = [lastWeekDay, lastWeekMonth, lastWeekYear];
       const D_2 = [currDay, currMonth, currYear];
       const D_3 = [day, month, year];
+      console.log(D_1);
+      console.log(D_2);
+      console.log(D_3);
       const d1 = new Date(D_1[2], parseInt(D_1[1]), D_1[0]); // eslint-disable-line
       const d2 = new Date(D_2[2], parseInt(D_2[1]), D_2[0]); // eslint-disable-line
       const d3 = new Date(D_3[2], parseInt(D_3[1]), D_3[0]); // eslint-disable-line
