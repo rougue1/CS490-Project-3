@@ -42,6 +42,8 @@ export function Transaction({ data, getData }) {
 
   useEffect(() => {
     setShowData(() => data.slice(0, 5));
+     if(showData.length === 0)
+      setDelete(false);
   }, [data]);
 
   return (
