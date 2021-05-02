@@ -8,7 +8,6 @@ export function View({ list, show, onHide, toogleUpdate, getData }) {
   const [showUpdate, setUpdate] = useState(false);
 
   const handleShow = () => {
-    //toogleUpdate();
     setUpdate(true);
   };
 
@@ -30,7 +29,7 @@ export function View({ list, show, onHide, toogleUpdate, getData }) {
         </Button>
       </Modal.Footer>
       <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
-        <UpdateView updateData={getData} show={showUpdate} onHide={onHide} id={list.id} />
+        <UpdateView show={showUpdate} onHide={onHide} id={list.id} />
       </div>
     </Modal>
   );

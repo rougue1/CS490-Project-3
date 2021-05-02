@@ -2,12 +2,16 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useHistory } from 'react-router'
+// form validation
 
 export function UpdateView({ show, onHide, id }) {
+  const history = useHistory();
   
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
+  
 
   // confirmation popup
   const closeConfirm = () => setConfirm(false);
@@ -34,7 +38,7 @@ export function UpdateView({ show, onHide, id }) {
       setValidated(false); // hide errors after correct input fields
       viewConfirm(); // show the confirmation
       // send to backend
-
+      
       const res = await fetch("/update", {
         method: "POST",
         body: JSON.stringify({
@@ -47,7 +51,7 @@ export function UpdateView({ show, onHide, id }) {
       });
       const data = await res.json();
 
-      // if (data === 200) updateData();
+      if (data === 200) {}
     }
   };
   return (
@@ -65,8 +69,7 @@ export function UpdateView({ show, onHide, id }) {
             </Form.Control>
 
             <Form.Label>Amount: </Form.Label>
-
-            <Form.Control required className="form-control" name="amount" step="0.01" precision="2" min="0" />
+            <Form.Control required className="form-control" name="amount" defaultValue = {id.amount} step="0.01" precision="2" min="0" />
             <Form.Control.Feedback type="invalid">Please enter an amount!</Form.Control.Feedback>
 
             <Form.Label>Date: </Form.Label>
@@ -104,26 +107,6 @@ export function UpdateView({ show, onHide, id }) {
             }}
           >
             Continue
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={showAnother} onHide={closeAnother}>
-        <Modal.Header>
-          <Modal.Title>Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Want to add another income or expense!</Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={() => {
-              closeAnother();
-              showAdd();
-            }}
-          >
-            Add Expense or Income
-          </Button>
-          <Button variant="danger" onClick={closeAnother}>
-            Done
           </Button>
         </Modal.Footer>
       </Modal>
