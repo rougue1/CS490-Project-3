@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
@@ -46,7 +46,7 @@ export function Transaction({ data, getData }) {
   }, [data]);
 
   return (
-    <div>
+    <div className="tableWrap">
       <div className="transaction">
         {data.length === 0 ? (
           <b>No transactions to show</b>
@@ -117,9 +117,12 @@ export function Transaction({ data, getData }) {
           </>
         )}
       </div>
-      <Button variant="success" onClick={() => showAdd()}>
+      <button type="button" className="regButton" onClick={() => showAdd()}>
         Add
-      </Button>
+      </button>
+      <button type="button" className="mobileButton" onClick={() => showAdd()}>
+        <div className="plus" />
+      </button>
       {}
       <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
         <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />

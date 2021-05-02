@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { View } from "./view";
 import { AddView } from "./addview";
@@ -193,7 +193,7 @@ export function History()
                     <option value="Expense"> Expense</option>
                   </select>
                 </div>
-                <div>
+                <div className="tableWrap">
                 <table className="transactionsTable">
                   <thead>
                     <th />
@@ -257,9 +257,12 @@ export function History()
               </>
             )}
           </div>
-          <Button variant="success" onClick={() => showAdd()}>
+          <button type="button" className="regButton" onClick={() => showAdd()}>
             Add
-          </Button>
+          </button>
+          <button type="button" className="mobileButton" onClick={() => showAdd()}>
+            <div className="plus" />
+          </button>
           <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
             <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
           </div>
