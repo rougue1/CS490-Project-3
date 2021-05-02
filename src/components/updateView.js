@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
-
+import { useHistory } from 'react-router'
 // form validation
 
+<<<<<<< HEAD
 export function UpdateView({getData, show, onHide, id }) {
   // function updateData() {
   //   fetch("/home")
@@ -14,6 +15,11 @@ export function UpdateView({getData, show, onHide, id }) {
   //     });
   // }
 
+=======
+export function UpdateView({ show, onHide, id }) {
+  const history = useHistory();
+  
+>>>>>>> e47c59f0adeff8fe25f43e998818c29e86abf305
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
@@ -56,15 +62,14 @@ export function UpdateView({getData, show, onHide, id }) {
       });
       const data = await res.json();
 
-      if (data === 200) 
-        getData();
+      if (data === 200) {}
     }
   };
   return (
     <div>
       <Modal show={show} onHide={onHide} backdrop="static" keyboard={false}>
         <Modal.Header closeButton onClick={() => setValidated(false)}>
-          <Modal.Title>Add Expense or Income</Modal.Title>
+          <Modal.Title>Update Expense or Income</Modal.Title>
         </Modal.Header>
         <Form onSubmit={onUpdate}>
           <Modal.Body>
@@ -114,26 +119,6 @@ export function UpdateView({getData, show, onHide, id }) {
             }}
           >
             Continue
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={showAnother} onHide={closeAnother}>
-        <Modal.Header>
-          <Modal.Title>Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Want to add another income or expense!</Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={() => {
-              closeAnother();
-              showAdd();
-            }}
-          >
-            Add Expense or Income
-          </Button>
-          <Button variant="danger" onClick={closeAnother}>
-            Done
           </Button>
         </Modal.Footer>
       </Modal>

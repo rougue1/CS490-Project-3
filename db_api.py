@@ -5,6 +5,7 @@ get overloaded with code.
 import datetime
 import models
 from app import DB
+import sqlalchemy as sa
 
 DB.create_all()
 session = DB.session()

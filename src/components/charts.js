@@ -1,15 +1,23 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from "react";
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { saveAs } from 'file-saver'; 
+import "../styles/charts.css";
 
 export function Charts()
 {   
-    const [chartData, setChartData] = useState([[], [], [], [], [], [], [], []]);
+    const [chartData, setChartData ] = useState(0);
     const [filterOptions, setFilterOptions] = useState("Year");
-    const [labelIncome, setIncome] = useState([[],[]]);
-    const [labeExpense, setExpense] = useState([[],[]]);
-    const chartRef = useRef(null);
+  
+    const [labelIncome, setIncome] = useState([[],[], []]);
+    const [dataIncome, setDataIncome] = useState([[],[], []]);
+    const [labeExpense, setExpense] = useState([[],[], []]);
+    const [dataExpense, setDataExpense] = useState([[],[], []]);
+    
+    const [ lineLableIncome, setLineLableIncome ] = useState([[], [], []]);
+    const [ lineDataIncome, setLineDataIncome ] = useState([[], [], []]);
+    const [ lineLableExpense, setLineLableExpense ] = useState([[], [], []]);
+    const [ lineDataExpense, setLineDataExpense ] = useState([[], [], []]);
     /*
         Expense Year
       0: labels
@@ -29,35 +37,47 @@ export function Charts()
      */
     
       function handleFilter(e) {
-         if (e.target.value === "Month") {
+         if (e.target.value === "Year") {
           /*indices 4-7*/
-          setExpense([chartData[4],chartData[5]]);
-          setIncome([chartData[6],chartData[7]]);
+          setChartData(0);
+          // setExpense([chartData[4],chartData[5]]);
+          // setIncome([chartData[6],chartData[7]]);
           
-        } else if (e.target.value === "Year") {
+        } else if (e.target.value === "Month") {
           /*indice 0-3*/
-          setExpense([chartData[0],chartData[1]]);
-          setIncome([chartData[2],chartData[3]]);
+          setChartData(1);
           
-        } else{
-            setExpense([chartData[0],chartData[1]]);
-            setIncome([chartData[2],chartData[3]]);
+        } else if (e.target.value === "Week") {
+          setChartData(2);
+        } else {
+          setChartData(0);
         }
       }
-    
-    
+
   
      function getData() {
         fetch("/chartInfo")
           .then((res) => res.json())
           .then((val) => {
-            console.log(val);
-            console.log(val[0]);
-            console.log(val[1]);
-            setChartData(val);
-            setExpense([val[0],val[1]]);
-            setIncome([val[2],val[3]]);
-
+            // setChartData(val[0]);
+            // console.log(val[0]);
+            
+            setExpense([val[0][0],val[0][4],val[0][8]]);
+            setDataExpense([val[0][1],val[0][5],val[0][9]]);
+            
+            setIncome([val[0][2],val[0][6],val[0][10]]);
+            setDataIncome([val[0][3],val[0][7],val[0][11]]);
+            
+            if(val[1].line[0].length !== 0)
+            {
+              setLineLableExpense([val[1].line[0].year.labels, val[1].line[0].month.labels, val[1].line[0].days.labels]);
+              setLineDataExpense([val[1].line[0].year.data, val[1].line[0].month.data, val[1].line[0].days.data]);
+            }
+            else if(val[1].line[1].length !== 0)
+            {
+              setLineLableIncome([val[1].line[1].year.labels, val[1].line[1].month.labels, val[1].line[1].days.labels]);
+              setLineDataIncome([val[1].line[1].year.data, val[1].line[1].month.data, val[1].line[1].days.data]);
+            }
           });
       }
       
@@ -65,9 +85,9 @@ export function Charts()
         getData();
         
     },[]);
-    
+    console.log(dataIncome);
     const state = {
-      labels: labeExpense[0],
+      labels: labeExpense[chartData],
       datasets: [
         {
           label: 'Expense',
@@ -94,12 +114,12 @@ export function Charts()
 
           ],
           hoverOffset: 5,
-          data: labeExpense[1],
+          data: dataExpense[chartData],
         }
       ]
     }
     const stateIncome = {
-      labels: labelIncome[0],
+      labels: labelIncome[chartData],
       datasets: [
         {
           label: 'Income',
@@ -126,65 +146,88 @@ export function Charts()
 
           ],
           hoverOffset: 5,
-          data: labelIncome[1],
+          data: dataIncome[chartData],
         }
       ]
     }
-    
-    const loaded = () => {
-        
-        console.log("done loading the images")
-        const base64Image = chartRef.current.chartInstance.toBase64Image();
-        console.log(base64Image);
-        alert(base64Image);
-        return base64Image;
-        
-        
+    const line_Expense = {
+        labels: lineLableExpense[chartData],
+        datasets: [{
+          label: 'Spent',
+          data: lineDataExpense[chartData],
+          fill: false,
+          borderColor: '#ff7171',
+          tension: 0.1
+        }]
     }
-    
-    
-    const option = {
-       animation: {
-          onComplete: loaded
-        }
+    const line_Income = {
+      labels: lineLableIncome[chartData],
+        datasets: [{
+          label: 'Earned',
+          data: lineDataIncome[chartData],
+          fill: false,
+          borderColor: '#98ddca',
+          tension: 0.1
+        }]
     }
-    
-   const saveCanvas= () =>{
-       //save to png
-       const canvasSave = document.getElementById('stackD');
-       canvasSave.toBlob(function (blob) {
-           saveAs(blob, "testing.png")
-       })
-   }
-    
-    
     return (
-        <div>
-          <select
-              value={filterOptions}
-              onChange={(e) => {
-                handleFilter(e);
-                setFilterOptions(e.target.value);
-              }}>
-              <option value="Year"> Show Year</option>
-              <option value="Month"> Show Month</option>
-          </select>
-            <h1>Charts</h1>
-            <Bar
-                data={state}
-                id="stackD"
-                height={400}
-                width={600}
-                ref={chartRef}
-                
-            />
-            <a onClick={saveCanvas}> Download </a>
-            <Bar
-                data={stateIncome}
-                height={400}
-                width={600}
-            />
-            
+        <div className="chartsBody">
+          <div className="sectionWrap">
+            <section>
+              <select
+                  value={filterOptions}
+                  onChange={(e) => {
+                    handleFilter(e);
+                    setFilterOptions(e.target.value);
+                  }}>
+                  <option value="Year"> Show Year</option>
+                  <option value="Month"> Show Month</option>
+                  <option value="Week"> Show Week</option>
+              </select>
+              <div className="barChartWrap">
+                <div className="chart-wrap">
+                  <Bar
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={state}
+                  />
+                </div>
+                <div className="chart-wrap">
+                  <Bar
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={stateIncome}
+                  />
+                </div>
+              </div>
+            </section>
+            <section>
+              <div className="lineChartWrap">
+                <div className="chart-wrap">
+                  <Line
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={line_Expense}
+                  />
+                </div>  
+                <div className="chart-wrap">
+                  <Line
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false
+                    }}
+                    data={line_Income}
+                  />
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
     );
 }
