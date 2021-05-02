@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 // form validation
 
-export function UpdateView({ show, onHide, id }) {
+export function UpdateView({getData, show, onHide, id }) {
   // function updateData() {
   //   fetch("/home")
   //     .then((res) => res.json())
@@ -56,7 +56,8 @@ export function UpdateView({ show, onHide, id }) {
       });
       const data = await res.json();
 
-      // if (data === 200) updateData();
+      if (data === 200) 
+        getData();
     }
   };
   return (
@@ -140,10 +141,12 @@ export function UpdateView({ show, onHide, id }) {
   );
 }
 UpdateView.propTypes = {
+  // getData: PropTypes.func,
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
 UpdateView.defaultProps = {
+  // getData: PropTypes.func,
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };

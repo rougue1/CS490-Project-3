@@ -1,6 +1,7 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Bar } from 'react-chartjs-2';
+import { saveAs } from 'file-saver'; 
 
 export function Charts()
 {   
@@ -8,6 +9,7 @@ export function Charts()
     const [filterOptions, setFilterOptions] = useState("Year");
     const [labelIncome, setIncome] = useState([[],[]]);
     const [labeExpense, setExpense] = useState([[],[]]);
+    const chartRef = useRef(null);
     /*
         Expense Year
       0: labels
@@ -129,6 +131,33 @@ export function Charts()
       ]
     }
     
+    const loaded = () => {
+        
+        console.log("done loading the images")
+        const base64Image = chartRef.current.chartInstance.toBase64Image();
+        console.log(base64Image);
+        alert(base64Image);
+        return base64Image;
+        
+        
+    }
+    
+    
+    const option = {
+       animation: {
+          onComplete: loaded
+        }
+    }
+    
+   const saveCanvas= () =>{
+       //save to png
+       const canvasSave = document.getElementById('stackD');
+       canvasSave.toBlob(function (blob) {
+           saveAs(blob, "testing.png")
+       })
+   }
+    
+    
     return (
         <div>
           <select
@@ -143,9 +172,13 @@ export function Charts()
             <h1>Charts</h1>
             <Bar
                 data={state}
+                id="stackD"
                 height={400}
                 width={600}
+                ref={chartRef}
+                
             />
+            <a onClick={saveCanvas}> Download </a>
             <Bar
                 data={stateIncome}
                 height={400}
