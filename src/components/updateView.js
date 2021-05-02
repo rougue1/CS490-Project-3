@@ -5,21 +5,10 @@ import PropTypes from "prop-types";
 import { useHistory } from 'react-router'
 // form validation
 
-<<<<<<< HEAD
-export function UpdateView({getData, show, onHide, id }) {
-  // function updateData() {
-  //   fetch("/home")
-  //     .then((res) => res.json())
-  //     .then((val) => {
-  //       setData(val);
-  //     });
-  // }
 
-=======
 export function UpdateView({ show, onHide, id }) {
   const history = useHistory();
   
->>>>>>> e47c59f0adeff8fe25f43e998818c29e86abf305
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
