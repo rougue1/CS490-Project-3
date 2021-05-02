@@ -212,9 +212,9 @@ export function History()
                         key={index}
                       >
                         {item.type === "Income" ? (
-                          <td className="colorTag" style={{ background: "green" }} />
+                          <td className="colorTag" style={{ background: "#32CD32", width: "8px" }} />
                         ) : (
-                          <td className="colorTag" style={{ background: "red" }} />
+                          <td className="colorTag" style={{ background: "#FF3131", width: "8px" }} />
                         )}
                         <td>${item.amount}</td>
                         <td>{item.location}</td>

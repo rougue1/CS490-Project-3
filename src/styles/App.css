@@ -36,6 +36,7 @@ img {
 .transactionsTable {
   border-collapse: separate;
   border-spacing: 0 15px;
+  table-layout: fixed;
 }
 
 .transaction tr:hover {
