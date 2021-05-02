@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useHistory } from 'react-router'
 // form validation
 
+
 export function UpdateView({ show, onHide, id }) {
   const history = useHistory();
   
@@ -114,10 +115,12 @@ export function UpdateView({ show, onHide, id }) {
   );
 }
 UpdateView.propTypes = {
+  // getData: PropTypes.func,
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
 UpdateView.defaultProps = {
+  // getData: PropTypes.func,
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };

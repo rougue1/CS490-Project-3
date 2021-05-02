@@ -1,7 +1,9 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Bar, Line } from 'react-chartjs-2';
+import { saveAs } from 'file-saver'; 
 import "../styles/charts.css";
+import { Download } from "react-bootstrap-icons";
 
 export function Charts()
 {   
@@ -67,12 +69,13 @@ export function Charts()
             setIncome([val[0][2],val[0][6],val[0][10]]);
             setDataIncome([val[0][3],val[0][7],val[0][11]]);
             
+            
             if(val[1].line[0].length !== 0)
             {
               setLineLableExpense([val[1].line[0].year.labels, val[1].line[0].month.labels, val[1].line[0].days.labels]);
               setLineDataExpense([val[1].line[0].year.data, val[1].line[0].month.data, val[1].line[0].days.data]);
             }
-            else if(val[1].line[1].length !== 0)
+            if(val[1].line[1].length !== 0)
             {
               setLineLableIncome([val[1].line[1].year.labels, val[1].line[1].month.labels, val[1].line[1].days.labels]);
               setLineDataIncome([val[1].line[1].year.data, val[1].line[1].month.data, val[1].line[1].days.data]);
@@ -82,9 +85,31 @@ export function Charts()
       
     useEffect(()=>{
         getData();
+
         
     },[]);
-    console.log(dataIncome);
+    
+    const downloadImage = (chartId) => {
+      console.log("The the charid "+ chartId);
+      const canvasSave = document.getElementById(chartId);
+      const context = canvasSave.getContext('2d');
+      context.save();
+      context.globalCompositeOperation = 'destination-over';
+      context.fillStyle = "white";
+      context.fillRect(0, 0, canvasSave.width, canvasSave.height);
+
+      canvasSave.toBlob(function (blob) {
+         saveAs(blob,  chartId+".png")
+      })
+      
+      context.restore();
+      
+    }
+    
+    
+    // console.log(dataIncome);
+    console.log(lineDataIncome);
+    console.log(lineLableIncome);
     const state = {
       labels: labeExpense[chartData],
       datasets: [
@@ -183,46 +208,71 @@ export function Charts()
                   <option value="Month"> Show Month</option>
                   <option value="Week"> Show Week</option>
               </select>
-              <div className="barChartWrap">
-                <div className="chart-wrap">
-                  <Bar
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false
-                    }}
-                    data={state}
-                  />
+              
+                <div className="barChartWrap">
+                  <div className="barChart1">
+                    <div className="chart-wrap">
+                      <Bar
+                        id="bar-expense"
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: false
+                        }}
+                        data={state}
+                      />
+                    </div>
+                    <div className="bar-expense-wrap">
+                      <Download id="bar-expense-download" onClick={()=>downloadImage("bar-expense")} />
+                    </div>
+                  </div>
+                  <div className="barChart1">
+                    <div className="chart-wrap">
+                      <Bar
+                        id="bar-income"
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: false
+                        }}
+                        data={stateIncome}
+                      />
+                    </div>
+                    <div className="bar-income-wrap">
+                      <Download id="bar-income-download" onClick={()=>downloadImage("bar-income")} />
+                   </div>
+                  </div>
                 </div>
-                <div className="chart-wrap">
-                  <Bar
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false
-                    }}
-                    data={stateIncome}
-                  />
-                </div>
-              </div>
             </section>
             <section>
               <div className="lineChartWrap">
-                <div className="chart-wrap">
-                  <Line
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false
-                    }}
-                    data={line_Expense}
-                  />
-                </div>  
-                <div className="chart-wrap">
-                  <Line
-                    options={{
-                      responsive: true,
-                      maintainAspectRatio: false
-                    }}
-                    data={line_Income}
-                  />
+                <div className="barChart1">
+                  <div className="chart-wrap">
+                    <Line
+                      id="line-expense"
+                      options={{
+                        responsive: true,
+                        maintainAspectRatio: false
+                      }}
+                      data={line_Expense}
+                    />
+                  </div>
+                  <div className="line-expense-wrap">
+                    <Download id="line-expense-download" onClick={()=>downloadImage("line-expense")}/>
+                  </div>
+                </div>
+                <div className="barChart1">
+                  <div className="chart-wrap">
+                    <Line
+                      id="line-income"
+                      options={{
+                        responsive: true,
+                        maintainAspectRatio: false
+                      }}
+                      data={line_Income}
+                    />
+                  </div>
+                  <div className="line-income-wrap">
+                    <Download id="line-income-download" onClick={()=>downloadImage("line-income")}/>
+                  </div>
                 </div>
               </div>
             </section>

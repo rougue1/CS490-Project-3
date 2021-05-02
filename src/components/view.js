@@ -29,21 +29,25 @@ export function View({ list, show, onHide, toogleUpdate, getData }) {
         </Button>
       </Modal.Footer>
       <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
+
         <UpdateView show={showUpdate} onHide={onHide} id={list.id} />
+
       </div>
     </Modal>
   );
 }
 View.propTypes = {
   show: PropTypes.bool,
-  updateData: PropTypes.instanceOf(Array),
+  getData: PropTypes.func,
+  updateData: PropTypes.func,
   onHide: PropTypes.bool,
   toggleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
 View.defaultProps = {
   show: PropTypes.bool,
-  updateData: PropTypes.instanceOf(Array),
+  getData: PropTypes.func,
+  updateData: PropTypes.func,
   onHide: PropTypes.bool,
   toggleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),

@@ -5,11 +5,27 @@ section {
 .chartsBody {
     width: 100%;
 }
-
-.chart-wrap {
+.barChart1{
     display: block;
-    height: 36vh;
+    height: 40vh;
     width: 35%;
+    position:relative;
+    
+}
+
+.chart-wrap{
+    height: 40vh;
+}
+
+#bar-expense-download, #bar-income-download, #line-expense-download, #line-income-download{
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+}
+
+
+.bar-expense-wrap, .bar-income-wrap, .line-expense-wrap, .line-income-wrap :hover{
+    cursor: pointer;
 }
 
 .sectionWrap {
@@ -29,7 +45,7 @@ section {
 @media (max-width: 950px) {
     .chart-wrap {
         height: 35vh;
-        width: 50%;
+        width: 100%;
     }
 }
 
@@ -44,5 +60,16 @@ section {
     
     .chart-wrap {
         width: 85%;
+    }
+    
+    .barChart1{
+        width: 95%;
+    }
+    
+    .sectionWrap {
+        height: 80vh;
+        overflow: auto;
+        margin: 0px -1em 0em -1em;
+        padding-bottom: 2em;
     }
 }
