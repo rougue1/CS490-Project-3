@@ -25,7 +25,9 @@ section {
 
 
 .bar-expense-wrap, .bar-income-wrap, .line-expense-wrap, .line-income-wrap :hover{
+    
     cursor: pointer;
+    
 }
 
 .sectionWrap {

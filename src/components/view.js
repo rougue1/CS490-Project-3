@@ -30,7 +30,7 @@ export function View({ list, show, onHide, toogleUpdate, getData }) {
       </Modal.Footer>
       <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
 
-        <UpdateView show={showUpdate} onHide={onHide} id={list.id} />
+        <UpdateView getData={getData} show={showUpdate} onHide={onHide} id={list.id} />
 
       </div>
     </Modal>

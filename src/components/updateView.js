@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 // form validation
 
 
-export function UpdateView({ show, onHide, id }) {
+export function UpdateView({ getData, show, onHide, id }) {
   const history = useHistory();
   
   const [validated, setValidated] = useState(false);
@@ -51,7 +51,10 @@ export function UpdateView({ show, onHide, id }) {
       });
       const data = await res.json();
 
-      if (data === 200) {}
+      if (data === 200) {
+        () => getData();
+      }
+        
     }
   };
   return (
@@ -115,12 +118,12 @@ export function UpdateView({ show, onHide, id }) {
   );
 }
 UpdateView.propTypes = {
-  // getData: PropTypes.func,
+  getData: PropTypes.func,
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
 UpdateView.defaultProps = {
-  // getData: PropTypes.func,
+  getData: PropTypes.func,
   show: PropTypes.bool,
   onHide: PropTypes.bool,
 };
