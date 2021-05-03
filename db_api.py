@@ -3,9 +3,9 @@ Class that communicates with the DB. Abstraction so that app.py doesn't
 get overloaded with code.
 """
 import datetime
+import sqlalchemy as sa
 import models
 from app import DB
-import sqlalchemy as sa
 
 DB.create_all()
 session = DB.session()

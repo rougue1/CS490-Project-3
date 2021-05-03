@@ -6,8 +6,6 @@ from flask import Flask, send_from_directory
 from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
-from db_api import *
-from datetime import datetime, timedelta
 from charts import *
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
@@ -15,6 +13,8 @@ APP = Flask(__name__, static_folder="./build/static")
 APP.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 APP.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 DB = SQLAlchemy(APP)
+from db_api import *
+from datetime import datetime, timedelta
 DB.create_all()
 USER = ''
 
@@ -67,12 +67,26 @@ def update():
     """
     global USER
     data = request.json
+    data1='formDataObj'
+    
+    if update_user_info(data, data1):
+        return jsonify(200)
+    return jsonify(400)
+    
 
+def update_user_info(data, data1):
+    global USER
     if data:
         transaction_id = data['id']
-        base = data['formDataObj']
+        base = data[data1]
         print(base["location"])
-        USER.edit_transaction(
+        final_edit_transaction(transaction_id, base)
+        return True
+    return False   
+    
+def final_edit_transaction(transaction_id, base):
+    global USER
+    USER.edit_transaction(
             transaction_id,
             base["type"],
             base["amount"],
@@ -81,9 +95,8 @@ def update():
             base["category"],
             base["description"],
         )
-        print(jsonify(200))
-        return jsonify(200)
-    return jsonify(400)
+    
+        
 
 
 @APP.route("/home", methods=["Get"])
@@ -249,12 +262,28 @@ def delete_transaction():
     """
     global USER
     data = request.json
-    if data:
-        transaction_id = data["id_data"]
-        USER.remove_transaction(transaction_id)
+    data_key ="id_data"
+    print(data)
+
+    
+    if delete_user_task(data, data_key):
         return jsonify(200)
     return jsonify(400)
-
+        
+  
+def delete_user_task(data, data_key):
+    if data:
+        transaction_id = data[data_key]
+        final_delete_transaction(transaction_id)
+        return True
+    return False
+  
+   
+    # if delete_user_task(trans_id):
+def final_delete_transaction(trans_id):
+    global USER
+    USER.remove_transaction(trans_id)
+    
 
 if __name__ == "__main__":
     APP.run(
