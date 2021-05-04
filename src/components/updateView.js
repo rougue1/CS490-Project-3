@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 // form validation
 
 
-export function UpdateView({ show, onHide, id, list }) {
+export function UpdateView({ show, onHide, id, list, getData }) {
   const history = useHistory();
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
@@ -51,7 +51,9 @@ export function UpdateView({ show, onHide, id, list }) {
       });
       const data = await res.json();
 
-      if (data === 200) {}
+      if (data === 200) {
+        () => getData();
+      }
     }
   };
   
