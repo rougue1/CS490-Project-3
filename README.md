@@ -22,17 +22,21 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 
 #### References
 ---
-- [Flask](https://flask.palletsprojects.com/en/1.1.x/#)
-- [React Docs](https://reactjs.org/docs/getting-started.html)
-- [SQLAlchemy Docs](https://docs.sqlalchemy.org/en/14/)
 - [Google Developer Account](https://console.cloud.google.com/apis/dashboard) (For Google Authentication)
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/#)
+- [Pandas](https://pandas.pydata.org/docs/)
+- [SQLAlchemy Docs](https://docs.sqlalchemy.org/en/14/)
+- [React Docs](https://reactjs.org/docs/getting-started.html)
 - [React-Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
+- [React-Router](https://reactrouter.com/web/guides/quick-start)
 - [Enzyme-Adapter-React-17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
+- [Chart.js](https://www.chartjs.org/docs/latest/)
 ---
 
 ## Issues
 1. Github Continuous Integration error:
    - Got some import module error from test/unmocked/unit_test.py: `from db_api import *` gave a ModuleNotFoundError, but works normally when running locally/on C9.
+2. Update component does not work as inteded. Debugging 
 
 ## Flask and create-react-app
 

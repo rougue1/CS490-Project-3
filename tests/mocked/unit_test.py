@@ -9,7 +9,7 @@ import os
 import sys
 
 sys.path.append(os.path.abspath('../../'))
-# from app import update_user_info, delete_user_task
+
 from app import *
 from db_api import *
 
