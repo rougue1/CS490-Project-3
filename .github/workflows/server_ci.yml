@@ -22,6 +22,9 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
+    
+    env:
+     DATABASE_URL: postgres://yevarrsrkrritu:10c0ec3a5e678708ab5970f137064f01c64b901d45601ffe5e3c5aca7940ed1f@ec2-34-206-8-52.compute-1.amazonaws.com:5432/d2bcvin3mvjuno
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -45,10 +48,18 @@ jobs:
 
       - name: Lint models.py
         run: pylint models.py
+      
+      - name: Lint charts.py
+        run: pylint charts.py
 
       # Run Unmocked tests
       - name: Run Unmocked Tests
-        run: python tests/unmocked/unit_test.py
-#       # Run Mocked tests
-#       - name: Run Mocked Tests
-#         run: python tests/mocked/unit_tests.py
+        run: python unmocked_unit_test.py
+
+      # Run Mocked tests
+      - name: Run Mocked Tests
+        run: python mocked_unit_test.py
+        
+       
+        
+        

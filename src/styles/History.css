@@ -22,3 +22,12 @@
   width: 100%;
   align-items: center;
 }
+
+@media (max-width: 575px) {
+  .historyWarp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}

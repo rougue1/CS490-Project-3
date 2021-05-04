@@ -1,6 +1,7 @@
 """
 Our server file
 """
+# pylint: disable= E1101, C0413, R0903, W0603, W1508, C0411, R0914, R0912, R0915
 import os
 import datetime
 from calendar import monthrange
@@ -8,8 +9,6 @@ from flask import Flask, send_from_directory
 from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
-from db_api import *
-from datetime import datetime, timedelta
 from charts import *
 
 load_dotenv(find_dotenv())  # This is to load your env variables from .env
@@ -17,6 +16,9 @@ APP = Flask(__name__, static_folder="./build/static")
 APP.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 APP.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 DB = SQLAlchemy(APP)
+from db_api import *
+from datetime import datetime, timedelta
+
 DB.create_all()
 USER = ''
 
@@ -62,27 +64,76 @@ def add():
     return jsonify(400)
 
 
+# @APP.route("/update", methods=["POST"])
+# def update():
+#     """
+#     Update income or expense
+#     """
+#     global USER
+#     data = request.json
+
+#     if data:
+#         transaction_id = data['id']
+#         base = data['formDataObj']
+#         print(base["location"])
+#         USER.edit_transaction(
+#             transaction_id,
+#             base["type"],
+#             base["amount"],
+#             base["date"],
+#             base["location"],
+#             base["category"],
+#             base["description"],
+#         )
+#         print(jsonify(200))
+#         return jsonify(USER.get_transactions())
+#     return jsonify(400)
+
+
 @APP.route("/update", methods=["POST"])
 def update():
     """
     Update income or expense
     """
-    global USER
+    # global USER
     data = request.json
+    data1 = 'formDataObj'
+    # print(data)
 
-    if data:
-        base = data['formDataObj']
-        USER.edit_transaction(
-            data["id"],
-            base["type"],
-            base["amount"],
-            base["date"],
-            base["location"],
-            base["category"],
-            base["description"],
-        )
+    if update_user_info(data, data1):
         return jsonify(200)
     return jsonify(400)
+
+
+def update_user_info(data, data1):
+    '''
+        update user info extended for mocked purposes
+    '''
+    # global USER
+    if data:
+        transaction_id = data['id']
+        base = data[data1]
+        # print(base["location"])
+        final_edit_transaction(transaction_id, base)
+        return True
+    return False
+
+
+def final_edit_transaction(transaction_id, base):
+    '''
+        final edit transaction extended for mocked purposes
+    '''
+    global USER
+    # print(type(USER))
+    USER.edit_transaction(
+        transaction_id,
+        base["type"],
+        base["amount"],
+        base["date"],
+        base["location"],
+        base["category"],
+        base["description"],
+    )
 
 
 @APP.route("/home", methods=["Get"])
@@ -95,37 +146,13 @@ def home():
 
 
 @APP.route("/userInfo", methods=["Get"])
-def get_user_info():
+def get_user_info_endpoint():
     """
     Get a users full info
     """
     global USER
     return jsonify(USER.get_info())
 
-
-# @APP.route("/chartInfo", methods=["Get"])
-# def get_chart_info():
-#     """
-#     Get chart info
-#     """
-#     global USER
-#     transactions = USER.get_transactions()
-#     categories = USER.get_transaction_categories()
-#     # sums = [sum([transaction["amount"] for transaction in transactions if transaction["category"]==category and transaction["type"]=="Expense"]) for category in categories]
-#     today = dt.datetime.today().date()
-#     days_in_month = monthrange(today.year, today.month)[1]
-#     days_in_year = 365 if today.year % 4 != 0 else 366
-#     today_last_month = (dt.datetime.now() - dt.timedelta(days_in_month)).date()
-#     today_last_year = (datetime.datetime.now() - datetime.timedelta(days_in_year)).date()
-#     data = {"income_month": [[], []], "income_year": [[], []], "expense_month": [[], []], "expense_year": [[], []]}
-#     for category in categories:
-#         for transaction in transactions:
-#             if transaction["category"] == category and transaction["type"] == "Income":
-#                 if today_last_month <= today <= transaction["date"]:
-#                     data["income_month"][0].append(category)
-#                     data["income_month"][1] =
-
-#     return jsonify({"transactions": transactions, "categories": categories})
 
 
 @APP.route("/chartInfo", methods=["Get"])
@@ -137,10 +164,10 @@ def get_chart_info():
 
     transactions = USER.get_transactions()
     categories = USER.get_transaction_categories()
-    # sums = [sum([transaction["amount"] for transaction in transactions if transaction["category"]==category and transaction["type"]=="Expense"]) for category in categories]
-    # print(sums)
+
     line_chart_data = get_chart_data(transactions)
-    # print(line_chart_data)
+    print(line_chart_data)
+
     sums = []
     sum_income = []
     sum_expense_month = []
@@ -292,11 +319,33 @@ def delete_transaction():
     """
     global USER
     data = request.json
-    if data:
-        transaction_id = data["id_data"]
-        USER.remove_transaction(transaction_id)
+    data_key = "id_data"
+    print(data)
+
+    if delete_user_task(data, data_key):
         return jsonify(200)
     return jsonify(400)
+
+
+def delete_user_task(data, data_key):
+    '''
+        delete user task function
+    '''
+    global USER
+    if data:
+        transaction_id = data[data_key]
+        final_delete_transaction(transaction_id)
+        return True
+    return False
+
+
+    # if delete_user_task(trans_id):
+def final_delete_transaction(trans_id):
+    '''
+        final delete transaction
+    '''
+    global USER
+    USER.remove_transaction(trans_id)
 
 
 if __name__ == "__main__":
