@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { View } from "./view";
 import { AddView } from "./addview";
 import { DeleteView } from "./deleteView";
 import "../styles/History.css";
 
-export function History()
-{
+export function History() {
   const [data, setData] = useState([]);
-  
+
   function getData() {
     fetch("/home")
       .then((res) => res.json())
@@ -17,11 +15,11 @@ export function History()
         setData(val);
       });
   }
-  
+
   useEffect(() => {
     getData();
   }, []);
-  
+
   const [show, setShow] = useState(false);
   const [row, setRow] = useState(false);
   const [showDelete, setDelete] = useState(false);
@@ -64,7 +62,7 @@ export function History()
         monthDataArray.push(monthData[i]);
       }
     }
-    setShowData(monthDataArray);
+    return monthDataArray;
   }
 
   function showYear(yearData) {
@@ -80,7 +78,7 @@ export function History()
         yearDataArray.push(yearData[i]);
       }
     }
-    setShowData(yearDataArray);
+    return yearDataArray;
   }
 
   function showWeek(weekData) {
@@ -93,7 +91,7 @@ export function History()
       const month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(date.slice(3, 6)) / 3;
       const year = date.slice(7, 11);
 
-      const lastWeekDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDay().toString();
+      const lastWeekDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDate().toString();
       const lastWeekMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getMonth().toString();
       const lastWeekYear = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
         .getFullYear()
@@ -106,6 +104,7 @@ export function History()
       const D_1 = [lastWeekDay, lastWeekMonth, lastWeekYear];
       const D_2 = [currDay, currMonth, currYear];
       const D_3 = [day, month, year];
+
       const d1 = new Date(D_1[2], parseInt(D_1[1]), D_1[0]); // eslint-disable-line
       const d2 = new Date(D_2[2], parseInt(D_2[1]), D_2[0]); // eslint-disable-line
       const d3 = new Date(D_3[2], parseInt(D_3[1]), D_3[0]); // eslint-disable-line
@@ -114,157 +113,180 @@ export function History()
         weekDataArray.push(weekData[i]);
       }
     }
-    setShowData(weekDataArray);
+    return weekDataArray;
+  }
+
+  function filterIncome(allData) {
+    const tempData = [];
+    for (let i = 0; i < allData.length; i += 1) {
+      if (allData[i].type === "Income") {
+        tempData.push(allData[i]);
+      }
+    }
+    return tempData;
+  }
+
+  function filterExpense(allData) {
+    const tempData = [];
+
+    for (let i = 0; i < allData.length; i += 1) {
+      if (allData[i].type === "Expense") {
+        tempData.push(allData[i]);
+      }
+    }
+
+    return tempData;
   }
 
   function handleFilter(e) {
+    let newData = data;
+
+    if (filterOptionsIE === "Income") {
+      newData = filterIncome(data);
+    } else if (filterOptionsIE === "Expense") {
+      newData = filterExpense(data);
+    }
+
     if (e.target.value === "Week") {
-      showWeek(data);
+      setShowData(showWeek(newData));
     } else if (e.target.value === "Month") {
-      showMonth(data);
+      setShowData(showMonth(newData));
     } else if (e.target.value === "Year") {
-      showYear(data);
+      setShowData(showYear(newData));
     } else {
-      setShowData(() => data);
+      setShowData(() => newData);
     }
-    setFilterOptionsIE("All");
-  }
-  
-  function handleFilterIE(e) 
-  {
-    let tempData = [];
-    if(e.target.value === "Income") 
-    {
-      for(let i = 0; i < data.length; i+=1)
-      {
-          if(data[i].type === "Income")
-          {
-            tempData.push(data[i]);
-          }
-      }
-    }
-    else if(e.target.value === "Expense") 
-    {
-      for(let i = 0; i < data.length; i+=1)
-      {
-          if(data[i].type === "Expense")
-          {
-            tempData.push(data[i]);
-          }
-      }
-    }
-    else {
-      tempData = data;
-    }
-    setShowData(tempData);
   }
 
-    return (
-        <div className="historyWarp">
-          <div className="transaction">
-            {data.length === 0 ? (
-              <b>No transactions to show</b>
-            ) : (
-              <>
-                <div className="dropDowns">
-                  <select
-                    className="timeFilter"
-                    value={filterOptions}
-                    onChange={(e) => {
-                      handleFilter(e);
-                      setFilterOptions(e.target.value);
-                    }}
-                  >
-                    <option value="All"> Show All</option>
-                    <option value="Week"> Show Week</option>
-                    <option value="Month"> Show Month</option>
-                    <option value="Year"> Show Year</option>
-                  </select>
-                  <select
-                    className="typeFilter"
-                    value={filterOptionsIE}
-                    onChange={(e) => {
-                      handleFilterIE(e);
-                      setFilterOptionsIE(e.target.value);
-                    }}
-                  >
-                    <option value="Both"> Both</option>
-                    <option value="Income"> Income</option>
-                    <option value="Expense"> Expense</option>
-                  </select>
-                </div>
-                <div>
-                <table className="transactionsTable">
-                  <thead>
-                    <th />
-                    <th>Amount</th>
-                    <th>Location</th>
-                    <th>Date</th>
-                  </thead>
-                  <tbody>
-                    {showData.map((item, index) => (
-                      <tr
-                        onClick={() => {
-                          setShow(true);
+  function handleFilterIE(e) {
+    let newData = data;
+
+    if (filterOptions === "Week") {
+      newData = showWeek(data);
+    } else if (filterOptions === "Month") {
+      newData = showMonth(data);
+    } else if (filterOptions === "Year") {
+      newData = showYear(data);
+    }
+
+    if (e.target.value === "Income") {
+      setShowData(filterIncome(newData));
+    } else if (e.target.value === "Expense") {
+      setShowData(filterExpense(newData));
+    } else {
+      setShowData(() => newData);
+    }
+  }
+
+  return (
+    <div className="historyWarp">
+      <div className="transaction">
+        {data.length === 0 ? (
+          <b>No transactions to show</b>
+        ) : (
+          <>
+            <div className="dropDowns">
+              <select
+                className="timeFilter"
+                value={filterOptions}
+                onChange={(e) => {
+                  handleFilter(e);
+                  setFilterOptions(e.target.value);
+                }}
+              >
+                <option value="All"> Show All</option>
+                <option value="Week"> Show Week</option>
+                <option value="Month"> Show Month</option>
+                <option value="Year"> Show Year</option>
+              </select>
+              <select
+                className="typeFilter"
+                value={filterOptionsIE}
+                onChange={(e) => {
+                  handleFilterIE(e);
+                  setFilterOptionsIE(e.target.value);
+                }}
+              >
+                <option value="Both"> Both</option>
+                <option value="Income"> Income</option>
+                <option value="Expense"> Expense</option>
+              </select>
+            </div>
+            <div className="tableWrap">
+              <table className="transactionsTable">
+                <thead>
+                  <th />
+                  <th>Amount</th>
+                  <th>Location</th>
+                  <th>Date</th>
+                </thead>
+                <tbody>
+                  {showData.map((item, index) => (
+                    <tr
+                      onClick={() => {
+                        setShow(true);
+                        setItem(item);
+                      }}
+                      /* eslint-disable-next-line react/no-array-index-key */
+                      key={index}
+                    >
+                      {item.type === "Income" ? (
+                        <td className="colorTag" style={{ background: "#32CD32", width: "8px" }} />
+                      ) : (
+                        <td className="colorTag" style={{ background: "#FF3131", width: "8px" }} />
+                      )}
+                      <td>${item.amount}</td>
+                      <td>{item.location}</td>
+                      <td>{item.date.slice(0, 16)}</td>
+                      <td
+                        onClick={(e) => {
+                          handleDelete();
                           setItem(item);
+                          e.stopPropagation();
                         }}
-                        /* eslint-disable-next-line react/no-array-index-key */
-                        key={index}
                       >
-                        {item.type === "Income" ? (
-                          <td className="colorTag" style={{ background: "green" }} />
-                        ) : (
-                          <td className="colorTag" style={{ background: "red" }} />
-                        )}
-                        <td>${item.amount}</td>
-                        <td>{item.location}</td>
-                        <td>{item.date}</td>
-                        <td
-                          onClick={(e) => {
-                            handleDelete();
-                            setItem(item);
-                            e.stopPropagation();
-                          }}
-                        >
-                          <Trash className="trash" />
-                        </td>
-                      </tr>
-                    ))}
-                    {show ? (
-                      <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
-                        <View
-                          list={itemData}
-                          show={show}
-                          onHide={handleClose}
-                          toogleUpdate={handleUpdate}
-                          updateData={getData}
-                        />
-                      </div>
-                    ) : null}
-                    {showDelete ? (
-                      <div style={{ display: "none" }}>
-                        <DeleteView
-                          list={itemData}
-                          updateData={getData}
-                          closeDelete={closeDelete}
-                          showDelete={showDelete}
-                        />
-                      </div>
-                    ) : null}
-                  </tbody>
-                </table>
-                </div>
-              </>
-            )}
-          </div>
-          <Button variant="success" onClick={() => showAdd()}>
-            Add
-          </Button>
-          <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
-            <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
-          </div>
-        </div>
-    );
+                        <Trash className="trash" />
+                      </td>
+                    </tr>
+                  ))}
+                  {show ? (
+                    <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
+                      <View
+                        list={itemData}
+                        show={show}
+                        onHide={handleClose}
+                        toogleUpdate={handleUpdate}
+                        updateData={getData}
+                      />
+                    </div>
+                  ) : null}
+                  {showDelete ? (
+                    <div style={{ display: "none" }}>
+                      <DeleteView
+                        list={itemData}
+                        updateData={getData}
+                        closeDelete={closeDelete}
+                        showDelete={showDelete}
+                      />
+                    </div>
+                  ) : null}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
+      <button type="button" className="regButton" onClick={() => showAdd()}>
+        Add
+      </button>
+      <button type="button" className="mobileButton" onClick={() => showAdd()}>
+        <div className="plus" />
+      </button>
+      <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
+        <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
+      </div>
+    </div>
+  );
 }
 
 export default History;

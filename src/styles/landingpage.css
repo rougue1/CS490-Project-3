@@ -21,10 +21,10 @@
 }
 
 .feature2 {
-  background: #F1F1F1;
+  background: #f1f1f1;
 }
 
-.loginBox h1{
+.loginBox h1 {
   font-size: 3.5rem;
   margin-bottom: 2.5rem;
 }
@@ -37,7 +37,7 @@
   border-radius: 50px;
   font-family: sans-serif;
   font-size: 20px;
-  color: #51308E;
+  color: #51308e;
   letter-spacing: 4px;
   transition: 100ms ease-in-out;
 }
@@ -72,7 +72,7 @@
   .feature3 {
     display: block;
   }
-  
+
   .googleLoginButton {
     width: 21em;
     height: 5em;
@@ -84,11 +84,11 @@
   .login {
     height: 100vh;
   }
-  
+
   .pointer {
     bottom: 0;
   }
-  
+
   .googleLoginButton {
     width: 21em;
     height: 5em;

@@ -1,14 +1,13 @@
-/* eslint-disable*/
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { UpdateView } from "./updateView";
 
-export function View({ list, show, onHide, toogleUpdate, getData }) {
+export function View({ list, show, onHide, toggleUpdate, getData }) {
   const [showUpdate, setUpdate] = useState(false);
 
   const handleShow = () => {
-    //toogleUpdate();
     setUpdate(true);
   };
 
@@ -30,23 +29,26 @@ export function View({ list, show, onHide, toogleUpdate, getData }) {
         </Button>
       </Modal.Footer>
       <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
-        <UpdateView updateData={getData} show={showUpdate} onHide={onHide} id={list.id} />
+        <UpdateView show={showUpdate} onHide={onHide} id={list.id} list={list} getData={getData} />
       </div>
     </Modal>
   );
 }
 View.propTypes = {
   show: PropTypes.bool,
-  updateData: PropTypes.instanceOf(Array),
+  getData: PropTypes.func,
+  updateData: PropTypes.func,
   onHide: PropTypes.bool,
   toggleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
 View.defaultProps = {
   show: PropTypes.bool,
-  updateData: PropTypes.instanceOf(Array),
+  getData: PropTypes.func,
+  updateData: PropTypes.func,
   onHide: PropTypes.bool,
   toggleUpdate: PropTypes.bool,
   list: PropTypes.instanceOf(Array),
 };
+
 export default View;

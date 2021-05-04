@@ -1,24 +1,33 @@
 .dropDowns {
-    display: flex;
-    margin: 1em;
-    justify-content: center;
+  display: flex;
+  margin: 1em;
+  justify-content: center;
 }
 
 .typeFilter {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .dropDowns select {
-    border: none;
-    border-bottom: solid 3px #543C88;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 2px;
+  border: none;
+  border-bottom: solid 3px #543c88;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px;
 }
 
 .historyWarp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+@media (max-width: 575px) {
+  .historyWarp {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
+  }
 }

@@ -1,18 +1,18 @@
 .header {
-    min-height: 19vh;
-    display: grid;
-    grid-template-rows: 70% 30%;
-    align-items: center;
-    width: 100%;
+  min-height: 19vh;
+  display: grid;
+  grid-template-rows: 70% 30%;
+  align-items: center;
+  width: 100%;
 }
 
 .title {
-    display: flex;
-    background: linear-gradient(343.8deg, #845EC2 17.83%, #543C88 88.01%);;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    color: white;
+  display: flex;
+  background: linear-gradient(343.8deg, #845ec2 17.83%, #543c88 88.01%);
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
 .navBar {
@@ -30,7 +30,7 @@
 }
 
 .navBar a {
-    color: black;
+  color: black;
 }
 
 .navBar a:hover {
@@ -51,25 +51,25 @@
 }
 
 .navBtn.underline_slide::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #51308E;
+  background-color: #51308e;
   height: 3px;
-  border-radius: 50px; 
+  border-radius: 50px;
   transition: transform 300ms ease-in-out;
   transform: scaleX(0);
 }
 
 .navBtn.underline::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #51308E;
+  background-color: #51308e;
   height: 4px;
   border-radius: 50px;
 }
@@ -80,7 +80,7 @@
 }
 
 .underline_slide {
-  content: '';
+  content: "";
 }
 
 .burger {
@@ -95,43 +95,42 @@
   transition: all 100ms ease-in-out;
 }
 
-
-@media screen and (max-width:680px) {
+@media screen and (max-width: 680px) {
   .navLinks {
     position: absolute;
-    background-color: #51308E;
+    background-color: #51308e;
     right: 0px;
     width: 65%;
     height: 82vh;
     top: 19vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
-    transform: translateX(100%);
     transition: transform 0.3s ease-in;
+    z-index: 1;
   }
-  
+
   .navBar {
     justify-self: end;
   }
-  
+
   .navBar a {
     color: white;
   }
-  
+
   .navBar a:hover {
     text-decoration: none;
     color: white;
   }
-  
+
   .navBtn {
     color: white;
   }
-  
+
   .navBtn.underline_slide::before {
     background-color: white;
   }
-  
+
   .burger {
     width: 100%;
     display: flex;
@@ -139,31 +138,32 @@
     margin-right: 15px;
     cursor: pointer;
   }
-  
+
   .burger div {
     display: block;
     justify-content: center;
   }
 }
 
-@media screen and (max-width:680px) {
+@media screen and (max-width: 680px) {
   .title h1 {
     font-size: 1.5rem;
   }
 }
 
 .navLinkActive {
+  display: flex;
   transform: translateX(0%);
 }
 
-.toggle .line1{
+.toggle .line1 {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
 
-.toggle .line2{
+.toggle .line2 {
   opacity: 0;
 }
 
-.toggle .line3{
+.toggle .line3 {
   transform: rotate(45deg) translate(-5px, -6px);
 }
