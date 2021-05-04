@@ -3,7 +3,7 @@ Class that communicates with the DB. Abstraction so that app.py doesn't
 get overloaded with code.
 """
 import datetime
-import sqlalchemy as sa
+# import sqlalchemy as sa
 import models
 from app import DB
 
@@ -49,6 +49,9 @@ def get_the_user_info(full_name, transactions):
 
 
 def get_user_info(full_name, transactions):
+    '''
+        getting user info
+    '''
     return get_the_user_info(full_name, transactions)
 
 
@@ -74,14 +77,16 @@ class DBQuery:
         self.first_name = first_name
         self.last_name = last_name
         self.add()
-    
+
     def __str__(self):
         """
         Print all needed info of a user on printing of object.
         """
         info = self.get_info()
-        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(info["full_name"], info["balance"], info["income"], info["expense"])
-    
+        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(
+            info["full_name"], info["balance"], info["income"],
+            info["expense"])
+
     def get_info(self):
         """
         Method to get the full name, total balance, total income,
@@ -143,6 +148,9 @@ class DBQuery:
         return transactions_list
 
     def get_transaction_categories(self):
+        '''
+            getting transaction and categories
+        '''
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
         user_categories = [
