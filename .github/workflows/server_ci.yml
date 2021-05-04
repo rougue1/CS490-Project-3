@@ -52,4 +52,4 @@ jobs:
 
       # Run Mocked tests
       - name: Run Mocked Tests
-        run: python tests/mocked/unit_tests.py
+        run: python tests/mocked/unit_test.py
