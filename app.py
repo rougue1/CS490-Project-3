@@ -62,6 +62,32 @@ def add():
     return jsonify(400)
 
 
+# @APP.route("/update", methods=["POST"])
+# def update():
+#     """
+#     Update income or expense
+#     """
+#     global USER
+#     data = request.json
+
+#     if data:
+#         transaction_id = data['id']
+#         base = data['formDataObj']
+#         print(base["location"])
+#         USER.edit_transaction(
+#             transaction_id,
+#             base["type"],
+#             base["amount"],
+#             base["date"],
+#             base["location"],
+#             base["category"],
+#             base["description"],
+#         )
+#         print(jsonify(200))
+#         return jsonify(USER.get_transactions())
+#     return jsonify(400)
+
+
 @APP.route("/update", methods=["POST"])
 def update():
     """
@@ -70,6 +96,7 @@ def update():
     # global USER
     data = request.json
     data1 = 'formDataObj'
+    # print(data)
 
     if update_user_info(data, data1):
         return jsonify(200)
@@ -84,7 +111,7 @@ def update_user_info(data, data1):
     if data:
         transaction_id = data['id']
         base = data[data1]
-        print(base["location"])
+        # print(base["location"])
         final_edit_transaction(transaction_id, base)
         return True
     return False
@@ -95,7 +122,7 @@ def final_edit_transaction(transaction_id, base):
         final edit transaction extended for mocked purposes
     '''
     global USER
-    print(type(USER))
+    # print(type(USER))
     USER.edit_transaction(
         transaction_id,
         base["type"],
