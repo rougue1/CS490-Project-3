@@ -39,8 +39,8 @@ jobs:
           architecture: x64
 
 
-#       - name: Install dependencies
-#         run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
 #       - name: Lint app.py
 #         run: pylint app.py
