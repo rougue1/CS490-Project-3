@@ -154,7 +154,7 @@ def get_chart_info():
     expense_cat_week = []
     income_cat_week = []
 
-    #removing duplicate categories
+    # removing duplicate categories
     new_categories = []
     for item in categories:
         if item not in new_categories:
@@ -181,7 +181,7 @@ def get_chart_info():
     # print(type(datetime_object))
     # print(past_year)
 
-    for category in new_categories:  #go thru all of the categories
+    for category in new_categories:  # go thru all of the categories
         li_expense_year = []
         li_income_year = []
         li_expense_month = []
@@ -276,7 +276,7 @@ def get_chart_info():
     # print(sum_income)
     # print(income_cat)
 
-    #expense year , value| income year, value | expense month , values | income month, values
+    # expense year , value| income year, value | expense month , values | income month, values
     return jsonify([[
         expense_cat, sums, income_cat, sum_income, expense_cat_month,
         sum_expense_month, income_cat_month, sum_income_month,

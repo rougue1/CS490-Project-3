@@ -7,7 +7,7 @@ import re
 import sys
 from yapf.yapflib.yapf_api import FormatFile
 
-PATHS = '.' if len(sys.argv) == 0 else sys.argv[1:]
+PATHS = '.' if len(sys.argv) == 1 else sys.argv[1:]
 FILES = []
 for PATH in PATHS:
     for r, d, f in os.walk(PATH):
