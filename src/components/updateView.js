@@ -11,7 +11,6 @@ export function UpdateView({ show, onHide, id, list, getData }) {
 
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
-  const [showAnother, setAnother] = useState(false);
 
   const time = new Date(list.date).toISOString().slice(0, 10);
 

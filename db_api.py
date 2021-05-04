@@ -137,7 +137,7 @@ class DBQuery:
         """
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        transactions.sort(key=lambda x: convert_to_datetime_obj(x.date))
+        transactions.sort(key=lambda x: x.date)
 
         transactions_list = [{
             "id": transaction.transaction_id,

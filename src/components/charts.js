@@ -21,15 +21,15 @@ export function Charts() {
         Expense Year
       0: labels
       1: values
-      
+
         Income Year
       2: labels
       3: values
-      
+
         Expense Month
       4: labels
       5: values
-      
+
         Income Month
       6: labels
       7: values
