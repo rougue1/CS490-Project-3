@@ -6,10 +6,10 @@ import { useHistory } from "react-router";
 // form validation
 
 export function UpdateView({ show, onHide, id, list, getData }) {
-  // const history = useHistory();
+  const history = useHistory();
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
-  // const [showAnother, setAnother] = useState(false);
+  const [showAnother, setAnother] = useState(false);
 
   const time = new Date(list.date).toISOString().slice(0, 10);
 
@@ -51,8 +51,11 @@ export function UpdateView({ show, onHide, id, list, getData }) {
       const data = await res.json();
 
       if (data === 200) {
+        console.log("updated on time!");
         () => getData();
       }
+      
+      // if(data === 200) { }
     }
   };
 

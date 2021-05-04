@@ -3,9 +3,9 @@ Class that communicates with the DB. Abstraction so that app.py doesn't
 get overloaded with code.
 """
 import datetime
+import sqlalchemy as sa
 import models
 from app import DB
-import sqlalchemy as sa
 
 DB.create_all()
 session = DB.session()
@@ -16,8 +16,6 @@ def convert_to_datetime_obj(date):
     Function that converts a string to a datetime object,
     following proper format.
     """
-    print(type(date), end=" ")
-    # print(date)
     if isinstance(date, str):
         if '-' in date:
             date = date.replace('-', '/')
@@ -51,6 +49,9 @@ def get_the_user_info(full_name, transactions):
 
 
 def get_user_info(full_name, transactions):
+    '''
+        getting user info
+    '''
     return get_the_user_info(full_name, transactions)
 
 
@@ -76,14 +77,16 @@ class DBQuery:
         self.first_name = first_name
         self.last_name = last_name
         self.add()
-    
+
     def __str__(self):
         """
         Print all needed info of a user on printing of object.
         """
         info = self.get_info()
-        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(info["full_name"], info["balance"], info["income"], info["expense"])
-    
+        return "Full Name: {}\nBalance: {}\nIncome: {}\nExpense: {}".format(
+            info["full_name"], info["balance"], info["income"],
+            info["expense"])
+
     def get_info(self):
         """
         Method to get the full name, total balance, total income,
@@ -132,8 +135,8 @@ class DBQuery:
         """
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
+        print(transactions[0].date)
         transactions.sort(key=lambda x: x.date)
-        
         transactions_list = [{
             "id": transaction.transaction_id,
             "type": transaction.transaction_type,
@@ -146,6 +149,9 @@ class DBQuery:
         return transactions_list
 
     def get_transaction_categories(self):
+        '''
+            getting transaction and categories
+        '''
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
         user_categories = [
@@ -202,7 +208,6 @@ class DBQuery:
                 to_edit.category = kwargs.get("category", to_edit.category)
                 to_edit.description = kwargs.get("description",
                                                  to_edit.description)
-                                                 
             session.commit()
 
     def remove_transaction(self, transaction_id):

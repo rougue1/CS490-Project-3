@@ -9,6 +9,7 @@ export function Home({ userData, getUserInfo }) {
     fetch("/home")
       .then((res) => res.json())
       .then((val) => {
+        console.log(val);
         setData(val);
       });
   }

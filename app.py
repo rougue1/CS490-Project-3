@@ -67,7 +67,7 @@ def update():
     """
     Update income or expense
     """
-    global USER
+    # global USER
     data = request.json
     data1 = 'formDataObj'
 
@@ -80,7 +80,7 @@ def update_user_info(data, data1):
     '''
         update user info extended for mocked purposes
     '''
-    global USER
+    # global USER
     if data:
         transaction_id = data['id']
         base = data[data1]
@@ -95,6 +95,7 @@ def final_edit_transaction(transaction_id, base):
         final edit transaction extended for mocked purposes
     '''
     global USER
+    print(type(USER))
     USER.edit_transaction(
         transaction_id,
         base["type"],
@@ -135,6 +136,8 @@ def get_chart_info():
     categories = USER.get_transaction_categories()
 
     line_chart_data = get_chart_data(transactions)
+    print(line_chart_data)
+    
 
     sums = []
     sum_income = []
@@ -299,7 +302,7 @@ def delete_user_task(data, data_key):
     '''
         delete user task function
     '''
-
+    global USER
     if data:
         transaction_id = data[data_key]
         final_delete_transaction(transaction_id)

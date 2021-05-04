@@ -19,10 +19,10 @@ export function Transaction({ data, getData }) {
     setShow(false);
     getData();
   };
-  // const handleUpdate = () => {
-  //   setShow(false);
-  //   getData();
-  // };
+  const handleUpdate = () => {
+    setShow(false);
+    getData();
+  };
 
   const handleDelete = () => setDelete(true);
   const closeDelete = () => setDelete(false);
@@ -95,6 +95,7 @@ export function Transaction({ data, getData }) {
                       list={itemData}
                       show={show}
                       onHide={handleClose}
+                      toggleUpdate={handleUpdate}
                       updateData={getData}
                     />
                   </div>
