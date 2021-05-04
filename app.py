@@ -137,7 +137,6 @@ def get_chart_info():
 
     line_chart_data = get_chart_data(transactions)
     print(line_chart_data)
-    
 
     sums = []
     sum_income = []
