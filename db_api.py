@@ -16,15 +16,14 @@ def convert_to_datetime_obj(date):
     Function that converts a string to a datetime object,
     following proper format.
     """
-    print(type(date), end=" ")
-    # print(date)
+    
     if isinstance(date, str):
         if '-' in date:
             date = date.replace('-', '/')
             date = datetime.datetime.strptime(date,
-                                              "%Y/%m/%d").strftime("%m/%d/%Y")
+                                              "%Y/%m/%d").strftime("%m/%d/%Y").date()
         else:
-            date = datetime.datetime.strptime(date, "%m/%d/%Y")
+            date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
     return date
 
 
@@ -132,7 +131,7 @@ class DBQuery:
         """
         transactions = session.query(
             models.Users).filter_by(user_id=self.user_id).first().transactions
-        transactions.sort(key=lambda x: x.date)
+        transactions.sort(key=lambda x: convert_to_datetime_obj(x.date))
         
         transactions_list = [{
             "id": transaction.transaction_id,

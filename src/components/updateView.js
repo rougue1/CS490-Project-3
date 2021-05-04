@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-expressions, no-unused-vars */
+/* eslint-disable no-unused-expressions, no-unused-vars */
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
@@ -48,12 +49,14 @@ export function UpdateView({ show, onHide, id, list, getData }) {
           "Content-Type": "application/json",
         },
       });
-      const data = await res.json();
-
-      if (data === 200) {
-        console.log("updated on time!");
+      await res.json().then(() =>{
         () => getData();
-      }
+      });
+
+      // if (data === 200) {
+      //   console.log("updated on time!");
+      //   () => getData();
+      // }
       
       // if(data === 200) { }
     }
