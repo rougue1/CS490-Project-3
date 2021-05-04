@@ -63,7 +63,7 @@ export function History()
         monthDataArray.push(monthData[i]);
       }
     }
-    setShowData(monthDataArray);
+    return monthDataArray;
   }
 
   function showYear(yearData) {
@@ -79,7 +79,7 @@ export function History()
         yearDataArray.push(yearData[i]);
       }
     }
-    setShowData(yearDataArray);
+    return yearDataArray;
   }
 
   function showWeek(weekData) {
@@ -107,9 +107,7 @@ export function History()
       const D_1 = [lastWeekDay, lastWeekMonth, lastWeekYear];
       const D_2 = [currDay, currMonth, currYear];
       const D_3 = [day, month, year];
-      console.log(D_1);
-      console.log(D_2);
-      console.log(D_3);
+          
       const d1 = new Date(D_1[2], parseInt(D_1[1]), D_1[0]); // eslint-disable-line
       const d2 = new Date(D_2[2], parseInt(D_2[1]), D_2[0]); // eslint-disable-line
       const d3 = new Date(D_3[2], parseInt(D_3[1]), D_3[0]); // eslint-disable-line
@@ -118,50 +116,83 @@ export function History()
         weekDataArray.push(weekData[i]);
       }
     }
-    setShowData(weekDataArray);
-  }
-
-  function handleFilter(e) {
-    if (e.target.value === "Week") {
-      showWeek(data);
-    } else if (e.target.value === "Month") {
-      showMonth(data);
-    } else if (e.target.value === "Year") {
-      showYear(data);
-    } else {
-      setShowData(() => data);
-    }
-    setFilterOptionsIE("All");
+    return weekDataArray;
   }
   
-  function handleFilterIE(e) 
-  {
-    let tempData = [];
+  function filterIncome(allData) {
+    const tempData = [];
+    for(let i = 0; i < allData.length; i+=1)
+    {
+        if(allData[i].type === "Income")
+        {
+          tempData.push(allData[i]);
+        }
+    }
+    return tempData;
+  }
+  
+  function filterExpense(allData) {
+    const tempData = [];
+    
+    for(let i = 0; i < allData.length; i+=1)
+    {
+        if(allData[i].type === "Expense")
+        {
+          tempData.push(allData[i]);
+        }
+    }
+    
+    return tempData;
+  }
+  
+  function handleFilter(e) {
+    
+    let newData = data;
+    
+    if(filterOptionsIE === "Income") {
+      newData = filterIncome(data);
+    }
+    else if(filterOptionsIE === "Expense")
+    {
+      newData = filterExpense(data);
+    }
+    
+    if (e.target.value === "Week") {
+      setShowData(showWeek(newData));
+    } else if (e.target.value === "Month") {
+      setShowData(showMonth(newData));
+    } else if (e.target.value === "Year") {
+      setShowData(showYear(newData));
+    } else {
+      setShowData(() => newData);
+    }
+  }
+  
+function handleFilterIE(e) {
+    let newData = data;
+    
+    if(filterOptions === "Week") {
+      newData = showWeek(data);
+    }
+    else if(filterOptions === "Month")
+    {
+      newData = showMonth(data);
+    }
+    else if(filterOptions === "Year")
+    {
+      newData = showYear(data)
+    }
+  
     if(e.target.value === "Income") 
     {
-      for(let i = 0; i < data.length; i+=1)
-      {
-          if(data[i].type === "Income")
-          {
-            tempData.push(data[i]);
-          }
-      }
-    }
-    else if(e.target.value === "Expense") 
+      setShowData(filterIncome(newData));
+    } else if(e.target.value === "Expense") 
     {
-      for(let i = 0; i < data.length; i+=1)
-      {
-          if(data[i].type === "Expense")
-          {
-            tempData.push(data[i]);
-          }
-      }
+      setShowData(filterExpense(newData));
+    } else {
+      setShowData(() => newData);
     }
-    else {
-      tempData = data;
-    }
-    setShowData(tempData);
-  }
+}
 
     return (
         <div className="historyWarp">
