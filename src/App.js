@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { LandingPage } from "./components/landingPage";
 import { NavBar } from "./components/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
