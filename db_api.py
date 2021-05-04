@@ -7,6 +7,7 @@ import models
 from app import DB
 # import sqlalchemy as sa
 
+
 DB.create_all()
 session = DB.session()
 

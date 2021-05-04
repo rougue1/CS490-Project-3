@@ -52,7 +52,6 @@ export function GLogin({ setLoginStatus }) {
         )}
         buttonText="Login with Google"
         onSuccess={onSuccess}
-        isSignedIn="true"
       />
     </div>
   );

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../styles/landingpage.css";
 import { GLogin } from "./login";
@@ -7,6 +8,10 @@ import icon from "../styles/images/icon.png";
 import Chart from "../styles/images/Chart.png";
 
 export function LandingPage({ setLoginStatus }) {
+  const history = useHistory();
+    useEffect(() => {
+        history.push("/");
+    }, [])
   return (
     <div className="landingPage">
       <section className="login wrap">
