@@ -68,4 +68,10 @@ section {
         width: 95%;
     }
     
+    .sectionWrap {
+        height: 80vh;
+        overflow: auto;
+        margin: 0px -1em 0em -1em;
+        padding-bottom: 2em;
+    }
 }

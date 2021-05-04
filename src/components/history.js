@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { View } from "./view";
 import { AddView } from "./addview";
@@ -93,19 +92,24 @@ export function History()
       const month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(date.slice(3, 6)) / 3;
       const year = date.slice(7, 11);
 
-      const lastWeekDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDay().toString();
+      const lastWeekDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getDate().toString();
       const lastWeekMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7).getMonth().toString();
       const lastWeekYear = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
         .getFullYear()
         .toString();
-
+        
+    
       const currDay = today.getDate().toString();
       const currMonth = today.getMonth().toString();
       const currYear = today.getFullYear().toString();
 
+      
       const D_1 = [lastWeekDay, lastWeekMonth, lastWeekYear];
       const D_2 = [currDay, currMonth, currYear];
       const D_3 = [day, month, year];
+      console.log(D_1);
+      console.log(D_2);
+      console.log(D_3);
       const d1 = new Date(D_1[2], parseInt(D_1[1]), D_1[0]); // eslint-disable-line
       const d2 = new Date(D_2[2], parseInt(D_2[1]), D_2[0]); // eslint-disable-line
       const d3 = new Date(D_3[2], parseInt(D_3[1]), D_3[0]); // eslint-disable-line
@@ -193,7 +197,7 @@ export function History()
                     <option value="Expense"> Expense</option>
                   </select>
                 </div>
-                <div>
+                <div className="tableWrap">
                 <table className="transactionsTable">
                   <thead>
                     <th />
@@ -212,9 +216,9 @@ export function History()
                         key={index}
                       >
                         {item.type === "Income" ? (
-                          <td className="colorTag" style={{ background: "green" }} />
+                          <td className="colorTag" style={{ background: "#32CD32", width: "8px" }} />
                         ) : (
-                          <td className="colorTag" style={{ background: "red" }} />
+                          <td className="colorTag" style={{ background: "#FF3131", width: "8px" }} />
                         )}
                         <td>${item.amount}</td>
                         <td>{item.location}</td>
@@ -257,9 +261,12 @@ export function History()
               </>
             )}
           </div>
-          <Button variant="success" onClick={() => showAdd()}>
+          <button type="button" className="regButton" onClick={() => showAdd()}>
             Add
-          </Button>
+          </button>
+          <button type="button" className="mobileButton" onClick={() => showAdd()}>
+            <div className="plus" />
+          </button>
           <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
             <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />
           </div>
