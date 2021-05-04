@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
@@ -29,7 +28,6 @@ export function Transaction({ data, getData }) {
   const closeDelete = () => setDelete(false);
 
   const handleShowAll = () => {
-    console.log("In");
     history.push("/history");
 
     const element = document.getElementById("home");
@@ -43,13 +41,16 @@ export function Transaction({ data, getData }) {
 
   useEffect(() => {
     setShowData(() => data.slice(0, 5));
+    if (showData.length === 0) setDelete(false);
   }, [data]);
 
   return (
-    <div>
+    <div className="tableWrap">
       <div className="transaction">
         {data.length === 0 ? (
-          <b>No transactions to show</b>
+          <div style={{ margin: "2em" }}>
+            <b>No transactions to show</b>
+          </div>
         ) : (
           <>
             <table className="transactionsTable">
@@ -70,9 +71,9 @@ export function Transaction({ data, getData }) {
                     key={index}
                   >
                     {item.type === "Income" ? (
-                      <td className="colorTag" style={{ background: "green" }} />
+                      <td className="colorTag" style={{ background: "#32CD32", width: "8px" }} />
                     ) : (
-                      <td className="colorTag" style={{ background: "red" }} />
+                      <td className="colorTag" style={{ background: "#FF3131", width: "8px" }} />
                     )}
                     <td>${item.amount}</td>
                     <td>{item.location}</td>
@@ -94,7 +95,7 @@ export function Transaction({ data, getData }) {
                       list={itemData}
                       show={show}
                       onHide={handleClose}
-                      toogleUpdate={handleUpdate}
+                      toggleUpdate={handleUpdate}
                       updateData={getData}
                     />
                   </div>
@@ -117,9 +118,12 @@ export function Transaction({ data, getData }) {
           </>
         )}
       </div>
-      <Button variant="success" onClick={() => showAdd()}>
+      <button type="button" className="regButton" onClick={() => showAdd()}>
         Add
-      </Button>
+      </button>
+      <button type="button" className="mobileButton" onClick={() => showAdd()}>
+        <div className="plus" />
+      </button>
       {}
       <div style={{ display: "none" }} onClick={(e) => e.stopPropagation()}>
         <AddView endPoint="/add" updateData={getData} show={row} onHide={closeAdd} showAdd={showAdd} />

@@ -1,3 +1,8 @@
+"""
+    Getting income and expenses for line charts
+"""
+
+# pylint: disable= C0103, R0914
 from datetime import datetime, timedelta
 import pandas as pd
 
@@ -9,17 +14,21 @@ def groupData(data_expense):
     today = datetime.today()
     week_prior = today - timedelta(weeks=1)
 
-    dfd = df[df['date'] >= week_prior]
+    dfd = df[(df['date'] <= pd.to_datetime('now'))
+             & (df['date'] >= pd.to_datetime('now') - pd.offsets.Day(7))]
 
-    dfm = df[df['date'].dt.year == now.year]
+    dfm = df[(df['date'] <= pd.to_datetime('now'))
+             & (df['date'] >= pd.to_datetime('now') - pd.DateOffset(months=1))]
+
+    dfy = df[df['date'].dt.year == now.year]
 
     df.date = pd.to_datetime(df.date)
     dgd = dfd.groupby(pd.Grouper(key='date',
                                  freq='1D')).sum()  # groupby each 1 Day
     dgm = dfm.groupby(pd.Grouper(key='date',
                                  freq='1W')).sum()  # groupby each 1 Week
-    dgy = df.groupby(pd.Grouper(key='date',
-                                freq='1M')).sum()  # groupby each 1 Month
+    dgy = dfy.groupby(pd.Grouper(key='date',
+                                 freq='1M')).sum()  # groupby each 1 Month
 
     dgd.index = dgd.index.strftime('%A')
     dgm.index = dgm.index.strftime('%d %b')
@@ -65,8 +74,6 @@ def groupData(data_expense):
 
 
 def get_chart_data(transactions):
-    now = datetime.now()
-
     data_expense = {"amount": [], "date": []}
     data_income = {"amount": [], "date": []}
 

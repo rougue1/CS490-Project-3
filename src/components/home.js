@@ -1,7 +1,6 @@
-/* eslint-disable*/
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { Transaction } from "./transactions.js";
+import PropTypes from "prop-types";
+import { Transaction } from "./transactions";
 
 export function Home({ userData, getUserInfo }) {
   const [data, setData] = useState([]);
@@ -10,6 +9,7 @@ export function Home({ userData, getUserInfo }) {
     fetch("/home")
       .then((res) => res.json())
       .then((val) => {
+        console.log(val);
         setData(val);
       });
   }
@@ -39,4 +39,14 @@ export function Home({ userData, getUserInfo }) {
     </div>
   );
 }
+
+Home.propTypes = {
+  userData: PropTypes.shape,
+  getUserInfo: PropTypes.func,
+};
+Home.defaultProps = {
+  userData: PropTypes.shape,
+  getUserInfo: PropTypes.func,
+};
+
 export default Home;
