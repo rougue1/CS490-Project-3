@@ -12,6 +12,7 @@ sys.path.append(os.path.abspath('./'))
 
 from app import delete_user_task, update_user_info
 
+
 KEY_INPUT = "input"
 KEY_EXPECTED = "expected"
 KEY_DATA = "data"
