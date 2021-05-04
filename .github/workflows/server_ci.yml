@@ -40,7 +40,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - name: temp
-        run: echo $DATABASE_URL
+        run: pwd
 
 
       - name: Install dependencies
