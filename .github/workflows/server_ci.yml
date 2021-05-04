@@ -50,6 +50,6 @@ jobs:
       - name: Run Unmocked Tests
         run: python tests/unmocked/unit_test.py
 
-#       # Run Mocked tests
-#       - name: Run Mocked Tests
-#         run: python tests/mocked/unit_tests.py
+      # Run Mocked tests
+      - name: Run Mocked Tests
+        run: python tests/mocked/unit_tests.py
