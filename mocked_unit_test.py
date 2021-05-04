@@ -10,9 +10,7 @@ import sys
 
 sys.path.append(os.path.abspath('./'))
 
-from app import *
-from db_api import *
-
+from app import delete_user_task, update_user_info
 
 KEY_INPUT = "input"
 KEY_EXPECTED = "expected"
