@@ -200,22 +200,22 @@ Heroku is a cloud platform company which will essentially allow us to host our c
 
 ### Pictures of our application
 
-## Home page 
+#### Home page 
 ![image](https://user-images.githubusercontent.com/57224609/117080471-e3060480-ad0b-11eb-841e-75192268c79d.png) 
 
-## History page 
+#### History page 
 ![image](https://user-images.githubusercontent.com/57224609/117080495-f4e7a780-ad0b-11eb-8c7f-4d81785c9306.png)
 
-## Chart page 
+#### Chart page 
 ![image](https://user-images.githubusercontent.com/57224609/117080525-0466f080-ad0c-11eb-8f05-433aae7f6bf8.png)
 
-## Home page (Mobile View)
+#### Home page (Mobile View)
 ![image](https://user-images.githubusercontent.com/57224609/117080595-2e201780-ad0c-11eb-8d86-ba3201aa23b7.png)
 
-## History page (Mobile View)
+#### History page (Mobile View)
 ![image](https://user-images.githubusercontent.com/57224609/117080625-4001ba80-ad0c-11eb-8895-00697978647a.png)
 
-## Chart page (Mobile View)
+#### Chart page (Mobile View)
 ![image](https://user-images.githubusercontent.com/57224609/117080664-53148a80-ad0c-11eb-8e95-e7c3532aab8d.png)
 
 
