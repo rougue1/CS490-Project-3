@@ -36,7 +36,8 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 ## Issues
 1. Github Continuous Integration error:
    - Got some import module error from test/unmocked/unit_test.py: `from db_api import *` gave a ModuleNotFoundError, but works normally when running locally/on C9.
-2. Update component does not work as inteded. Debugging 
+2. Update component does not work as inteded. Requires user to refresh page in order to see changes, although the Update component is very similar to the add component - which works.
+3. Heroku issue: DO NOT REFRESH any of the pages, since this will cause a `Not Found` error, or will reveal a list of all the transactions - unrendered according to the usual UI.
 
 ## Flask and create-react-app
 
