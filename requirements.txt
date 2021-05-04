@@ -29,6 +29,8 @@ jmespath==0.10.0
 lazy-object-proxy==1.5.2
 MarkupSafe==1.1.1
 mccabe==0.6.1
+numpy==1.19.5
+pandas==1.1.5
 parso==0.1.1
 pbr==5.5.1
 pexpect==4.8.0
@@ -42,7 +44,6 @@ Pygments==2.7.4
 pylint==2.7.2
 pylint-django==2.3.0
 pylint-flask==0.6
-pylint-flask-sqlalchemy==0.2.0
 pylint-plugin-utils==0.6
 python-dateutil==2.8.1
 python-dotenv==0.15.0
