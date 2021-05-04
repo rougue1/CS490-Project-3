@@ -46,9 +46,9 @@ jobs:
 #       - name: Lint models.py
 #         run: pylint models.py
 
-#       # Run Unmocked tests
-#       - name: Run Unmocked Tests
-#         run: python tests/unmocked/unit_test.py
+      # Run Unmocked tests
+      - name: Run Unmocked Tests
+        run: python unmocked_unit_test.py
 
       # Run Mocked tests
       - name: Run Mocked Tests
