@@ -15,7 +15,7 @@ export function GLogin({ setLoginStatus }) {
       FullName: googleUser.profileObj.name,
       Email: googleUser.profileObj.email,
     };
-    console.log(userInfo);
+    
     const res = await fetch("/login", {
       method: "POST",
       body: JSON.stringify({
@@ -38,13 +38,20 @@ export function GLogin({ setLoginStatus }) {
       <h5>Please login to continue</h5>
       <br />
       <br />
-      <GoogleLogin 
-        clientId={clientId} 
-        render={renderProps => (
-          <button type="button" className="googleLoginButton" onClick={renderProps.onClick} disabled={renderProps.disabled}>Login with Google</button>
+      <GoogleLogin
+        clientId={clientId}
+        render={(renderProps) => (
+          <button
+            type="button"
+            className="googleLoginButton"
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+          >
+            Login with Google
+          </button>
         )}
-        buttonText="Login with Google" 
-        onSuccess={onSuccess} 
+        buttonText="Login with Google"
+        onSuccess={onSuccess}
       />
     </div>
   );

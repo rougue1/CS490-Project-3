@@ -75,7 +75,7 @@ img {
 }
 
 .login {
-  background: linear-gradient(343.8deg, #845EC2 17.83%, #543C88 88.01%);
+  background: linear-gradient(343.8deg, #845ec2 17.83%, #543c88 88.01%);
   height: 90vh;
   width: 100%;
   box-shadow: 1px 1px 12px rgb(0 0 0 / 10%);
@@ -110,23 +110,23 @@ img {
 }
 
 .regButton {
-    padding: .5em 1em;
-    border: none;
-    color: white;
-    background-color: #51308E;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 1em;
+  padding: 0.5em 1em;
+  border: none;
+  color: white;
+  background-color: #51308e;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 1em;
 }
 
 .regButton:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .mobileButton {
-    display: none;
+  display: none;
 }
 
 .transaction {
@@ -137,25 +137,25 @@ img {
   .pageBody {
     padding: 1em;
   }
-  
+
   .transaction {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .dropDowns {
     display: flex;
     margin: 1em 0;
     justify-content: center;
     width: 100%;
   }
-  
+
   .dropDowns select {
     font-size: 0.8rem;
   }
-  
+
   .transactionsTable {
     font-size: 0.8rem;
     table-layout: auto;
@@ -169,7 +169,7 @@ img {
     padding: 0.5em;
     border-radius: 10px;
   }
-  
+
   .tableWrap {
     width: 100%;
     display: flex;
@@ -177,58 +177,58 @@ img {
     row-gap: 1em;
     align-items: center;
   }
-  
+
   .transaction td {
     padding: 9px;
   }
-  
+
   table {
     width: 100%;
   }
-  
+
   .regButton {
     display: none;
   }
-  
+
   .mobileButton {
     display: block;
     position: absolute;
     bottom: 1em;
     right: 1em;
-    content: '';
+    content: "";
     width: 3em;
     height: 3em;
     border-radius: 100%;
     border: none;
-    background-color: #51308E;
+    background-color: #51308e;
     padding-left: 1em;
     transition: 50ms ease-in-out;
   }
-  
+
   .plus {
-      position: absolute;
+    position: absolute;
   }
-  
+
   .plus::before {
-      position: absolute;
-      content: '';
-      height: 2px;
-      background-color: white;
-      width: 1em;
-      transform: rotate(90deg);
+    position: absolute;
+    content: "";
+    height: 2px;
+    background-color: white;
+    width: 1em;
+    transform: rotate(90deg);
   }
-  
+
   .plus::after {
-      position: absolute;
-      content: '';
-      height: 2px;
-      background-color: white;
-      width: 1em;
+    position: absolute;
+    content: "";
+    height: 2px;
+    background-color: white;
+    width: 1em;
   }
-  
+
   .mobileButton:hover {
-      transform: scale(1.05);
-      cursor: pointer;
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05);
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
 }

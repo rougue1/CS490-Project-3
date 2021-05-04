@@ -12,25 +12,24 @@ export function Transaction({ data, getData }) {
   const [showDelete, setDelete] = useState(false);
 
   const [showData, setShowData] = useState([]);
-  
+
   const history = useHistory();
 
   const handleClose = () => {
     setShow(false);
     getData();
   };
-  const handleUpdate = () => {
-    setShow(false);
-    getData();
-  };
+  // const handleUpdate = () => {
+  //   setShow(false);
+  //   getData();
+  // };
 
   const handleDelete = () => setDelete(true);
   const closeDelete = () => setDelete(false);
 
   const handleShowAll = () => {
-    console.log("In");
     history.push("/history");
-    
+
     const element = document.getElementById("home");
     element.classList.remove("underline");
   };
@@ -42,15 +41,14 @@ export function Transaction({ data, getData }) {
 
   useEffect(() => {
     setShowData(() => data.slice(0, 5));
-     if(showData.length === 0)
-      setDelete(false);
+    if (showData.length === 0) setDelete(false);
   }, [data]);
 
   return (
     <div className="tableWrap">
       <div className="transaction">
         {data.length === 0 ? (
-          <div style={{margin:"2em"}}>
+          <div style={{ margin: "2em" }}>
             <b>No transactions to show</b>
           </div>
         ) : (
@@ -97,7 +95,6 @@ export function Transaction({ data, getData }) {
                       list={itemData}
                       show={show}
                       onHide={handleClose}
-                      toogleUpdate={handleUpdate}
                       updateData={getData}
                     />
                   </div>

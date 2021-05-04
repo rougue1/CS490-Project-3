@@ -1,77 +1,79 @@
 section {
-    width: 100%;
+  width: 100%;
 }
 
 .chartsBody {
-    width: 100%;
+  width: 100%;
 }
-.barChart1{
-    display: block;
-    height: 40vh;
-    width: 35%;
-    position:relative;
-    
-}
-
-.chart-wrap{
-    height: 40vh;
+.barChart1 {
+  display: block;
+  height: 40vh;
+  width: 35%;
+  position: relative;
 }
 
-#bar-expense-download, #bar-income-download, #line-expense-download, #line-income-download{
-    position: absolute;
-    top: 0.5em;
-    right: 1em;
+.chart-wrap {
+  height: 40vh;
 }
 
+#bar-expense-download,
+#bar-income-download,
+#line-expense-download,
+#line-income-download {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+}
 
-.bar-expense-wrap, .bar-income-wrap, .line-expense-wrap, .line-income-wrap :hover{
-    
-    cursor: pointer;
-    
+.bar-expense-wrap,
+.bar-income-wrap,
+.line-expense-wrap,
+.line-income-wrap :hover {
+  cursor: pointer;
 }
 
 .sectionWrap {
-    height: 80vh;
-    overflow: auto;
-    margin: -3em;
+  height: 80vh;
+  overflow: auto;
+  margin: -3em;
 }
 
 .lineChartWrap,
 .barChartWrap {
-    display: flex;
-    grid-column-gap: 6%;
-    justify-content: center;
-    column-gap: 6%;
+  display: flex;
+  grid-column-gap: 6%;
+  justify-content: center;
+  column-gap: 6%;
 }
 
 @media (max-width: 950px) {
-    .chart-wrap {
-        height: 35vh;
-        width: 100%;
-    }
+  .chart-wrap {
+    height: 35vh;
+    width: 100%;
+  }
 }
 
 @media (max-width: 680px) {
-    .lineChartWrap,
-    .barChartWrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        column-gap: 6%;
-    }
-    
-    .chart-wrap {
-        width: 95%;
-    }
-    
-    .barChart1{
-        width: 95%;
-    }
-    
-    .sectionWrap {
-        height: 80vh;
-        overflow: auto;
-        margin: 0px -1em 0em -1em;
-        padding-bottom: 2em;
-    }
+  .lineChartWrap,
+  .barChartWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 6%;
+  }
+
+  .chart-wrap {
+    width: 95%;
+  }
+
+  .barChart1 {
+    width: 95%;
+  }
+
+  .sectionWrap {
+    height: 80vh;
+    overflow: auto;
+    margin: 0px -1em 0em -1em;
+    padding-bottom: 2em;
+  }
 }

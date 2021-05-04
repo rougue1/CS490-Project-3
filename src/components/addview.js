@@ -77,7 +77,7 @@ export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
             <Form.Control.Feedback type="invalid">Please enter a location!</Form.Control.Feedback>
 
             <Form.Label>Category: </Form.Label>
-            <Form.Control required type="text" name="category"/>
+            <Form.Control required type="text" name="category" />
             <Form.Control.Feedback type="invalid">Please choose a category!</Form.Control.Feedback>
 
             <Form.Label>Description: </Form.Label>
