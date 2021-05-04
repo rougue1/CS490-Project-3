@@ -23,8 +23,6 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8]
     
-    env:
-     DATABASE_URL: postgres://yevarrsrkrritu:10c0ec3a5e678708ab5970f137064f01c64b901d45601ffe5e3c5aca7940ed1f@ec2-34-206-8-52.compute-1.amazonaws.com:5432/d2bcvin3mvjuno
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
