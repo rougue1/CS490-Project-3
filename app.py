@@ -58,7 +58,7 @@ def add():
     data = request.json["formDataObj"]
     if data:
         USER.add_transaction(data["type"], data["amount"], data["date"],
-                             data["location"], data["category"].lower(),
+                             data["location"], data["category"],
                              data["description"])
         return jsonify(200)
     return jsonify(400)
