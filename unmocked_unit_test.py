@@ -114,7 +114,7 @@ class UpdateUserTestCase(unittest.TestCase):
     def test_convert_datetime_obj(self):
         """ This test checks the update board function on app functions file side """
         for test in self.success_test_params_get_date_time_obj:
-            actual_result = convert_to_datetime_obj(test['data'])
+            actual_result = unmocked_convert_to_datetime_obj(test['data'])
 
             expected_result = test["expected"]
             self.assertEqual(actual_result, expected_result)

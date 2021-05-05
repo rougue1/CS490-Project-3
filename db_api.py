@@ -7,7 +7,6 @@ import models
 from app import DB
 # import sqlalchemy as sa
 
-
 DB.create_all()
 session = DB.session()
 
@@ -16,6 +15,22 @@ def convert_to_datetime_obj(date):
     """
     Function that converts a string to a datetime object,
     following proper format.
+    """
+
+    if isinstance(date, str):
+        if '-' in date:
+            date = date.replace('-', '/')
+            date = datetime.datetime.strptime(date,
+                                              "%Y/%m/%d").strftime("%m/%d/%Y")
+        else:
+            date = datetime.datetime.strptime(date, "%m/%d/%Y")
+    return date
+
+
+def unmocked_convert_to_datetime_obj(date):
+    """
+    Function that converts a string to a datetime object,
+    following proper format. For unmocked.
     """
 
     if isinstance(date, str):
