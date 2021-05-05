@@ -7,7 +7,18 @@ import { useHistory } from "react-router";
 
 export function UpdateView({ show, onHide, id, list, getData }) {
   const history = useHistory();
-
+  const categories = [
+    "Food",
+    "Subscription",
+    "Rent",
+    "Utilities",
+    "Work",
+    "Education",
+    "Technology",
+    "Transportation",
+    "Bank",
+  ];
+  categories.sort();
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
 
@@ -96,7 +107,11 @@ export function UpdateView({ show, onHide, id, list, getData }) {
             <Form.Control.Feedback type="invalid">Please enter a location!</Form.Control.Feedback>
 
             <Form.Label>Category: </Form.Label>
-            <Form.Control required type="text" defaultValue={list.category} name="category" />
+            <Form.Control as="select" name="category" defaultValue={list.category}>
+              {categories.map((item) => (
+                <option>{item}</option>
+              ))}
+            </Form.Control>
             <Form.Control.Feedback type="invalid">Please choose a category!</Form.Control.Feedback>
 
             <Form.Label>Description: </Form.Label>
