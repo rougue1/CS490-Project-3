@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { DropdownInput } from "react-dropdown-input";
 
 export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
   // form validation
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
   const [showAnother, setAnother] = useState(false);
-  const temp = ["Hello", "World", "This", "Worked!"];
+  const categories = [
+    "Food",
+    "Subscription",
+    "Rent",
+    "Utilities",
+    "Work",
+    "Education",
+    "Technology",
+    "Transportation",
+    "Bank",
+  ];
+  categories.sort();
   // confirmation popup
   const closeConfirm = () => setConfirm(false);
   const viewConfirm = () => {
     setConfirm(true);
   };
-  
-  function tempfunc(){
-    console.log("Here ma boi!");
-  }
-  
+
   // add another income or expense
   const closeAnother = () => setAnother(false);
   const viewAnother = () => setAnother(true);
@@ -82,15 +88,12 @@ export function AddView({ endPoint, updateData, show, onHide, showAdd }) {
             <Form.Control.Feedback type="invalid">Please enter a location!</Form.Control.Feedback>
 
             <Form.Label>Category: </Form.Label>
-            <DropdownInput
-              options={temp}
-              defaultValue={temp[0]}
-              menuClassName="dropdown-input"
-              onSelect={tempfunc}
-              palceholder="Search..."
-            />
-            // <Form.Control required type="text" name="category" />
-            // <Form.Control.Feedback type="invalid">Please choose a category!</Form.Control.Feedback>
+            <Form.Control as="select" name="category">
+              {categories.map((item) => (
+                <option>{item}</option>
+              ))}
+            </Form.Control>
+            <Form.Control.Feedback type="invalid">Please choose a category!</Form.Control.Feedback>
 
             <Form.Label>Description: </Form.Label>
             <Form.Control required as="textarea" name="description" />

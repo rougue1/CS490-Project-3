@@ -76,7 +76,6 @@ def groupData(data_expense):
     }
 
 
-
 def get_chart_data(transactions):
     """
         getting chart data

@@ -49,7 +49,7 @@ export function UpdateView({ show, onHide, id, list, getData }) {
           "Content-Type": "application/json",
         },
       });
-      await res.json().then(() =>{
+      await res.json().then(() => {
         () => getData();
       });
 
@@ -57,7 +57,7 @@ export function UpdateView({ show, onHide, id, list, getData }) {
       //   console.log("updated on time!");
       //   () => getData();
       // }
-      
+
       // if(data === 200) { }
     }
   };

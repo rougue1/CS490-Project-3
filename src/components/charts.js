@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Bar, Line } from "react-chartjs-2";
 import { saveAs } from "file-saver";
 import "../styles/charts.css";
@@ -88,7 +88,7 @@ export function Charts() {
     context.fillRect(0, 0, canvasSave.width, canvasSave.height);
 
     canvasSave.toBlob((blob) => {
-      saveAs(blob, `${chartId  }.png`);
+      saveAs(blob, `${chartId}.png`);
     });
 
     context.restore();
@@ -229,6 +229,5 @@ export function Charts() {
     </div>
   );
 }
-
 
 export default Charts;

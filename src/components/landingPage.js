@@ -9,9 +9,9 @@ import Chart from "../styles/images/Chart.png";
 
 export function LandingPage({ setLoginStatus }) {
   const history = useHistory();
-    useEffect(() => {
-        history.push("/");
-    }, [])
+  useEffect(() => {
+    history.push("/");
+  }, []);
   return (
     <div className="landingPage">
       <section className="login wrap">

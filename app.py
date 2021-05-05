@@ -44,7 +44,6 @@ def login():
                        user_info["userInfo"]["Email"],
                        user_info["userInfo"]["FirstName"],
                        user_info["userInfo"]["LastName"])
-        USERS[user_info["googleID"]] = USER
 
         return jsonify(200)
     return jsonify(400)
@@ -143,7 +142,7 @@ def home():
     Get transactions for a user
     """
     global USER
-    return {"googleID": id, "data": jsonify(USER.get_transactions())}
+    return jsonify(USER.get_transactions())
 
 
 @APP.route("/userInfo", methods=["Get"])

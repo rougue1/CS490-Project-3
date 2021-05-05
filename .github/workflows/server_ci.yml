@@ -16,18 +16,16 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  
+
   test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
-        
+
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-    
-    
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -51,7 +49,7 @@ jobs:
 
       - name: Lint models.py
         run: pylint models.py
-      
+
       - name: Lint charts.py
         run: pylint charts.py
 
@@ -62,7 +60,3 @@ jobs:
       # Run Mocked tests
       - name: Run Mocked Tests
         run: python mocked_unit_test.py
-        
-       
-        
-        

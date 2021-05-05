@@ -26,6 +26,7 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 #### References
 
 ---
+
 - [Google Developer Account](https://console.cloud.google.com/apis/dashboard) (For Google Authentication)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/#)
 - [Pandas](https://pandas.pydata.org/docs/)
@@ -35,12 +36,13 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 - [React-Router](https://reactrouter.com/web/guides/quick-start)
 - [Enzyme-Adapter-React-17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
 - [Chart.js](https://www.chartjs.org/docs/latest/)
+
 ---
 
 ## Known Issues
+
 1. Update component does not work as inteded. Requires user to refresh page in order to see changes, although the Update component is very similar to the add component - which works.
 2. If the user wants to open the expense tracker app in an incognito tab then they will need to enable cookies on their browser.
-
 
 ## Flask and create-react-app
 
@@ -221,22 +223,26 @@ Heroku is a cloud platform company which will essentially allow us to host our c
 
 ### Pictures of our application
 
-#### Home page 
-![image](https://user-images.githubusercontent.com/57224609/117080471-e3060480-ad0b-11eb-841e-75192268c79d.png) 
+#### Home page
 
-#### History page 
+![image](https://user-images.githubusercontent.com/57224609/117080471-e3060480-ad0b-11eb-841e-75192268c79d.png)
+
+#### History page
+
 ![image](https://user-images.githubusercontent.com/57224609/117080495-f4e7a780-ad0b-11eb-8c7f-4d81785c9306.png)
 
-#### Chart page 
+#### Chart page
+
 ![image](https://user-images.githubusercontent.com/57224609/117080525-0466f080-ad0c-11eb-8f05-433aae7f6bf8.png)
 
 #### Home page (Mobile View)
+
 ![image](https://user-images.githubusercontent.com/57224609/117080595-2e201780-ad0c-11eb-8d86-ba3201aa23b7.png)
 
 #### History page (Mobile View)
+
 ![image](https://user-images.githubusercontent.com/57224609/117080625-4001ba80-ad0c-11eb-8895-00697978647a.png)
 
 #### Chart page (Mobile View)
+
 ![image](https://user-images.githubusercontent.com/57224609/117080664-53148a80-ad0c-11eb-8e95-e7c3532aab8d.png)
-
-

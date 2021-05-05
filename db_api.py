@@ -7,7 +7,6 @@ import models
 from app import DB
 # import sqlalchemy as sa
 
-
 DB.create_all()
 session = DB.session()
 
@@ -21,8 +20,8 @@ def convert_to_datetime_obj(date):
     if isinstance(date, str):
         if '-' in date:
             date = date.replace('-', '/')
-            date = datetime.datetime.strptime(
-                date, "%Y/%m/%d").strftime("%m/%d/%Y")
+            date = datetime.datetime.strptime(date,
+                                              "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
             date = datetime.datetime.strptime(date, "%m/%d/%Y")
     return date
