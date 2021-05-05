@@ -2,6 +2,7 @@
 Our server file
 """
 # pylint: disable= E1101, C0413, R0903, W0603, W1508, C0411, R0914, R0912, R0915
+# pylint: disable= W0611
 import os
 import datetime
 from calendar import monthrange
@@ -62,32 +63,6 @@ def add():
                              data["description"])
         return jsonify(200)
     return jsonify(400)
-
-
-# @APP.route("/update", methods=["POST"])
-# def update():
-#     """
-#     Update income or expense
-#     """
-#     global USER
-#     data = request.json
-
-#     if data:
-#         transaction_id = data['id']
-#         base = data['formDataObj']
-#         print(base["location"])
-#         USER.edit_transaction(
-#             transaction_id,
-#             base["type"],
-#             base["amount"],
-#             base["date"],
-#             base["location"],
-#             base["category"],
-#             base["description"],
-#         )
-#         print(jsonify(200))
-#         return jsonify(USER.get_transactions())
-#     return jsonify(400)
 
 
 @APP.route("/update", methods=["POST"])
@@ -152,31 +127,6 @@ def get_user_info_endpoint():
     """
     global USER
     return jsonify(USER.get_info())
-
-
-# @APP.route("/chartInfo", methods=["Get"])
-# def get_chart_info():
-#     """
-#     Get chart info
-#     """
-#     global USER
-#     transactions = USER.get_transactions()
-#     categories = USER.get_transaction_categories()
-#     # sums = [sum([transaction["amount"] for transaction in transactions if transaction["category"]==category and transaction["type"]=="Expense"]) for category in categories]
-#     today = dt.datetime.today().date()
-#     days_in_month = monthrange(today.year, today.month)[1]
-#     days_in_year = 365 if today.year % 4 != 0 else 366
-#     today_last_month = (dt.datetime.now() - dt.timedelta(days_in_month)).date()
-#     today_last_year = (datetime.datetime.now() - datetime.timedelta(days_in_year)).date()
-#     data = {"income_month": [[], []], "income_year": [[], []], "expense_month": [[], []], "expense_year": [[], []]}
-#     for category in categories:
-#         for transaction in transactions:
-#             if transaction["category"] == category and transaction["type"] == "Income":
-#                 if today_last_month <= today <= transaction["date"]:
-#                     data["income_month"][0].append(category)
-#                     data["income_month"][1] =
-
-#     return jsonify({"transactions": transactions, "categories": categories})
 
 
 @APP.route("/chartInfo", methods=["Get"])
@@ -323,7 +273,8 @@ def get_chart_info():
     # print(expense_cat)
     # print(sum_income)
     # print(income_cat)
-    #expense year , value| income year, value | expense month , values | income month, values
+    #expense year , value| income year, value | expense month , values
+    #| income month, values
     return jsonify([[
         expense_cat, sums, income_cat, sum_income, expense_cat_month,
         sum_expense_month, income_cat_month, sum_income_month,
