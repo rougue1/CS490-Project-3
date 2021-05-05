@@ -4,7 +4,10 @@
 
 ### Heroku Link
 
-https://cs490-project3-sprint-1.herokuapp.com/
+(SPRINT 1) https://cs490-project3-sprint-1.herokuapp.com/ 
+
+(SPRINT 2) https://cs490-project3-sprint-2.herokuapp.com/ 
+
 
 ### Description
 
