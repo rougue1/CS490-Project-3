@@ -37,9 +37,9 @@ def unmocked_convert_to_datetime_obj(date):
         if '-' in date:
             date = date.replace('-', '/')
             date = datetime.datetime.strptime(
-                date, "%Y/%m/%d").strftime("%m/%d/%Y").date()
+                date, "%Y/%m/%d").strftime("%m/%d/%Y")
         else:
-            date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+            date = datetime.datetime.strptime(date, "%m/%d/%Y")
     return date
 
 
