@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions, no-unused-vars */
-/* eslint-disable no-unused-expressions, no-unused-vars */
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
