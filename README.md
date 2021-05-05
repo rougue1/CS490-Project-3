@@ -1,27 +1,32 @@
 # CS490-Project-3
+
 ## Expense Tracker
 
 ### Heroku Link
+
 https://cs490-project3-sprint-1.herokuapp.com/
 
 ### Description
 
-Expense tracker is a basic web app that allows users to keep track of their incomes and expenses in one place. 
+Expense tracker is a basic web app that allows users to keep track of their incomes and expenses in one place.
 This app will allow users to login, and create a personal expense profile. Users will be able to add new incomes or expenses, and also access the ones added on the website.
 
 #### Team Members:
- * Abishek Vasudevan
- * Aman Hirpara
- * Mihir Rana
- * Raj Patel
- 
+
+- Abishek Vasudevan
+- Aman Hirpara
+- Mihir Rana
+- Raj Patel
+
 ### Technologies we used
 
 In this project, we used the Flask framework, as our web server and the React library for client side functionality. In addtion,
 we have used Google Authentication for ease of login and React-Bootstrap to streamline our html and css visuals.
 
 #### References
+
 ---
+
 - [Google Developer Account](https://console.cloud.google.com/apis/dashboard) (For Google Authentication)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/#)
 - [Pandas](https://pandas.pydata.org/docs/)
@@ -31,12 +36,13 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 - [React-Router](https://reactrouter.com/web/guides/quick-start)
 - [Enzyme-Adapter-React-17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
 - [Chart.js](https://www.chartjs.org/docs/latest/)
+
 ---
 
 ## Known Issues
+
 1. Update component does not work as inteded. Requires user to refresh page in order to see changes, although the Update component is very similar to the add component - which works.
 2. If the user wants to open the expense tracker app in an incognito tab then they will need to enable cookies on their browser.
-
 
 ## Flask and create-react-app
 
@@ -50,8 +56,8 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 
 1. Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
 2. Add following to .env file:
-   + REACT_APP_GOOGLE_CLIENT_ID = "Your_OAuth_client_ID"
-   + DATABASE_URL = "Your_database_url"
+   - REACT_APP_GOOGLE_CLIENT_ID = "Your_OAuth_client_ID"
+   - DATABASE_URL = "Your_database_url"
 
 ## Setting up Google Authentication
 
@@ -71,98 +77,115 @@ we have used Google Authentication for ease of login and React-Bootstrap to stre
 ## React-Bootstrap
 
 #### About
+
 It is a front-end framework to help design our webpage faster and easier.
 
 #### Requirements
+
 1. `npm install react-bootstrap bootstrap`
 2. Adding this line in App.js `import 'bootstrap/dist/css/bootstrap.min.css';`
-
 
 ## Enzyme-Adapter-React-17
 
 #### About
+
 It is a JavaScript testing utility for React that makes it easier to assert, manipulate, and traverse your React Components' output.
 
 #### Requirements
+
 1. `npm install --save-dev @wojtekmaj/enzyme-adapter-react-17`
-2. Add the following to setupTests.js: 
+2. Add the following to setupTests.js:
    ```
     import { configure } from 'enzyme';
     import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-    configure({ adapter: new Adapter() }); 
+    configure({ adapter: new Adapter() });
    ```
 
 ## Setting up Our Database (PostgresSql)
 
 #### About
+
 PostgresSql is an open-source relational database management system which is also SQL compliance. We will be using this as our database to store the the expenses of the
 respective users.
 
 #### Installation
-1) `sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql  docs`
+
+1. `sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql docs`
 
 #### Setup
-1) Once you have installed PostgreSql using the command above we initialize the database.
-2) Initialize: `sudo service postgresql initdb`
-3) To start the service: `sudo service postgresql start`
-4) Now we can make a superuser(if an error says 'could not change directory' that means it worked): `sudo -u postgres createuser --superuser $USER`
-5) Now lets make a database: `sudo -u postgres createdb $USER`
-6) To ensure that your user shows up follow the commands:
+
+1. Once you have installed PostgreSql using the command above we initialize the database.
+2. Initialize: `sudo service postgresql initdb`
+3. To start the service: `sudo service postgresql start`
+4. Now we can make a superuser(if an error says 'could not change directory' that means it worked): `sudo -u postgres createuser --superuser $USER`
+5. Now lets make a database: `sudo -u postgres createdb $USER`
+6. To ensure that your user shows up follow the commands:
    - `psql`
    - `\du`
    - `\l`
-7) Making a new user: 
+7. Making a new user:
    - `create user some_username_here superuser password 'some_unique_new_password_here'`
    - `\q` (to quit sql)
-8) Now to save your passwords to a `sql.env` file with the following format `SQL_USER=""` and `SQL_PASSWORD=""`.
+8. Now to save your passwords to a `sql.env` file with the following format `SQL_USER=""` and `SQL_PASSWORD=""`.
 
 ### SQLAlchemy
+
 ---
 
 #### About
+
 To now query and access our database we will use SQLAlchemy.
 
 #### Installation
-1) `pip install psycopg2-binary`
-2) `pip install Flask-SQLAlchemy==2.1`
+
+1. `pip install psycopg2-binary`
+2. `pip install Flask-SQLAlchemy==2.1`
 
 #### Creating new database for Heroku and connect our code
-1) Login to heroku: `heroku login -i`
-2) Create new app: `heroku create`
-3) Add a database on our heroku app:`heroku addons:create heroku-postgresql:hobby-dev`
-4) To see the config vars that are set by heroku for us: `heroku config`
-5) Set the database variable as an environment variable: `export DATABASE_URL='paste config value here'`
 
-## Deploying our App to Heroku 
+1. Login to heroku: `heroku login -i`
+2. Create new app: `heroku create`
+3. Add a database on our heroku app:`heroku addons:create heroku-postgresql:hobby-dev`
+4. To see the config vars that are set by heroku for us: `heroku config`
+5. Set the database variable as an environment variable: `export DATABASE_URL='paste config value here'`
+
+## Deploying our App to Heroku
 
 #### About
+
 Heroku is a cloud platform company which will essentially allow us to host our code on their servers and we can run our game on there.
 
 #### Installation
+
 1. `npm install -g heroku`
 
-#### Setup 
-1) First we will need to create a free account on [Heroku](https://www.heroku.com/).
-2) Next, we will create a  `requirements.txt` file which will list all the libraries and packages our app uses. This information is needed because Heroku's servers will 
-  download said packages and libraries so it can run the app on their servers.
-  In your terminal, type the following:
-  1. `touch requirements.txt`
-  2. `pip freeze > requirements.txt`
-3) Once that is done, we will need a `Procfile`, which is a file that will tell Heroku what command to use to run our app.
-  1. In your terminal, type: `touch Procfile`
-  2. Next, open up the `Procfile` and type your commands needed to run your app. In my case I would write: `web: python main.py`. 
-4) Now for the actual deploying part, open your terminal and follow along:
-  1. Login to Heroku via terminal: `heroku login -i`
-  2. Next go to your project folder and create the heroku app: `heroku create --buildpack heroku/python`
-  3. Now we will add the nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
-  4. Now we will push our code to heroku: `git push heroku main`
+#### Setup
+
+1. First we will need to create a free account on [Heroku](https://www.heroku.com/).
+2. Next, we will create a `requirements.txt` file which will list all the libraries and packages our app uses. This information is needed because Heroku's servers will
+   download said packages and libraries so it can run the app on their servers.
+   In your terminal, type the following:
+
+1) `touch requirements.txt`
+2) `pip freeze > requirements.txt`
+
+3. Once that is done, we will need a `Procfile`, which is a file that will tell Heroku what command to use to run our app.
+
+1) In your terminal, type: `touch Procfile`
+2) Next, open up the `Procfile` and type your commands needed to run your app. In my case I would write: `web: python main.py`.
+
+4. Now for the actual deploying part, open your terminal and follow along:
+
+1) Login to Heroku via terminal: `heroku login -i`
+2) Next go to your project folder and create the heroku app: `heroku create --buildpack heroku/python`
+3) Now we will add the nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
+4) Now we will push our code to heroku: `git push heroku main`
 
 ## Run Application
 
 1. Run command in terminal (in your project directory): `python app.py`
 2. Run command in another terminal, `cd` into the project directory, and run `npm run start`
 3. Preview web page in browser '/'
-
 
 ## Formatting/Linting
 
@@ -175,7 +198,7 @@ Heroku is a cloud platform company which will essentially allow us to host our c
   - `react/jsx-filename-extension`: Weird error when writing html code in a return statement.
   - `no-restricted-globals`: Couldn't use event variable in addview.js
   - `control-has-associated-label`: Couldn't just have a tag without the "label" tag along with it.
-  - Miscellaneous errors which couldn't be fixed (couldn't find any working solutions - even online):  
+  - Miscellaneous errors which couldn't be fixed (couldn't find any working solutions - even online):
     - `no-noninteractive-element-interactions`
     - `click-events-have-key-events`
     - `no-static-element-interactions`
@@ -200,22 +223,26 @@ Heroku is a cloud platform company which will essentially allow us to host our c
 
 ### Pictures of our application
 
-#### Home page 
-![image](https://user-images.githubusercontent.com/57224609/117080471-e3060480-ad0b-11eb-841e-75192268c79d.png) 
+#### Home page
 
-#### History page 
+![image](https://user-images.githubusercontent.com/57224609/117080471-e3060480-ad0b-11eb-841e-75192268c79d.png)
+
+#### History page
+
 ![image](https://user-images.githubusercontent.com/57224609/117080495-f4e7a780-ad0b-11eb-8c7f-4d81785c9306.png)
 
-#### Chart page 
+#### Chart page
+
 ![image](https://user-images.githubusercontent.com/57224609/117080525-0466f080-ad0c-11eb-8f05-433aae7f6bf8.png)
 
 #### Home page (Mobile View)
+
 ![image](https://user-images.githubusercontent.com/57224609/117080595-2e201780-ad0c-11eb-8d86-ba3201aa23b7.png)
 
 #### History page (Mobile View)
+
 ![image](https://user-images.githubusercontent.com/57224609/117080625-4001ba80-ad0c-11eb-8895-00697978647a.png)
 
 #### Chart page (Mobile View)
+
 ![image](https://user-images.githubusercontent.com/57224609/117080664-53148a80-ad0c-11eb-8e95-e7c3532aab8d.png)
-
-

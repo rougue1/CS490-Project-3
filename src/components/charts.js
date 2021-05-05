@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Bar, Line } from "react-chartjs-2";
 import { saveAs } from "file-saver";
 import "../styles/charts.css";
@@ -21,15 +21,15 @@ export function Charts() {
         Expense Year
       0: labels
       1: values
-      
+
         Income Year
       2: labels
       3: values
-      
+
         Expense Month
       4: labels
       5: values
-      
+
         Income Month
       6: labels
       7: values
@@ -88,7 +88,7 @@ export function Charts() {
     context.fillRect(0, 0, canvasSave.width, canvasSave.height);
 
     canvasSave.toBlob((blob) => {
-      saveAs(blob, `${chartId  }.png`);
+      saveAs(blob, `${chartId}.png`);
     });
 
     context.restore();

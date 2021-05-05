@@ -15,7 +15,7 @@ export function GLogin({ setLoginStatus }) {
       FullName: googleUser.profileObj.name,
       Email: googleUser.profileObj.email,
     };
-    
+
     const res = await fetch("/login", {
       method: "POST",
       body: JSON.stringify({

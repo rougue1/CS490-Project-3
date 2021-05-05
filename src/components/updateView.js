@@ -7,9 +7,9 @@ import { useHistory } from "react-router";
 
 export function UpdateView({ show, onHide, id, list, getData }) {
   const history = useHistory();
+
   const [validated, setValidated] = useState(false);
   const [theConfirm, setConfirm] = useState(false);
-  const [showAnother, setAnother] = useState(false);
 
   const time = new Date(list.date).toISOString().slice(0, 10);
 
@@ -48,7 +48,7 @@ export function UpdateView({ show, onHide, id, list, getData }) {
           "Content-Type": "application/json",
         },
       });
-      await res.json().then(() =>{
+      await res.json().then(() => {
         () => getData();
       });
 
@@ -56,7 +56,7 @@ export function UpdateView({ show, onHide, id, list, getData }) {
       //   console.log("updated on time!");
       //   () => getData();
       // }
-      
+
       // if(data === 200) { }
     }
   };
