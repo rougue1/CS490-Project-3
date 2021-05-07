@@ -91,6 +91,7 @@ export function UpdateView({ show, onHide, id, list, getData }) {
               required
               className="form-control"
               name="amount"
+              type="number"
               defaultValue={list.amount}
               step="0.01"
               precision="2"
